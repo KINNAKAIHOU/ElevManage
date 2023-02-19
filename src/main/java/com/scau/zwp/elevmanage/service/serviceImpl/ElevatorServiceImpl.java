@@ -1,5 +1,6 @@
 package com.scau.zwp.elevmanage.service.serviceImpl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.poi.excel.cell.CellSetter;
@@ -12,12 +13,14 @@ import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.entity.ElevatorImage;
 import com.scau.zwp.elevmanage.entity.Location;
 import com.scau.zwp.elevmanage.entity.Manufacturer;
+import com.scau.zwp.elevmanage.mapper.ElevatorImageMapper;
 import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.service.ElevatorImageService;
 import com.scau.zwp.elevmanage.service.ElevatorService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scau.zwp.elevmanage.service.LocationService;
 import com.scau.zwp.elevmanage.service.ManufacturerService;
+import com.scau.zwp.elevmanage.vo.ElevatorVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -41,7 +45,7 @@ import java.util.UUID;
  */
 @Service
 public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> implements ElevatorService {
-    @Mapper
+    @Resource
     private ElevatorMapper elevatorMapper;
     @Resource
     private ElevatorImageService elevatorImageService;
@@ -60,13 +64,18 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      * @param id 主键
      * @return 实例对象
      */
-    public R<Elevator> queryById(Integer id) {
-        System.out.println(id);
+    public R<ElevatorVo> queryById(Integer id) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("elevator_id", id);
+        List<ElevatorImage> elevatorImageList = elevatorImageService.list(queryWrapper);
         Elevator elevator = getById(id);
         if (elevator == null)
             return R.error("通过ID查询电梯信息失败");
-        else
-            return R.success(elevator);
+        else {
+            ElevatorVo elevatorVo = BeanUtil.copyProperties(elevator, ElevatorVo.class);
+            elevatorVo.setElevatorImageList(elevatorImageList);
+            return R.success(elevatorVo);
+        }
     }
 
     /**
@@ -171,6 +180,15 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      * @return 是否成功
      */
     public R<Boolean> deleteById(Integer id) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("elevator_id", id);
+        List<ElevatorImage> elevatorImageList = elevatorImageService.list(queryWrapper);
+        if (elevatorImageList != null) {
+            for (ElevatorImage elevatorImage : elevatorImageList) {
+                if (elevatorImageService.removeById(elevatorImage.getId()) == false)
+                    return R.error("删除电梯图片失败");
+            }
+        }
         if (removeById(id) == true)
             return R.success(true);
         else

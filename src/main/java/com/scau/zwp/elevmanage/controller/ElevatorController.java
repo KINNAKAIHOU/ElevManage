@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.service.ElevatorService;
+import com.scau.zwp.elevmanage.vo.ElevatorVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -40,7 +41,7 @@ public class ElevatorController {
     @ApiOperation("通过ID查询单条数据")
     @GetMapping
     @ApiImplicitParam(name = "id", value = "电梯ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Elevator> queryById(@RequestParam(value = "id") Integer id) {
+    public R<ElevatorVo> queryById(@RequestParam(value = "id") Integer id) {
         return elevatorService.queryById(id);
     }
 

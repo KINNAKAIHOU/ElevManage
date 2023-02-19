@@ -6,13 +6,18 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.entity.Location;
 import com.scau.zwp.elevmanage.entity.Location;
+import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.mapper.LocationMapper;
 import com.scau.zwp.elevmanage.service.LocationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -24,8 +29,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> implements LocationService {
-    @Mapper
+    @Resource
     private LocationMapper locationMapper;
+    @Resource
+    private ElevatorMapper elevatorMapper;
 
     /**
      * 通过ID查询单条数据
@@ -92,9 +99,20 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
      * @return 实例对象
      */
     public R<Boolean> update(Location location) {
-        if (updateById(location) == true)
+        if (updateById(location) == true) {
+            QueryWrapper queryWrapper = new QueryWrapper();
+            queryWrapper.eq("location_id", location.getId());
+            List<Elevator> elevatorList = elevatorMapper.selectList(queryWrapper);
+            if (elevatorList != null) {
+                for (Elevator elevator : elevatorList) {
+                    elevator.setLocationName(location.getLocationName());
+                    elevator.setAddress(location.getAddress());
+                    if (elevatorMapper.updateById(elevator) == 0)
+                        return R.error("更新相关电梯信息事变");
+                }
+            }
             return R.success(true);
-        else
+        } else
             return R.error("更新数据失败");
     }
 

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.scau.zwp.elevmanage.vo.ElevatorVo;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -21,7 +22,7 @@ public interface ElevatorService extends IService<Elevator> {
      * @param id 主键
      * @return 实例对象
      */
-    R<Elevator> queryById(Integer id);
+    R<ElevatorVo> queryById(Integer id);
 
     /**
      * 分页查询
