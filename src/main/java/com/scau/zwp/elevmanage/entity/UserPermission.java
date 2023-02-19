@@ -24,7 +24,7 @@ import lombok.Setter;
 @Setter
 @TableName("t_user_permission")
 @ApiModel(value = "TUserPermission对象", description = "用户权限")
-public class TUserPermission {
+public class UserPermission {
 
     @ApiModelProperty("用户权限ID")
     @TableId(value = "user_permission_id", type = IdType.AUTO)

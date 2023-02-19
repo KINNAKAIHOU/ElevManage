@@ -35,8 +35,8 @@ public class Accessory {
     private String accessoryNumber;
 
     @ApiModelProperty("配件名称")
-    @TableField("accessory_person")
-    private String accessoryPerson;
+    @TableField("accessory_name")
+    private String accessoryName;
 
     @ApiModelProperty("规格型号")
     @TableField("specification")

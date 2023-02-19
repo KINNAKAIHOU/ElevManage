@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.1.3",
   "createdTime": "2023-2-19 10:48:07",
-  "updatedTime": "2023-2-19 14:50:38",
+  "updatedTime": "2023-2-19 19:10:52",
   "dbConns": [],
   "profile": {
     "default": {
@@ -1797,7 +1797,7 @@
           "id": "728EF7F1-AC1E-4DF7-BD40-F47F1A5078F3"
         },
         {
-          "defKey": "accessory_person",
+          "defKey": "accessory_name",
           "defName": "配件名称",
           "comment": "",
           "type": "",

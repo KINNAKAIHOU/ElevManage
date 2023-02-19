@@ -1,6 +1,6 @@
 package com.scau.zwp.elevmanage.service;
 
-import com.scau.zwp.elevmanage.entity.TUserPermission;
+import com.scau.zwp.elevmanage.entity.UserPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author KinnakaIhou
  * @since 2023-02-19 10:47:51
  */
-public interface TUserPermissionService extends IService<TUserPermission> {
+public interface UserPermissionService extends IService<UserPermission> {
 
 }

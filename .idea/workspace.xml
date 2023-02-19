@@ -5,20 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b87a6c7b-f5dc-4cbc-8307-8f6c720c7066" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/vo/ElevatorVo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/ElevatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/ElevatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/ElevatorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/ElevatorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/ElevatorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/ElevatorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/LocationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/LocationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/ManufacturerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/ManufacturerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/ElevatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/ElevatorController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/ElevatorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/ElevatorService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/ElevatorServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/ElevatorServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/LocationServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/LocationServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/ManufacturerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/ManufacturerServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/AccessoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/AccessoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/SupplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/SupplierController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/TUserPermissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/UserPermissionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Accessory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Accessory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/TUserPermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/UserPermission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/TUserPermissionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/UserPermissionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/AccessoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/AccessoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/SupplierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/SupplierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/TUserPermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/UserPermissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/AccessoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/AccessoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/SupplierServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/SupplierServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/TUserPermissionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/UserPermissionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/TUserPermissionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/TUserPermissionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/AccessoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/AccessoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/SupplierController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/SupplierController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/TUserPermissionController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Accessory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Accessory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/TUserPermission.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/mapper/TUserPermissionMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/AccessoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/AccessoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/SupplierService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/SupplierService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/TUserPermissionService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/AccessoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/AccessoryServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/SupplierServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/SupplierServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/TUserPermissionServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/TUserPermissionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/TUserPermissionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/电梯管理(无em).pdma.json" beforeDir="false" afterPath="$PROJECT_DIR$/电梯管理(无em).pdma.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +156,7 @@
       <workItem from="1676771321072" duration="1123000" />
       <workItem from="1676772524501" duration="12426000" />
       <workItem from="1676786715693" duration="10552000" />
-      <workItem from="1676800174997" duration="3230000" />
+      <workItem from="1676800174997" duration="5818000" />
     </task>
     <task id="LOCAL-00001" summary="第一次模板">
       <created>1676771533846</created>
@@ -186,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676800829971</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="电梯基本完善">
+      <created>1676803676081</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1676803676081</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +241,7 @@
     <MESSAGE value="第一次模板" />
     <MESSAGE value="电梯初步" />
     <MESSAGE value="电梯进一步完善" />
-    <option name="LAST_COMMIT_MESSAGE" value="电梯进一步完善" />
+    <MESSAGE value="电梯基本完善" />
+    <option name="LAST_COMMIT_MESSAGE" value="电梯基本完善" />
   </component>
 </project>
