@@ -47,6 +47,18 @@ public class Storage {
     @TableField("supplier_name")
     private String supplierName;
 
+    @ApiModelProperty("联系人")
+    @TableField("contact_person")
+    private String contactPerson;
+
+    @ApiModelProperty("联系电话")
+    @TableField("contact_number")
+    private Integer contactNumber;
+
+    @ApiModelProperty("场所地址")
+    @TableField("address")
+    private String address;
+
     @ApiModelProperty("总金额")
     @TableField("total_price")
     private BigDecimal totalPrice;

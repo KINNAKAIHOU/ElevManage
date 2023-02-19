@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.entity.Accessory;
 import com.scau.zwp.elevmanage.entity.Accessory;
+import com.scau.zwp.elevmanage.entity.Manufacturer;
 import com.scau.zwp.elevmanage.service.AccessoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -41,6 +43,21 @@ public class AccessoryController {
         return accessoryService.queryById(id);
     }
 
+
+    /**
+     * 查询全部数据
+     *
+     * @return 实例对象
+     */
+    @ApiOperation("查询全部数据")
+    @GetMapping("/getAll")
+    public R<List<Accessory>> getAll() {
+        List<Accessory> accessoryList = accessoryService.list();
+        if (accessoryList != null)
+            return R.success(accessoryList);
+        else
+            return R.error("查询所有失败");
+    }
 
     /**
      * 分页查询

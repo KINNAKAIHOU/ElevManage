@@ -2,6 +2,7 @@ package com.scau.zwp.elevmanage.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.entity.Storage;
 import com.scau.zwp.elevmanage.entity.Supplier;
 import com.scau.zwp.elevmanage.service.SupplierService;
 import io.swagger.annotations.Api;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -38,6 +40,21 @@ public class SupplierController {
     @ApiImplicitParam(name = "id", value = "供货商ID", required = true, paramType = "query", dataType = "Integer")
     public R<Supplier> queryById(@RequestParam(value = "id") Integer id) {
         return supplierService.queryById(id);
+    }
+
+    /**
+     * 查询全部数据
+     *
+     * @return 实例对象
+     */
+    @ApiOperation("查询全部数据")
+    @GetMapping("/getAll")
+    public R<List<Supplier>> getAll() {
+        List<Supplier> storageList = supplierService.list();
+        if (storageList != null)
+            return R.success(storageList);
+        else
+            return R.error("查询所有失败");
     }
 
 

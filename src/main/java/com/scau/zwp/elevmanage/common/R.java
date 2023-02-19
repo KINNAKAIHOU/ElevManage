@@ -13,7 +13,7 @@ import java.util.Objects;
 @Data
 public class R<T> {
 
-    private Integer code; //编码：1成功，和其它数字为失败
+    private Integer code; //编码：1成功，0失败，2警告
 
     private String msg; //错误信息
 
@@ -30,6 +30,13 @@ public class R<T> {
         R r = new R();
         r.msg = msg;
         r.code = 0;
+        return r;
+    }
+
+    public static <T> R<T> warring(String msg) {
+        R r = new R();
+        r.msg = msg;
+        r.code = 2;
         return r;
     }
 

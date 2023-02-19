@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -42,6 +43,21 @@ public class ManufacturerController {
         return manufacturerService.queryById(id);
     }
 
+    /**
+     * 查询全部数据
+     *
+     * @return 实例对象
+     */
+    @ApiOperation("查询全部数据")
+    @GetMapping("/getAll")
+    public R<List<Manufacturer>> getAll() {
+        List<Manufacturer> manufacturerList = manufacturerService.list();
+        if (manufacturerList != null)
+            return R.success(manufacturerList);
+        else
+            return R.error("查询所有失败");
+    }
+
 
     /**
      * 分页查询
@@ -67,7 +83,7 @@ public class ManufacturerController {
     /**
      * 新增数据
      *
-     * @param elevator 实例对象
+     * @param manufacturer 实例对象
      * @return 实例对象
      */
     @ApiOperation("新增数据")
@@ -80,7 +96,7 @@ public class ManufacturerController {
     /**
      * 更新数据
      *
-     * @param elevator 实例对象
+     * @param manufacturer 实例对象
      * @return 实例对象
      */
     @ApiOperation("更新数据")

@@ -34,6 +34,26 @@ public class Inventory {
     @TableField("accessory_id")
     private Integer accessoryId;
 
+    @ApiModelProperty("配件编号")
+    @TableField("accessory_number")
+    private String accessoryNumber;
+
+    @ApiModelProperty("配件名称")
+    @TableField("accessory_name")
+    private String accessoryName;
+
+    @ApiModelProperty("规格型号")
+    @TableField("specification")
+    private String specification;
+
+    @ApiModelProperty("配件类型")
+    @TableField("type")
+    private String type;
+
+    @ApiModelProperty("单位")
+    @TableField("unit")
+    private String unit;
+
     @ApiModelProperty("库存数量")
     @TableField("quantity")
     private Integer quantity;

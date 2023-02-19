@@ -6,14 +6,18 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
-import com.scau.zwp.elevmanage.entity.Accessory;
-import com.scau.zwp.elevmanage.entity.Elevator;
+import com.scau.zwp.elevmanage.entity.*;
 import com.scau.zwp.elevmanage.entity.Accessory;
 import com.scau.zwp.elevmanage.mapper.AccessoryMapper;
+import com.scau.zwp.elevmanage.mapper.InventoryMapper;
 import com.scau.zwp.elevmanage.service.AccessoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.scau.zwp.elevmanage.service.InventoryService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -26,6 +30,8 @@ import java.util.List;
  */
 @Service
 public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory> implements AccessoryService {
+    @Resource
+    private InventoryMapper inventoryMapper;
 
     /**
      * 通过ID查询单条数据
@@ -88,9 +94,19 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("accessory_number", accessory.getAccessoryNumber());
         if (getOne(queryWrapper) == null) {
-            if (save(accessory) == true)
-                return R.success(true);
-            else
+            if (save(accessory) == true) {
+                Inventory inventory = new Inventory();
+                inventory.setAccessoryId(accessory.getId());
+                inventory.setAccessoryNumber(accessory.getAccessoryNumber());
+                inventory.setAccessoryName(accessory.getAccessoryName());
+                inventory.setSpecification(accessory.getSpecification());
+                inventory.setType(accessory.getType());
+                inventory.setUnit(accessory.getUnit());
+                if (inventoryMapper.insert(inventory) == 1) {
+                    return R.success(true);
+                }
+                return R.error("库存管理建立失败");
+            } else
                 return R.error("新增数据失败");
         } else
             return R.error("配件编码重复");
@@ -104,6 +120,31 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
      */
     public R<Boolean> update(Accessory accessory) {
         if (updateById(accessory) == true) {
+            QueryWrapper queryWrapper = new QueryWrapper();
+            queryWrapper.eq("accessory_id", accessory.getId());
+            Inventory inventory = inventoryMapper.selectOne(queryWrapper);
+            if (inventory != null) {
+                if (StrUtil.isNotBlank(accessory.getAccessoryNumber())) {
+                    inventory.setAccessoryNumber(accessory.getAccessoryNumber());
+                }
+                if (StrUtil.isNotBlank(accessory.getAccessoryName())) {
+                    inventory.setAccessoryName(accessory.getAccessoryName());
+                }
+                if (StrUtil.isNotBlank(accessory.getSpecification())) {
+                    inventory.setSpecification(accessory.getSpecification());
+                }
+                if (StrUtil.isNotBlank(accessory.getType())) {
+                    inventory.setType(accessory.getType());
+                }
+                if (StrUtil.isNotBlank(accessory.getUnit())) {
+                    inventory.setUnit(accessory.getUnit());
+                }
+                if (inventoryMapper.updateById(inventory) == 1) {
+                    return R.success(true);
+                } else {
+                    return R.error("库存管理建立失败");
+                }
+            }
             return R.success(true);
         } else
             return R.error("更新数据失败");
@@ -116,9 +157,14 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
      * @return 是否成功
      */
     public R<Boolean> deleteById(Integer id) {
-        if (removeById(id) == true)
-            return R.success(true);
-        else
+        if (removeById(id) == true) {
+            QueryWrapper queryWrapper = new QueryWrapper();
+            queryWrapper.eq("accessory_id", id);
+            if (inventoryMapper.deleteById(queryWrapper) == 1)
+                return R.success(true);
+            else
+                return R.error("删除库存失败");
+        } else
             return R.error("通过主键删除数据失败");
     }
 

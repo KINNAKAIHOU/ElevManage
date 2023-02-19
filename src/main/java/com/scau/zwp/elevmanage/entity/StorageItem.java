@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -34,6 +36,10 @@ public class StorageItem {
     @ApiModelProperty("配件入库ID")
     @TableField("storage_id")
     private Integer storageId;
+
+    @ApiModelProperty("配件ID")
+    @TableField("accessory_id")
+    private Integer accessoryId;
 
     @ApiModelProperty("配件名称")
     @TableField("accessory_name")

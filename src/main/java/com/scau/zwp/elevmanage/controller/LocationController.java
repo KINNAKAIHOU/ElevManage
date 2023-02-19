@@ -2,6 +2,7 @@ package com.scau.zwp.elevmanage.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.entity.Location;
 import com.scau.zwp.elevmanage.service.LocationService;
 import io.swagger.annotations.Api;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -39,6 +41,21 @@ public class LocationController {
     @ApiImplicitParam(name = "id", value = "场所ID", required = true, paramType = "query", dataType = "Integer")
     public R<Location> queryById(@RequestParam(value = "id") Integer id) {
         return locationService.queryById(id);
+    }
+
+    /**
+     * 查询全部数据
+     *
+     * @return 实例对象
+     */
+    @ApiOperation("查询全部数据")
+    @GetMapping("/getAll")
+    public R<List<Location>> getAll() {
+        List<Location> locationList = locationService.list();
+        if (locationList != null)
+            return R.success(locationList);
+        else
+            return R.error("查询所有失败");
     }
 
 

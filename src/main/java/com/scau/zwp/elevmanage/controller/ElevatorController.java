@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.entity.Accessory;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.service.ElevatorService;
 import com.scau.zwp.elevmanage.vo.ElevatorVo;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import sun.plugin.javascript.navig4.LayerArray;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -45,6 +47,20 @@ public class ElevatorController {
         return elevatorService.queryById(id);
     }
 
+    /**
+     * 查询全部数据
+     *
+     * @return 实例对象
+     */
+    @ApiOperation("查询全部数据")
+    @GetMapping("/getAll")
+    public R<List<Elevator>> getAll() {
+        List<Elevator> elevatorList = elevatorService.list();
+        if (elevatorList != null)
+            return R.success(elevatorList);
+        else
+            return R.error("查询所有失败");
+    }
 
     /**
      * 分页查询
