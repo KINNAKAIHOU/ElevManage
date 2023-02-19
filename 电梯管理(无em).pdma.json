@@ -1,10 +1,10 @@
 {
-  "name": "电梯管理",
+  "name": "电梯管理(无em)",
   "describe": "电梯管理",
   "avatar": "",
   "version": "4.1.3",
-  "createdTime": "2023-2-18 14:25:52",
-  "updatedTime": "2023-2-19 00:34:04",
+  "createdTime": "2023-2-19 10:48:07",
+  "updatedTime": "2023-2-19 12:49:05",
   "dbConns": [],
   "profile": {
     "default": {
@@ -558,12 +558,12 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "1B7F4004-0538-404D-B295-989BDDDD6800"
         },
         {
@@ -716,7 +716,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "2F3866FB-2C17-433B-B310-A4A32786CCFE"
         },
         {
@@ -733,7 +733,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "9A35802F-51F9-4D6F-90D9-000F10A2603B"
         },
         {
@@ -904,12 +904,12 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "9BF3739C-5C57-4084-9EA6-FEC1BE10D8D0"
         },
         {
@@ -1199,10 +1199,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "B8D50CD7-5857-4951-95C1-DF9ABD481D19"
@@ -1561,10 +1561,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "9B33E934-2E6E-4958-AEF5-428AD9C0B937"
@@ -1581,7 +1581,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "4A2FA834-FE95-4C3E-B95B-0F317B6C3FD5"
@@ -1771,10 +1771,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "42EC0081-100B-4E01-977C-47F2604580A3"
@@ -2032,10 +2032,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "F8BB0456-CB27-4FE7-9AA1-EF40C674734E"
@@ -2310,10 +2310,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "866558AE-7D3A-47F1-A68D-0ACE2485B933"
@@ -2571,12 +2571,12 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "0F92D629-812B-4635-BE73-429488DAB2CC"
         },
         {
@@ -2593,7 +2593,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "9F9EECAB-1D93-4B3B-A6B2-41DFF39CA2F0"
         },
         {
@@ -2883,10 +2883,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "8256C85E-BACA-493B-95FB-5C71C673019E"
@@ -2905,7 +2905,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "7B90DD9D-344B-41BC-860E-9A10823AB638"
         },
         {
@@ -3110,12 +3110,12 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "C9E21268-882E-4952-B542-9DAB129C9FF8"
         },
         {
@@ -3336,7 +3336,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "A88E6DAD-ABA7-406C-AB15-A4A8D014A1E5"
         },
         {
@@ -3507,10 +3507,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "E184412F-5069-470D-AABA-F4F1DDF079CC"
@@ -3527,7 +3527,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "5F0E0120-1C8C-4E42-B540-617B5AF45ECD"
@@ -3819,10 +3819,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "204A22FF-1DBA-41D3-88EB-FFD6E6B5B301"
@@ -4009,7 +4009,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "583B1FB5-519B-4499-9A38-FAEEE4922E5C"
@@ -4182,10 +4182,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "998B6ED1-6FCA-47FB-8286-884C8028BC82"
@@ -4202,7 +4202,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "508CC025-0E30-488E-9B9E-E179ECD619F9"
@@ -4392,10 +4392,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "93653D24-8CD6-4FA8-890B-5E27BD66BD2E"
@@ -4414,7 +4414,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "0CC5C1F3-92A4-4603-9777-F73679E3023B"
         },
         {
@@ -4429,7 +4429,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "7224AD6C-4FCD-45F6-830B-9E03D15E1138"
@@ -4619,12 +4619,12 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "7D6ADB0B-B0DF-43B6-A906-3457D58EF3E1"
         },
         {
@@ -4641,7 +4641,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "id": "1ADA5E71-2CFD-4F26-A14A-4A407051D6AC"
         },
         {
@@ -4914,12 +4914,12 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "73099FE9-C90D-4C99-8CB2-24AA56F1DAEB"
         },
         {
@@ -5175,12 +5175,12 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "4902292F-0A41-459A-BC1C-04C1F144101D"
         },
         {
@@ -5351,10 +5351,10 @@
           "scale": "",
           "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "D7081893-80A0-4141-B31A-251A650EB54F"
@@ -5371,7 +5371,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
           "id": "38BA815B-2157-41F5-AEB1-44EECFCD8192"
@@ -5390,7 +5390,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "374DECA8-3485-4440-BCB8-F2D8381389DA"
         },
         {

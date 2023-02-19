@@ -1,4 +1,4 @@
-package com.scau.zwp.elevmanage.entity;
+package com.scau.zwp.elevmanage;
 
 import com.baomidou.mybatisplus.annotation.*;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * 电梯厂家
+ * 电梯
  * </p>
  *
  * @author KinnakaIhou
@@ -18,41 +18,53 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("em_manufacturer")
-@ApiModel(value = "Manufacturer对象", description = "电梯厂家")
-public class Manufacturer {
+@TableName("em_elevator")
+@ApiModel(value = "Elevator对象", description = "电梯")
+public class Elevator {
 
-    @ApiModelProperty("厂家ID")
+    @ApiModelProperty("电梯id")
     @TableId(value = "id", type = IdType.AUTO)
     private String id;
 
-    @ApiModelProperty("厂家名称")
+    @ApiModelProperty("电梯编号")
+    @TableField("elevator_number")
+    private String elevatorNumber;
+
+    @ApiModelProperty("电梯名称")
+    @TableField("elevator_name")
+    private String elevatorName;
+
+    @ApiModelProperty("场所名称")
+    @TableField("location_name")
+    private String locationName;
+
+    @ApiModelProperty("生产厂家")
     @TableField("manufacturer_name")
     private String manufacturerName;
 
-    @ApiModelProperty("联系人")
-    @TableField("contact_person")
-    private String contactPerson;
+    @ApiModelProperty("设备型号")
+    @TableField("model")
+    private String model;
 
-    @ApiModelProperty("联系电话")
+    @ApiModelProperty("载重速度")
     @TableField("load_speed")
     private Integer loadSpeed;
 
-    @ApiModelProperty("手机")
-    @TableField("telephone")
-    private Integer telephone;
+    @ApiModelProperty("产品编号")
+    @TableField("product_number")
+    private String productNumber;
 
-    @ApiModelProperty("编号前缀")
-    @TableField("mobile_phone")
-    private String mobilePhone;
-
-    @ApiModelProperty("传真")
-    @TableField("fax")
-    private Integer fax;
-
-    @ApiModelProperty("公司地址")
+    @ApiModelProperty("详细地址")
     @TableField("address")
     private String address;
+
+    @ApiModelProperty("电梯厂家ID")
+    @TableField("manufacturer_id")
+    private String manufacturerId;
+
+    @ApiModelProperty("场所ID")
+    @TableField("location_id")
+    private String locationId;
 
     @ApiModelProperty("备注")
     @TableField("remarks")
