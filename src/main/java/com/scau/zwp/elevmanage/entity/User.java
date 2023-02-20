@@ -50,6 +50,18 @@ public class User {
     @TableField("age")
     private String age;
 
+    @ApiModelProperty("权限ID")
+    @TableField("permission_id")
+    private Integer permissionId;
+
+    @ApiModelProperty("权限名字")
+    @TableField("permission_name")
+    private String permissionName;
+
+    @ApiModelProperty("是否启用")
+    @TableField("is_enabled")
+    private String isEnabled;
+
     @ApiModelProperty("备注")
     @TableField("remarks")
     private String remarks;
