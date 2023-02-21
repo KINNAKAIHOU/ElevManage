@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import jdk.nashorn.internal.parser.Token;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -88,6 +89,31 @@ public class UserController {
     @PostMapping
     public R<Boolean> add(@RequestBody User user) {
         return userService.insert(user);
+    }
+
+
+    /**
+     * 注册用户
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
+    @ApiOperation("注册用户")
+    @PostMapping("/register")
+    public R<User> register(@RequestBody User user) {
+        return userService.register(user);
+    }
+
+    /**
+     * 登录用户
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
+    @ApiOperation("登录用户")
+    @PostMapping("/login")
+    public R<String> login(@RequestBody User user) {
+        return userService.login(user);
     }
 
 

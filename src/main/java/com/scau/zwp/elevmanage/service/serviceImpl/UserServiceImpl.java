@@ -14,10 +14,16 @@ import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.mapper.UserMapper;
 import com.scau.zwp.elevmanage.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.scau.zwp.elevmanage.utils.JWTUtils;
+import jdk.nashorn.internal.parser.Token;
+import org.jasypt.encryption.StringEncryptor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -29,6 +35,9 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+
+    @Resource
+    private StringEncryptor stringEncryptor;
 
     /**
      * 通过ID查询单条数据
@@ -109,11 +118,49 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 break;
         }
         user.setUserNumber(number);
+        user.setIsEnabled("1");
         if (save(user) == true)
             return R.success(true);
         else
             return R.error("新增数据失败");
     }
+
+    /**
+     * 注册用户
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
+    public R<User> register(User user) {
+        user.setPassword(stringEncryptor.encrypt(user.getPassword()));
+        insert(user);
+        return R.success(user);
+    }
+
+
+    /**
+     * 登录用户
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
+    public R<String> login(User user) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("user_number", user.getUserNumber());
+        User newUser = getOne(queryWrapper);
+        if (newUser == null)
+            return R.error("sb");
+        System.out.println(stringEncryptor.decrypt(newUser.getPassword()));
+        if (stringEncryptor.decrypt(newUser.getPassword()).equals(user.getPassword())) {
+            Map<String, User> payload = new HashMap<>();
+            payload.put("user", user);
+            String token = "";
+            token = JWTUtils.getToken(payload);
+            return R.success(token);
+        }
+        return R.error("登录失败");
+    }
+
 
     /**
      * 更新数据

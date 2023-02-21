@@ -29,6 +29,8 @@ spring:
 schedules:
   runBatch:  0 0 12 * * ?
 
+
+
 # mp配置
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
@@ -59,3 +61,7 @@ mybatis-plus:
 knife4j:
   # 是否开启增强模式
   enable: true
+
+jasypt:
+  encryptor:
+    password: erkuhkjgou;BVCIJ^*&cUGCUGW

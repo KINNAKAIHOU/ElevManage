@@ -5,6 +5,10 @@ import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import io.swagger.annotations.ApiOperation;
+import jdk.nashorn.internal.parser.Token;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * <p>
@@ -26,9 +30,9 @@ public interface UserService extends IService<User> {
     /**
      * 分页查询
      *
-     * @param user 筛选条件
-     * @param current  当前页码
-     * @param size     每页大小
+     * @param user    筛选条件
+     * @param current 当前页码
+     * @param size    每页大小
      * @return
      */
     Page<User> paginQuery(User user, Integer current, Integer size);
@@ -40,6 +44,23 @@ public interface UserService extends IService<User> {
      * @return 实例对象
      */
     R<Boolean> insert(User user);
+
+    /**
+     * 注册用户
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
+    R<User> register(User user);
+
+    /**
+     * 登录用户
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
+    R<String> login(User user);
+
 
     /**
      * 更新数据
