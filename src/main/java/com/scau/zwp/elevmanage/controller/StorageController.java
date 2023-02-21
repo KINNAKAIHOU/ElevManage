@@ -93,7 +93,7 @@ public class StorageController {
      */
     @ApiOperation("新增数据")
     @PostMapping
-    public Result add(@RequestPart("storage") Storage storage, @RequestPart("storageItems") List<StorageItem> storageItems) {
+    public Result add(@RequestPart("storage") Storage storage, @RequestPart(name = "storageItems", required = false) List<StorageItem> storageItems) {
         return storageService.insert(storage, storageItems);
     }
 

@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -79,6 +80,7 @@ public class Maintenance {
 
     @ApiModelProperty("维修日期")
     @TableField("maintenance_data")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime maintenanceData;
 
     @ApiModelProperty("维修人")

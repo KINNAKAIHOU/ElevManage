@@ -1,7 +1,9 @@
 package com.scau.zwp.elevmanage.config;
 
+import com.scau.zwp.elevmanage.utils.JWTInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -41,5 +43,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedMethods("*")
                 //跨域允许时间
                 .maxAge(10000);
+    }
+
+    //注册拦截器
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new JWTInterceptor())
+                .addPathPatterns("/user/**", "/column/**", "/order/**", "/product/**")   //其他接口token验证
+                .excludePathPatterns("/user/login");  //所有用户都放心
     }
 }

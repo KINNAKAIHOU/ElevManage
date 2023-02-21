@@ -12,7 +12,11 @@ import com.scau.zwp.elevmanage.entity.Inventory;
 import com.scau.zwp.elevmanage.mapper.InventoryMapper;
 import com.scau.zwp.elevmanage.service.InventoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -132,5 +136,24 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
             return new Result(false, StatusCode.ERROR, "减少数量失败");
     }
 
-
+    /**
+     * 检查所有库存
+     *
+     * @return 实例对象
+     */
+    public Result checkAllInventory() {
+        List<Inventory> inventoryList = list();
+        if (inventoryList != null) {
+            List<String> stringList = new ArrayList<>();
+            for (Inventory inventory : inventoryList) {
+                if (inventory.getQuantity() < inventory.getWarningQuantity())
+                    stringList.add(inventory.getAccessoryNumber() + "-" + inventory.getAccessoryName() + ":数量低于预警数量");
+            }
+            if (!stringList.isEmpty()) {
+                return new Result(true, StatusCode.OK, "检查所有库存成功,有配件数量低于预警", stringList);
+            } else
+                return new Result(true, StatusCode.OK, "检查所有库存成功,没有配件数量低于预警");
+        } else
+            return new Result(true, StatusCode.OK, "检查所有库存成功,没有配件数量低于预警");
+    }
 }

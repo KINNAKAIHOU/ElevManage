@@ -129,4 +129,16 @@ public class InventoryController {
     }
 
 
+    /**
+     * 检查所有库存
+     *
+     * @return 实例对象
+     */
+    @ApiOperation("检查所有库存")
+    @GetMapping("/checkAllInventory")
+    public Result checkAllInventory() {
+        return inventoryService.checkAllInventory();
+    }
+
+
 }
