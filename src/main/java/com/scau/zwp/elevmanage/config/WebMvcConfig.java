@@ -17,7 +17,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         String fullPath = "file:" + uploadRootPath;
-        registry.addResourceHandler("/pic/**")
+        registry.addResourceHandler("/**")
                 .addResourceLocations(fullPath);
         System.out.println("静态资源路径：" + fullPath);
     }

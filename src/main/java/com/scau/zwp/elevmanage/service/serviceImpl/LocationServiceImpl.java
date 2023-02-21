@@ -105,8 +105,14 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
             List<Elevator> elevatorList = elevatorMapper.selectList(queryWrapper);
             if (elevatorList != null) {
                 for (Elevator elevator : elevatorList) {
-                    elevator.setLocationName(location.getLocationName());
-                    elevator.setAddress(location.getAddress());
+                    if (location.getLocationName() != null)
+                        elevator.setLocationName(location.getLocationName());
+                    if (location.getAddress() != null)
+                        elevator.setAddress(location.getAddress());
+                    if (location.getContactPerson() != null)
+                        elevator.setContactPerson(location.getContactPerson());
+                    if (location.getContactNumber() != null)
+                        elevator.setContactNumber(location.getContactNumber());
                     if (elevatorMapper.updateById(elevator) == 0)
                         return R.error("更新相关电梯信息事变");
                 }
@@ -115,6 +121,7 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
         } else
             return R.error("更新数据失败");
     }
+
 
     /**
      * 通过主键删除数据

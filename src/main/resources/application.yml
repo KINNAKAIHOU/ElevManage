@@ -26,6 +26,9 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+schedules:
+  runBatch: 0/5 * * * * ?
+
 # mp配置
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

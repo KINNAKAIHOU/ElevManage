@@ -102,7 +102,7 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
                 inventory.setSpecification(accessory.getSpecification());
                 inventory.setType(accessory.getType());
                 inventory.setUnit(accessory.getUnit());
-                if (inventoryMapper.insert(inventory) == 1) {
+                if (inventoryMapper.insert(inventory)!=0) {
                     return R.success(true);
                 }
                 return R.error("库存管理建立失败");

@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -43,6 +45,10 @@ public class Maintenance {
     @TableField("location_name")
     private String locationName;
 
+    @ApiModelProperty("详细地址")
+    @TableField("address")
+    private String address;
+
     @ApiModelProperty("联系人")
     @TableField("contact_person")
     private String contactPerson;
@@ -50,6 +56,10 @@ public class Maintenance {
     @ApiModelProperty("联系电话")
     @TableField("contact_number")
     private Integer contactNumber;
+
+    @ApiModelProperty("检查描述")
+    @TableField("check_description")
+    private String checkDescription;
 
     @ApiModelProperty("维修工费")
     @TableField("maintenance_price")

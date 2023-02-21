@@ -222,7 +222,6 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
                 return R.error("电梯图片上传失败");
         }
         return R.success(true);
-
     }
 
 }

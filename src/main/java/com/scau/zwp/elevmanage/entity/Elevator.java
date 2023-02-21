@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -43,6 +45,14 @@ public class Elevator {
     @ApiModelProperty("场所名称")
     @TableField("location_name")
     private String locationName;
+
+    @ApiModelProperty("联系人")
+    @TableField("contact_person")
+    private String contactPerson;
+
+    @ApiModelProperty("联系电话")
+    @TableField("contact_number")
+    private Integer contactNumber;
 
     @ApiModelProperty("生产厂家")
     @TableField("manufacturer_name")

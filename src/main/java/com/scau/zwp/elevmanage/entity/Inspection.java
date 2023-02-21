@@ -31,8 +31,8 @@ public class Inspection {
     private Integer id;
 
     @ApiModelProperty("检查编号")
-    @TableField("maintenance_number")
-    private String maintenanceNumber;
+    @TableField("inspection_number")
+    private String InspectionNumber;
 
     @ApiModelProperty("电梯编号")
     @TableField("elevator_number")
@@ -41,6 +41,10 @@ public class Inspection {
     @ApiModelProperty("电梯地点")
     @TableField("location_name")
     private String locationName;
+
+    @ApiModelProperty("详细地址")
+    @TableField("address")
+    private String address;
 
     @ApiModelProperty("联系人")
     @TableField("contact_person")
@@ -51,8 +55,8 @@ public class Inspection {
     private Integer contactNumber;
 
     @ApiModelProperty("检查描述")
-    @TableField("fault_description")
-    private String faultDescription;
+    @TableField("check_description")
+    private String checkDescription;
 
     @ApiModelProperty("检查日期")
     @TableField("inspection_data")

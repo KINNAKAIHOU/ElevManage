@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -33,6 +35,14 @@ public class Plan {
     @ApiModelProperty("计划编号")
     @TableField("plan_number")
     private String planNumber;
+
+    @ApiModelProperty("电梯编号")
+    @TableField("elevator_number")
+    private String elevatorNumber;
+
+    @ApiModelProperty("电梯ID")
+    @TableField("elevator_id")
+    private Integer elevatorId;
 
     @ApiModelProperty("开始日期")
     @TableField("start_time")

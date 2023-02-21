@@ -115,7 +115,9 @@ public class ManufacturerServiceImpl extends ServiceImpl<ManufacturerMapper, Man
             List<Elevator> elevatorList = elevatorMapper.selectList(queryWrapper);
             if (elevatorList != null) {
                 for (Elevator elevator : elevatorList) {
-                    elevator.setManufacturerName(manufacturer.getManufacturerName());
+                    String manufacturerName = manufacturer.getManufacturerName();
+                    if (manufacturerName != null)
+                        elevator.setManufacturerName(manufacturerName);
                     if (elevatorMapper.updateById(elevator) == 0)
                         return R.error("更新相关电梯信息事变");
                 }

@@ -1,5 +1,6 @@
 package com.scau.zwp.elevmanage.service;
 
+import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.entity.InspectionImage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +13,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-02-19 10:47:51
  */
 public interface InspectionImageService extends IService<InspectionImage> {
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    R<Boolean> deleteById(Integer id);
+
 
 }
