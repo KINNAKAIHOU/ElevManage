@@ -27,7 +27,7 @@ spring:
       matching-strategy: ant_path_matcher
 
 schedules:
-  runBatch: 0/5 * * * * ?
+  runBatch:  0 0 12 * * ?
 
 # mp配置
 mybatis-plus:
@@ -47,8 +47,8 @@ mybatis-plus:
       # table-prefix: em_
     banner: off
     # 在控制台开启mybatis日志
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #springfox:
 #  documentation:
