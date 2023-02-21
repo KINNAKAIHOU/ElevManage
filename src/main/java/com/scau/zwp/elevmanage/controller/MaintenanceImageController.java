@@ -1,7 +1,10 @@
 package com.scau.zwp.elevmanage.controller;
 
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.service.ElevatorImageService;
+import com.scau.zwp.elevmanage.service.MaintenanceService;
+import com.scau.zwp.elevmanage.service.serviceImpl.MaintenanceImageServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +29,7 @@ import javax.annotation.Resource;
 public class MaintenanceImageController {
 
     @Resource
-    private ElevatorImageService elevatorImageService;
+    private MaintenanceImageServiceImpl maintenanceImageService;
 
 
     /**
@@ -38,8 +41,8 @@ public class MaintenanceImageController {
     @ApiOperation("通过主键删除数据")
     @DeleteMapping
     @ApiImplicitParam(name = "id", value = "维修报告图片ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Boolean> deleteById(@RequestParam(value = "id") Integer id) {
-        return elevatorImageService.deleteById(id);
+    public Result deleteById(@RequestParam(value = "id") Integer id) {
+        return maintenanceImageService.deleteById(id);
     }
 
 }

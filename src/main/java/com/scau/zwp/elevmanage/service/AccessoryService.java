@@ -2,6 +2,7 @@ package com.scau.zwp.elevmanage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.entity.Accessory;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.scau.zwp.elevmanage.entity.Accessory;
@@ -21,7 +22,7 @@ public interface AccessoryService extends IService<Accessory> {
      * @param id 主键
      * @return 实例对象
      */
-    R<Accessory> queryById(Integer id);
+    Result queryById(Integer id);
 
     /**
      * 分页查询
@@ -31,7 +32,7 @@ public interface AccessoryService extends IService<Accessory> {
      * @param size      每页大小
      * @return
      */
-    Page<Accessory> paginQuery(Accessory accessory, Integer current, Integer size);
+    Result paginQuery(Accessory accessory, Integer current, Integer size);
 
     /**
      * 新增数据
@@ -39,7 +40,7 @@ public interface AccessoryService extends IService<Accessory> {
      * @param accessory 实例对象
      * @return 实例对象
      */
-    R<Boolean> insert(Accessory accessory);
+    Result insert(Accessory accessory);
 
     /**
      * 更新数据
@@ -47,7 +48,7 @@ public interface AccessoryService extends IService<Accessory> {
      * @param accessory 实例对象
      * @return 实例对象
      */
-    R<Boolean> update(Accessory accessory);
+    Result update(Accessory accessory);
 
     /**
      * 通过主键删除数据
@@ -55,6 +56,6 @@ public interface AccessoryService extends IService<Accessory> {
      * @param id 主键
      * @return 是否成功
      */
-    R<Boolean> deleteById(Integer id);
+    Result deleteById(Integer id);
 
 }

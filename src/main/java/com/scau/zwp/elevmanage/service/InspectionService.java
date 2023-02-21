@@ -1,15 +1,8 @@
 package com.scau.zwp.elevmanage.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.scau.zwp.elevmanage.common.R;
-import com.scau.zwp.elevmanage.entity.Inspection;
-import com.scau.zwp.elevmanage.entity.Inspection;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.scau.zwp.elevmanage.vo.InspectionVo;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.entity.Inspection;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -27,7 +20,7 @@ public interface InspectionService extends IService<Inspection> {
      * @param id 主键
      * @return 实例对象
      */
-    R<InspectionVo> queryById(Integer id);
+    Result queryById(Integer id);
 
     /**
      * 分页查询
@@ -37,7 +30,7 @@ public interface InspectionService extends IService<Inspection> {
      * @param size       每页大小
      * @return
      */
-    Page<Inspection> paginQuery(Inspection inspection, Integer current, Integer size);
+    Result paginQuery(Inspection inspection, Integer current, Integer size);
 
     /**
      * 新增数据
@@ -45,7 +38,7 @@ public interface InspectionService extends IService<Inspection> {
      * @param inspection 实例对象
      * @return 实例对象
      */
-    R<Boolean> insert(Inspection inspection, MultipartFile[] files);
+    Result insert(Inspection inspection, MultipartFile[] files);
 
     /**
      * 更新数据
@@ -53,7 +46,7 @@ public interface InspectionService extends IService<Inspection> {
      * @param inspection 实例对象
      * @return 实例对象
      */
-    R<Boolean> update(Inspection inspection, MultipartFile[] files);
+    Result update(Inspection inspection, MultipartFile[] files);
 
     /**
      * 通过主键删除数据
@@ -61,7 +54,7 @@ public interface InspectionService extends IService<Inspection> {
      * @param id 主键
      * @return 是否成功
      */
-    R<Boolean> deleteById(Integer id);
+    Result deleteById(Integer id);
 
     /**
      * 确认完成
@@ -69,7 +62,7 @@ public interface InspectionService extends IService<Inspection> {
      * @param inspection 主键
      * @return 是否成功
      */
-    R<Boolean> finish(Inspection inspection);
+    Result finish(Inspection inspection);
 
 
 }

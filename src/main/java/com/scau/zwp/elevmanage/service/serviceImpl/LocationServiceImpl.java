@@ -5,15 +5,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.scau.zwp.elevmanage.common.R;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Elevator;
-import com.scau.zwp.elevmanage.entity.Location;
 import com.scau.zwp.elevmanage.entity.Location;
 import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.mapper.LocationMapper;
 import com.scau.zwp.elevmanage.service.LocationService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,13 +39,13 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
      * @param id 主键
      * @return 实例对象
      */
-    public R<Location> queryById(Integer id) {
+    public Result queryById(Integer id) {
         System.out.println(id);
         Location location = getById(id);
         if (location == null)
-            return R.error("通过ID查询电梯厂家信息失败");
+            return new Result(false, StatusCode.ERROR, "通过ID查询场所信息失败");
         else
-            return R.success(location);
+            return new Result(true, StatusCode.OK, "通过ID查询场所信息成功", location);
     }
 
     /**
@@ -57,7 +56,7 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
      * @param size     每页大小
      * @return
      */
-    public Page<Location> paginQuery(Location location, Integer current, Integer size) {
+    public Result paginQuery(Location location, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Location> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(location.getLocationName())) {
@@ -76,7 +75,7 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询场所分页成功", pagin);
     }
 
     /**
@@ -85,11 +84,11 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
      * @param location 实例对象
      * @return 实例对象
      */
-    public R<Boolean> insert(Location location) {
+    public Result insert(Location location) {
         if (save(location) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "添加场所成功");
         else
-            return R.error("新增数据失败");
+            return new Result(false, StatusCode.ERROR, "添加场所失败");
     }
 
     /**
@@ -98,7 +97,7 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
      * @param location 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(Location location) {
+    public Result update(Location location) {
         if (updateById(location) == true) {
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("location_id", location.getId());
@@ -114,12 +113,12 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
                     if (location.getContactNumber() != null)
                         elevator.setContactNumber(location.getContactNumber());
                     if (elevatorMapper.updateById(elevator) == 0)
-                        return R.error("更新相关电梯信息事变");
+                        return new Result(false, StatusCode.ERROR, "电梯信息更新失败");
                 }
             }
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "更新场所数据成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新场所数据失败");
     }
 
 
@@ -129,11 +128,11 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         if (removeById(id) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "删除场所成功");
         else
-            return R.error("通过主键删除数据失败");
+            return new Result(false, StatusCode.ERROR, "删除场所失败");
     }
 
 }

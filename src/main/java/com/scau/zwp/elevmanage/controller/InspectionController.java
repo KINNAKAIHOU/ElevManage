@@ -2,6 +2,8 @@ package com.scau.zwp.elevmanage.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Inspection;
 import com.scau.zwp.elevmanage.service.InspectionService;
 import com.scau.zwp.elevmanage.vo.InspectionVo;
@@ -39,7 +41,7 @@ public class InspectionController {
     @ApiOperation("通过ID查询单条数据")
     @GetMapping
     @ApiImplicitParam(name = "id", value = "检查报告ID", required = true, paramType = "query", dataType = "Integer")
-    public R<InspectionVo> queryById(@RequestParam(value = "id") Integer id) {
+    public Result queryById(@RequestParam(value = "id") Integer id) {
         return inspectionService.queryById(id);
     }
 
@@ -50,12 +52,12 @@ public class InspectionController {
      */
     @ApiOperation("查询全部数据")
     @GetMapping("/getAll")
-    public R<List<Inspection>> getAll() {
+    public Result getAll() {
         List<Inspection> inspectionList = inspectionService.list();
         if (inspectionList != null)
-            return R.success(inspectionList);
+            return new Result(true, StatusCode.OK, "查询检查报告全部数据成功", inspectionList);
         else
-            return R.error("查询所有失败");
+            return new Result(false, StatusCode.ERROR, "查询检查报告全部数据失败");
     }
 
     /**
@@ -72,10 +74,10 @@ public class InspectionController {
             @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Integer"),
             @ApiImplicitParam(name = "size", value = "元素", required = true, paramType = "query", dataType = "Integer"),
     })
-    public R<Page<Inspection>> paginQuery(@RequestBody Inspection inspection, @RequestParam("current") Integer current, @RequestParam("size") Integer size) {
+    public Result paginQuery(@RequestBody Inspection inspection, @RequestParam("current") Integer current, @RequestParam("size") Integer size) {
         /*把Mybatis的分页对象做封装转换，MP的分页对象上有一些SQL敏感信息，还是通过spring的分页模型来封装数据吧*/
-        Page<Inspection> pageResult = inspectionService.paginQuery(inspection, current, size);
-        return R.success(pageResult);
+        Page<Inspection> pageResult = (Page<Inspection>) inspectionService.paginQuery(inspection, current, size).getData();
+        return new Result(true, StatusCode.OK, "查询检查报告分页成功", pageResult);
     }
 
 
@@ -87,7 +89,7 @@ public class InspectionController {
      */
     @ApiOperation("新增数据")
     @PostMapping
-    public R<Boolean> add(@RequestPart("inspection") Inspection inspection, @RequestPart(name = "files", required = false) MultipartFile[] files) {
+    public Result add(@RequestPart("inspection") Inspection inspection, @RequestPart(name = "files", required = false) MultipartFile[] files) {
         return inspectionService.insert(inspection, files);
     }
 
@@ -100,7 +102,7 @@ public class InspectionController {
      */
     @ApiOperation("更新数据")
     @PutMapping
-    public R<Boolean> edit(@RequestPart("inspection") Inspection inspection, @RequestPart(name = "files", required = false) MultipartFile[] files) {
+    public Result edit(@RequestPart("inspection") Inspection inspection, @RequestPart(name = "files", required = false) MultipartFile[] files) {
         return inspectionService.update(inspection, files);
     }
 
@@ -114,7 +116,7 @@ public class InspectionController {
     @ApiOperation("通过主键删除数据")
     @DeleteMapping
     @ApiImplicitParam(name = "id", value = "检查报告ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Boolean> deleteById(@RequestParam(value = "id") Integer id) {
+    public Result deleteById(@RequestParam(value = "id") Integer id) {
         return inspectionService.deleteById(id);
     }
 
@@ -125,8 +127,8 @@ public class InspectionController {
      * @return 是否成功
      */
     @ApiOperation("确认完成")
-    @PostMapping ("/finish")
-    public R<Boolean> finish(@RequestBody Inspection inspection) {
+    @PostMapping("/finish")
+    public Result finish(@RequestBody Inspection inspection) {
         return inspectionService.finish(inspection);
     }
 

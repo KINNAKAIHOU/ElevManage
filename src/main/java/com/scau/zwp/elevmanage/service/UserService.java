@@ -2,6 +2,7 @@ package com.scau.zwp.elevmanage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -25,7 +26,7 @@ public interface UserService extends IService<User> {
      * @param id 主键
      * @return 实例对象
      */
-    R<User> queryById(Integer id);
+    Result queryById(Integer id);
 
     /**
      * 分页查询
@@ -35,7 +36,7 @@ public interface UserService extends IService<User> {
      * @param size    每页大小
      * @return
      */
-    Page<User> paginQuery(User user, Integer current, Integer size);
+    Result paginQuery(User user, Integer current, Integer size);
 
     /**
      * 新增数据
@@ -43,7 +44,7 @@ public interface UserService extends IService<User> {
      * @param user 实例对象
      * @return 实例对象
      */
-    R<Boolean> insert(User user);
+    Result insert(User user);
 
     /**
      * 注册用户
@@ -51,7 +52,7 @@ public interface UserService extends IService<User> {
      * @param user 实例对象
      * @return 实例对象
      */
-    R<User> register(User user);
+    Result register(User user);
 
     /**
      * 登录用户
@@ -59,7 +60,7 @@ public interface UserService extends IService<User> {
      * @param user 实例对象
      * @return 实例对象
      */
-    R<String> login(User user);
+    Result login(User user);
 
 
     /**
@@ -68,7 +69,7 @@ public interface UserService extends IService<User> {
      * @param user 实例对象
      * @return 实例对象
      */
-    R<Boolean> update(User user);
+    Result update(User user);
 
     /**
      * 通过主键删除数据
@@ -76,6 +77,6 @@ public interface UserService extends IService<User> {
      * @param id 主键
      * @return 是否成功
      */
-    R<Boolean> deleteById(Integer id);
+    Result deleteById(Integer id);
 
 }

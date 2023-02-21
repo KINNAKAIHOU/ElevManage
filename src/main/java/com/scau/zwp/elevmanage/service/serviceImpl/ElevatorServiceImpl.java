@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.entity.ElevatorImage;
 import com.scau.zwp.elevmanage.entity.Location;
@@ -64,17 +66,17 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      * @param id 主键
      * @return 实例对象
      */
-    public R<ElevatorVo> queryById(Integer id) {
+    public Result queryById(Integer id) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("elevator_id", id);
         List<ElevatorImage> elevatorImageList = elevatorImageService.list(queryWrapper);
         Elevator elevator = getById(id);
         if (elevator == null)
-            return R.error("通过ID查询电梯信息失败");
+            return new Result(false, StatusCode.ERROR, "通过ID查询电梯信息失败");
         else {
             ElevatorVo elevatorVo = BeanUtil.copyProperties(elevator, ElevatorVo.class);
             elevatorVo.setElevatorImageList(elevatorImageList);
-            return R.success(elevatorVo);
+            return new Result(true, StatusCode.OK, "通过ID查询电梯信息成功", elevatorVo);
         }
     }
 
@@ -86,7 +88,7 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      * @param size     每页大小
      * @return
      */
-    public Page<Elevator> paginQuery(Elevator elevator, Integer current, Integer size) {
+    public Result paginQuery(Elevator elevator, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Elevator> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(elevator.getElevatorNumber())) {
@@ -117,7 +119,7 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询电梯分页成功", pagin);
     }
 
     /**
@@ -126,7 +128,7 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      * @param elevator 实例对象
      * @return 实例对象
      */
-    public R<Boolean> insert(Elevator elevator, MultipartFile[] files) {
+    public Result insert(Elevator elevator, MultipartFile[] files) {
         Manufacturer manufacturer = manufacturerService.getById(elevator.getManufacturerId());
         Location location = locationService.getById(elevator.getLocationId());
         String date = DateUtil.format(new Date(), "yyyyMMdd");
@@ -149,12 +151,12 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
         elevator.setLocationId(location.getId());
         elevator.setManufacturerId(manufacturer.getId());
         if (save(elevator) == true) {
-            if (insertElevatorImage(elevator.getId(), files).getCode() == 1)
-                return R.success(true);
+            if (insertElevatorImage(elevator.getId(), files).getCode() == 2000)
+                return new Result(true, StatusCode.OK, "添加电梯成功");
             else
-                return R.error("电梯图片上传失败");
+                return new Result(false, StatusCode.ERROR, "电梯图片上传失败");
         } else
-            return R.error("新增数据失败");
+            return new Result(false, StatusCode.ERROR, "添加电梯失败");
     }
 
     /**
@@ -163,14 +165,14 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      * @param elevator 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(Elevator elevator, MultipartFile[] files) {
+    public Result update(Elevator elevator, MultipartFile[] files) {
         if (updateById(elevator) == true) {
-            if (insertElevatorImage(elevator.getId(), files).getCode() == 1)
-                return R.success(true);
+            if (insertElevatorImage(elevator.getId(), files).getCode() == 2000)
+                return new Result(true, StatusCode.OK, "更新电梯数据成功");
             else
-                return R.error("电梯图片上传失败");
+                return new Result(false, StatusCode.ERROR, "电梯图片上传失败");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新电梯数据失败");
     }
 
     /**
@@ -179,20 +181,20 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("elevator_id", id);
         List<ElevatorImage> elevatorImageList = elevatorImageService.list(queryWrapper);
         if (elevatorImageList != null) {
             for (ElevatorImage elevatorImage : elevatorImageList) {
                 if (elevatorImageService.removeById(elevatorImage.getId()) == false)
-                    return R.error("删除电梯图片失败");
+                    return new Result(false, StatusCode.ERROR, "删除电梯图片失败");
             }
         }
         if (removeById(id) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "删除电梯成功");
         else
-            return R.error("通过主键删除数据失败");
+            return new Result(false, StatusCode.ERROR, "删除电梯失败");
     }
 
     /**
@@ -201,9 +203,9 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      * @param files 图片
      * @return 是否成功
      */
-    public R<Boolean> insertElevatorImage(Integer id, MultipartFile[] files) {
+    public Result insertElevatorImage(Integer id, MultipartFile[] files) {
         if (files == null)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "图片数量为0");
         for (MultipartFile file : files) {
             String orgName = file.getOriginalFilename();
             String extName = orgName.substring(orgName.lastIndexOf('.'));
@@ -212,16 +214,16 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
                 file.transferTo(new File(uploadRootPath, destName));
             } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
-                return R.error("电梯图片上传失败");
+                return new Result(false, StatusCode.ERROR, "电梯图片上传失败");
             }
             ElevatorImage elevatorImage = new ElevatorImage();
             elevatorImage.setElevatorId(id);
             elevatorImage.setImageName(destName);
             elevatorImage.setImagePosition("/elevator/" + destName);
             if (elevatorImageService.save(elevatorImage) == false)
-                return R.error("电梯图片上传失败");
+                return new Result(false, StatusCode.ERROR, "电梯图片上传失败");
         }
-        return R.success(true);
+        return new Result(true, StatusCode.OK, "图片上传成功");
     }
 
 }

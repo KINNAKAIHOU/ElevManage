@@ -2,6 +2,8 @@ package com.scau.zwp.elevmanage.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Plan;
 import com.scau.zwp.elevmanage.service.PlanService;
 import io.swagger.annotations.Api;
@@ -37,7 +39,7 @@ public class PlanController {
     @ApiOperation("通过ID查询单条数据")
     @GetMapping
     @ApiImplicitParam(name = "id", value = "检查计划ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Plan> queryById(@RequestParam(value = "id") Integer id) {
+    public Result queryById(@RequestParam(value = "id") Integer id) {
         return planService.queryById(id);
     }
 
@@ -49,12 +51,12 @@ public class PlanController {
      */
     @ApiOperation("查询全部数据")
     @GetMapping("/getAll")
-    public R<List<Plan>> getAll() {
+    public Result getAll() {
         List<Plan> planList = planService.list();
         if (planList != null)
-            return R.success(planList);
+            return new Result(true, StatusCode.OK, "查询检查计划全部数据成功", planList);
         else
-            return R.error("查询所有失败");
+            return new Result(false, StatusCode.ERROR, "查询检查计划全部数据失败");
     }
 
     /**
@@ -71,10 +73,10 @@ public class PlanController {
             @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Integer"),
             @ApiImplicitParam(name = "size", value = "元素", required = true, paramType = "query", dataType = "Integer"),
     })
-    public R<Page<Plan>> paginQuery(@RequestBody Plan plan, @RequestParam("current") Integer current, @RequestParam("size") Integer size) {
+    public Result paginQuery(@RequestBody Plan plan, @RequestParam("current") Integer current, @RequestParam("size") Integer size) {
         /*把Mybatis的分页对象做封装转换，MP的分页对象上有一些SQL敏感信息，还是通过spring的分页模型来封装数据吧*/
-        Page<Plan> pageResult = planService.paginQuery(plan, current, size);
-        return R.success(pageResult);
+        Page<Plan> pageResult = (Page<Plan>) planService.paginQuery(plan, current, size).getData();
+        return new Result(true, StatusCode.OK, "查询检查计划分页成功", pageResult);
     }
 
 
@@ -86,7 +88,7 @@ public class PlanController {
      */
     @ApiOperation("新增数据")
     @PostMapping
-    public R<Boolean> add(@RequestBody Plan plan) {
+    public Result add(@RequestBody Plan plan) {
         return planService.insert(plan);
     }
 
@@ -99,7 +101,7 @@ public class PlanController {
      */
     @ApiOperation("更新数据")
     @PutMapping
-    public R<Boolean> edit(@RequestBody Plan plan) {
+    public Result edit(@RequestBody Plan plan) {
         return planService.update(plan);
     }
 
@@ -112,7 +114,7 @@ public class PlanController {
     @ApiOperation("通过主键删除数据")
     @DeleteMapping
     @ApiImplicitParam(name = "id", value = "检查计划ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Boolean> deleteById(@RequestParam(value = "id") Integer id) {
+    public Result deleteById(@RequestParam(value = "id") Integer id) {
         return planService.deleteById(id);
     }
 
@@ -123,7 +125,7 @@ public class PlanController {
      */
     @ApiOperation("检查所有计划")
     @GetMapping("/checkAllPlan")
-    public R<Boolean> checkAllPlan() {
+    public Result checkAllPlan() {
         return planService.checkAllPlan();
     }
 

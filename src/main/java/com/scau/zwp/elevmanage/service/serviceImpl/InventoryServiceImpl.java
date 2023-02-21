@@ -6,14 +6,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Inventory;
 import com.scau.zwp.elevmanage.mapper.InventoryMapper;
 import com.scau.zwp.elevmanage.service.InventoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * <p>
@@ -32,13 +31,13 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
      * @param id 主键
      * @return 实例对象
      */
-    public R<Inventory> queryById(Integer id) {
+    public Result queryById(Integer id) {
         System.out.println(id);
         Inventory inventory = getById(id);
         if (inventory == null)
-            return R.error("通过ID查询配件信息失败");
+            return new Result(false, StatusCode.ERROR, "通过ID查询库存管理信息失败");
         else
-            return R.success(inventory);
+            return new Result(true, StatusCode.OK, "通过ID查询库存管理信息成功", inventory);
     }
 
 
@@ -50,7 +49,7 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
      * @param size      每页大小
      * @return
      */
-    public Page<Inventory> paginQuery(Inventory inventory, Integer current, Integer size) {
+    public Result paginQuery(Inventory inventory, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Inventory> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(inventory.getAccessoryNumber())) {
@@ -75,7 +74,7 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询库存管理分页成功", pagin);
     }
 
 
@@ -85,13 +84,11 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
      * @param inventory 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(Inventory inventory) {
+    public Result update(Inventory inventory) {
         if (updateById(inventory) == true) {
-            if (inventory.getQuantity() < inventory.getWarningQuantity())
-                return R.warring(inventory.getAccessoryId() + ":" + inventory.getAccessoryName() + "库存不足");
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "更新库存管理数据成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新库存管理数据失败");
     }
 
 
@@ -102,17 +99,15 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
      * @param size        数量
      * @return 实例对象
      */
-    public R<Boolean> increase(Integer accessoryId, Integer size) {
+    public Result increase(Integer accessoryId, Integer size) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("accessory_id", accessoryId);
         Inventory inventory = getOne(queryWrapper);
         inventory.setQuantity(inventory.getQuantity() + size);
         if (updateById(inventory) == true) {
-            if (inventory.getQuantity() < inventory.getWarningQuantity())
-                return R.warring(inventory.getAccessoryId() + ":" + inventory.getAccessoryName() + "库存不足");
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "增加数量成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "增加数量失败");
 
     }
 
@@ -124,7 +119,7 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
      * @param size        数量
      * @return 实例对象
      */
-    public R<Boolean> reduce(Integer accessoryId, Integer size) {
+    public Result reduce(Integer accessoryId, Integer size) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("accessory_id", accessoryId);
         Inventory inventory = getOne(queryWrapper);
@@ -132,11 +127,9 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
         if (inventory.getQuantity() < 0)
             inventory.setQuantity(0);
         if (updateById(inventory) == true) {
-            if (inventory.getQuantity() < inventory.getWarningQuantity())
-                return R.warring(inventory.getAccessoryId() + ":" + inventory.getAccessoryName() + "库存不足");
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "减少数量成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "减少数量失败");
     }
 
 

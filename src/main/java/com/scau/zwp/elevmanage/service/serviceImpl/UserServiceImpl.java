@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.entity.Storage;
 import com.scau.zwp.elevmanage.entity.User;
@@ -20,10 +22,7 @@ import org.jasypt.encryption.StringEncryptor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -45,13 +44,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param id 主键
      * @return 实例对象
      */
-    public R<User> queryById(Integer id) {
+    public Result queryById(Integer id) {
         System.out.println(id);
         User user = getById(id);
         if (user == null)
-            return R.error("通过ID查询电梯厂家信息失败");
+            return new Result(false, StatusCode.ERROR, "通过ID查询用户信息失败");
         else
-            return R.success(user);
+            return new Result(true, StatusCode.OK, "通过ID查询用户信息成功", user);
     }
 
     /**
@@ -62,7 +61,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param size    每页大小
      * @return
      */
-    public Page<User> paginQuery(User user, Integer current, Integer size) {
+    public Result paginQuery(User user, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(user.getUserNumber())) {
@@ -93,7 +92,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询用户分页成功", pagin);
     }
 
     /**
@@ -103,7 +102,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return 实例对象
      * 等待修改
      */
-    public R<Boolean> insert(User user) {
+    public Result insert(User user) {
         String date = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "US" + date;
         int num = 3;//编号的位数
@@ -120,9 +119,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setUserNumber(number);
         user.setIsEnabled("1");
         if (save(user) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "添加用户成功");
         else
-            return R.error("新增数据失败");
+            return new Result(false, StatusCode.ERROR, "添加用户失败");
+
     }
 
     /**
@@ -131,10 +131,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param user 实例对象
      * @return 实例对象
      */
-    public R<User> register(User user) {
+    public Result register(User user) {
         user.setPassword(stringEncryptor.encrypt(user.getPassword()));
-        insert(user);
-        return R.success(user);
+        if (insert(user).getCode() == 2000)
+            return new Result(true, StatusCode.OK, "添加用户成功", user);
+        else
+            return new Result(false, StatusCode.ERROR, "添加用户失败");
     }
 
 
@@ -144,21 +146,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param user 实例对象
      * @return 实例对象
      */
-    public R<String> login(User user) {
+    public Result login(User user) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_number", user.getUserNumber());
         User newUser = getOne(queryWrapper);
         if (newUser == null)
-            return R.error("sb");
+            return new Result(false, StatusCode.ERROR, "用户编号不存在");
         System.out.println(stringEncryptor.decrypt(newUser.getPassword()));
         if (stringEncryptor.decrypt(newUser.getPassword()).equals(user.getPassword())) {
             Map<String, User> payload = new HashMap<>();
             payload.put("user", user);
             String token = "";
             token = JWTUtils.getToken(payload);
-            return R.success(token);
+            List<Object> list = new ArrayList<>();
+            list.add(token);
+            list.add(newUser);
+            return new Result(true, StatusCode.OK, "登录成功", list);
         }
-        return R.error("登录失败");
+        return new Result(false, StatusCode.ERROR, "密码错误");
     }
 
 
@@ -168,11 +173,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param user 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(User user) {
+    public Result update(User user) {
         if (updateById(user) == true) {
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "更新用户数据成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新用户数据失败");
     }
 
     /**
@@ -181,11 +186,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         if (removeById(id) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "删除用户成功");
         else
-            return R.error("通过主键删除数据失败");
+            return new Result(false, StatusCode.ERROR, "删除用户失败");
     }
 
 }

@@ -2,11 +2,11 @@ package com.scau.zwp.elevmanage.service.serviceImpl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
-import com.scau.zwp.elevmanage.entity.Supplier;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Supplier;
 import com.scau.zwp.elevmanage.mapper.SupplierMapper;
 import com.scau.zwp.elevmanage.service.SupplierService;
@@ -29,13 +29,13 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
      * @param id 主键
      * @return 实例对象
      */
-    public R<Supplier> queryById(Integer id) {
+    public Result queryById(Integer id) {
         System.out.println(id);
         Supplier supplier = getById(id);
         if (supplier == null)
-            return R.error("通过ID查询供货商信息失败");
+            return new Result(false, StatusCode.ERROR, "通过ID查询供货商信息失败");
         else
-            return R.success(supplier);
+            return new Result(true, StatusCode.OK, "通过ID查询供货商信息成功", supplier);
     }
 
     /**
@@ -46,7 +46,7 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
      * @param size     每页大小
      * @return
      */
-    public Page<Supplier> paginQuery(Supplier supplier, Integer current, Integer size) {
+    public Result paginQuery(Supplier supplier, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Supplier> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(supplier.getSupplierName())) {
@@ -65,7 +65,7 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询供货商分页成功", pagin);
     }
 
     /**
@@ -74,11 +74,11 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
      * @param supplier 实例对象
      * @return 实例对象
      */
-    public R<Boolean> insert(Supplier supplier) {
+    public Result insert(Supplier supplier) {
         if (save(supplier) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "添加供货商成功");
         else
-            return R.error("新增数据失败");
+            return new Result(false, StatusCode.ERROR, "添加供货商失败");
     }
 
     /**
@@ -87,11 +87,11 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
      * @param supplier 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(Supplier supplier) {
+    public Result update(Supplier supplier) {
         if (updateById(supplier) == true) {
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "更新供货商数据成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新供货商数据失败");
     }
 
     /**
@@ -100,11 +100,11 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         if (removeById(id) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "删除供货商成功");
         else
-            return R.error("通过主键删除数据失败");
+            return new Result(false, StatusCode.ERROR, "删除供货商失败");
     }
 
 }

@@ -24,14 +24,10 @@ public class IndexController {
     /**
      * 跳转主页
      */
-    @RequestMapping({"/", "/index"})
+    @RequestMapping("/index")
     public String index(HttpSession session) {
         System.out.println(session);
         return "index";
     }
 
-//    @RequestMapping("bye")
-//    public String bye(){
-//        return "redirect:/logout";
-//    }
 }

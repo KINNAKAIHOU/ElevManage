@@ -2,6 +2,7 @@ package com.scau.zwp.elevmanage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.entity.Maintenance;
 import com.scau.zwp.elevmanage.entity.Maintenance;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -27,7 +28,7 @@ public interface MaintenanceService extends IService<Maintenance> {
      * @param id 主键
      * @return 实例对象r
      */
-    R<MaintenanceVo> queryById(Integer id);
+    Result queryById(Integer id);
 
     /**
      * 分页查询
@@ -37,7 +38,7 @@ public interface MaintenanceService extends IService<Maintenance> {
      * @param size        每页大小
      * @return
      */
-    Page<Maintenance> paginQuery(Maintenance maintenance, Integer current, Integer size);
+    Result paginQuery(Maintenance maintenance, Integer current, Integer size);
 
     /**
      * 新增数据
@@ -45,7 +46,7 @@ public interface MaintenanceService extends IService<Maintenance> {
      * @param maintenance 实例对象
      * @return 实例对象
      */
-    R<Boolean> insert(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files);
+    Result insert(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files);
 
     /**
      * 更新数据
@@ -53,7 +54,7 @@ public interface MaintenanceService extends IService<Maintenance> {
      * @param maintenance 实例对象
      * @return 实例对象
      */
-    R<Boolean> update(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files);
+    Result update(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files);
 
     /**
      * 通过主键删除数据
@@ -61,6 +62,6 @@ public interface MaintenanceService extends IService<Maintenance> {
      * @param id 主键
      * @return 是否成功
      */
-    R<Boolean> deleteById(Integer id);
+    Result deleteById(Integer id);
 
 }

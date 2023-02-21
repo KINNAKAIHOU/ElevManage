@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.*;
 import com.scau.zwp.elevmanage.entity.Storage;
 import com.scau.zwp.elevmanage.mapper.StorageMapper;
@@ -46,17 +48,17 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
      * @param id 主键
      * @return 实例对象
      */
-    public R<StorageVo> queryById(Integer id) {
+    public Result queryById(Integer id) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("storage_id", id);
         List<StorageItem> storageItemList = storageItemService.list(queryWrapper);
         Storage storage = getById(id);
         if (storage == null)
-            return R.error("通过ID查询配件入库信息失败");
-        else{
+            return new Result(false, StatusCode.ERROR, "通过ID查询配件入库信息失败");
+        else {
             StorageVo storageVo = BeanUtil.copyProperties(storage, StorageVo.class);
             storageVo.setStorageItemList(storageItemList);
-            return R.success(storageVo);
+            return new Result(true, StatusCode.OK, "通过ID查询配件入库信息成功", storageVo);
         }
     }
 
@@ -69,7 +71,7 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
      * @param size    每页大小
      * @return
      */
-    public Page<Storage> paginQuery(Storage storage, Integer current, Integer size) {
+    public Result paginQuery(Storage storage, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Storage> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(storage.getStorageNumber())) {
@@ -94,7 +96,7 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询配件入库分页成功", pagin);
     }
 
     /**
@@ -103,7 +105,7 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
      * @param storage 实例对象
      * @return 实例对象
      */
-    public R<Boolean> insert(Storage storage, List<StorageItem> storageItems) {
+    public Result insert(Storage storage, List<StorageItem> storageItems) {
         String date = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "RK" + date;
         int num = 3;//编号的位数
@@ -123,15 +125,15 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
                 for (StorageItem storageItem : storageItems) {
                     storageItem.setStorageId(storage.getId());
                     if (storageItemService.save(storageItem) == true) {
-                        if (inventoryService.increase(storageItem.getAccessoryId(), storageItem.getQuantity()).getCode() != 1)
-                            return R.error("库存登记失败");
+                        if (inventoryService.increase(storageItem.getAccessoryId(), storageItem.getQuantity()).getCode() == 2001)
+                            return new Result(false, StatusCode.ERROR, "库存登记失败");
                     } else
-                        return R.error("入库详情登记失败");
+                        return new Result(false, StatusCode.ERROR, "配件入库详情登记失败");
                 }
             }
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "配件入库登记成功");
         } else
-            return R.error("入库失败");
+            return new Result(false, StatusCode.ERROR, "配件入库登记失败");
     }
 
 
@@ -141,11 +143,11 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
      * @param storage 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(Storage storage) {
+    public Result update(Storage storage) {
         if (updateById(storage) == true) {
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "更新配件入库数据成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新配件入库数据失败");
     }
 
     /**
@@ -154,7 +156,7 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         if (removeById(id) == true) {
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("storage_id", id);
@@ -162,14 +164,14 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
             if (storageItemList != null) {
                 for (StorageItem storageItem : storageItemList) {
                     if (storageItemService.removeById(storageItem) == true) {
-                        if (inventoryService.reduce(storageItem.getAccessoryId(), storageItem.getQuantity()).getCode() != 1)
-                            return R.error("库存登记失败");
+                        if (inventoryService.reduce(storageItem.getAccessoryId(), storageItem.getQuantity()).getCode() == 2001)
+                            return new Result(false, StatusCode.ERROR, "删除库存登记失败");
                     } else
-                        return R.error("入库详情登记失败");
+                        return new Result(false, StatusCode.ERROR, "删除配件入库详情登记失败");
                 }
             }
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "删除配件入库成功");
         } else
-            return R.error("通过主键删除数据失败");
+            return new Result(false, StatusCode.ERROR, "删除配件入库失败");
     }
 }

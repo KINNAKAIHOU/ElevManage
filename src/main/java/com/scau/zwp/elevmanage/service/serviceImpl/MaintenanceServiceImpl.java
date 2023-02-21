@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.*;
 import com.scau.zwp.elevmanage.mapper.MaintenanceMapper;
 import com.scau.zwp.elevmanage.service.*;
@@ -54,7 +56,7 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
      * @param id 主键
      * @return 实例对象
      */
-    public R<MaintenanceVo> queryById(Integer id) {
+    public Result queryById(Integer id) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("maintenance_id", id);
         List<MaintenanceImage> maintenanceImageList = maintenanceImageService.list(queryWrapper);
@@ -62,13 +64,13 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
         List<InspectionImage> inspectionImageList = inspectionImageService.list(queryWrapper);
         Maintenance maintenance = getById(id);
         if (maintenance == null)
-            return R.error("通过ID查询电梯信息失败");
+            return new Result(false, StatusCode.ERROR, "通过ID查询维修报告信息失败");
         else {
             MaintenanceVo maintenanceVo = BeanUtil.copyProperties(maintenance, MaintenanceVo.class);
             maintenanceVo.setMaintenanceImageList(maintenanceImageList);
             maintenanceVo.setMaintenanceItemList(maintenanceItemList);
             maintenanceVo.setInspectionImageList(inspectionImageList);
-            return R.success(maintenanceVo);
+            return new Result(true, StatusCode.OK, "通过ID查询维修报告信息成功", maintenanceVo);
         }
     }
 
@@ -81,7 +83,7 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
      * @param size        每页大小
      * @return
      */
-    public Page<Maintenance> paginQuery(Maintenance maintenance, Integer current, Integer size) {
+    public Result paginQuery(Maintenance maintenance, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Maintenance> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(maintenance.getMaintenanceNumber())) {
@@ -109,7 +111,7 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询维修报告分页成功", pagin);
     }
 
     /**
@@ -118,7 +120,7 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
      * @param maintenance 实例对象
      * @return 实例对象
      */
-    public R<Boolean> insert(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files) {
+    public Result insert(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files) {
         String date = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "WX" + date;
         int num = 3;//编号的位数
@@ -131,25 +133,24 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
                 continue;
             else
                 break;
-
         }
         maintenance.setMaintenanceNumber(number);
         if (save(maintenance) == true) {
-            if (insertMaintenanceImage(maintenance.getId(), files).getCode() == 0)
-                return R.error("维修图片上传失败");
+            if (insertMaintenanceImage(maintenance.getId(), files).getCode() == 2001)
+                return new Result(false, StatusCode.ERROR, "维修报告图片上传失败");
             if (maintenanceItemList != null) {
                 for (MaintenanceItem maintenanceItem : maintenanceItemList) {
                     maintenanceItem.setMaintenanceId(maintenance.getId());
                     if (maintenanceItemService.save(maintenanceItem) == true) {
                         if (inventoryService.reduce(maintenanceItem.getAccessoryId(), maintenanceItem.getQuantity()).getCode() != 1)
-                            return R.error("库存登记失败数量");
+                            return new Result(false, StatusCode.ERROR, "库存登记失败");
                     } else
-                        return R.error("入库详情登记失败");
+                        return new Result(false, StatusCode.ERROR, "维修报告详情登记失败");
                 }
             }
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "添加维修报告成功");
         } else
-            return R.error("新增数据失败");
+            return new Result(false, StatusCode.ERROR, "添加维修报告失败");
     }
 
 
@@ -159,23 +160,23 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
      * @param maintenance 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files) {
+    public Result update(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files) {
         if (updateById(maintenance) == true) {
-            if (insertMaintenanceImage(maintenance.getId(), files).getCode() == 0)
-                return R.error("电梯图片上传失败");
+            if (insertMaintenanceImage(maintenance.getId(), files).getCode() == 2001)
+                return new Result(false, StatusCode.ERROR, "维修报告图片上传失败");
             if (maintenanceItemList != null) {
                 for (MaintenanceItem maintenanceItem : maintenanceItemList) {
                     maintenanceItem.setMaintenanceId(maintenance.getId());
                     if (maintenanceItemService.save(maintenanceItem) == true) {
                         if (inventoryService.reduce(maintenanceItem.getAccessoryId(), maintenanceItem.getQuantity()).getCode() != 1)
-                            return R.error("维修报告登记失败数量");
+                            return new Result(false, StatusCode.ERROR, "库存登记失败");
                     } else
-                        return R.error("维修报告登记失败");
+                        return new Result(false, StatusCode.ERROR, "维修报告详情登记失败");
                 }
             }
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "更新维修报告成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新维修报告失败");
     }
 
     /**
@@ -184,7 +185,7 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("maintenance_id", id);
         List<MaintenanceImage> maintenanceImageList = maintenanceImageService.list(queryWrapper);
@@ -192,22 +193,22 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
         if (maintenanceImageList != null) {
             for (MaintenanceImage maintenanceImage : maintenanceImageList) {
                 if (maintenanceImageService.removeById(maintenanceImage.getId()) == false)
-                    return R.error("删除维修报告图片失败");
+                    return new Result(false, StatusCode.ERROR, "删除维修报告图片失败");
             }
         }
         if (maintenanceItemList != null) {
             for (MaintenanceItem maintenanceItem : maintenanceItemList) {
                 if (maintenanceItemService.removeById(maintenanceItem) == true) {
                     if (inventoryService.increase(maintenanceItem.getAccessoryId(), maintenanceItem.getQuantity()).getCode() != 1)
-                        return R.error("维修报告登记失败数组");
+                        return new Result(false, StatusCode.ERROR, "删除库存登记失败");
                 } else
-                    return R.error("维修报告登记失败");
+                    return new Result(false, StatusCode.ERROR, "删除维修报告详情登记失败");
             }
         }
         if (removeById(id) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "删除维修报告成功");
         else
-            return R.error("通过主键删除数据失败");
+            return new Result(false, StatusCode.ERROR, "删除维修报告失败");
     }
 
 
@@ -217,9 +218,9 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
      * @param files 图片
      * @return 是否成功
      */
-    public R<Boolean> insertMaintenanceImage(Integer id, MultipartFile[] files) {
+    public Result insertMaintenanceImage(Integer id, MultipartFile[] files) {
         if (files == null)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "图片数量为0");
         for (MultipartFile file : files) {
             String orgName = file.getOriginalFilename();
             String extName = orgName.substring(orgName.lastIndexOf('.'));
@@ -228,16 +229,16 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
                 file.transferTo(new File(uploadRootPath, destName));
             } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
-                return R.error("电梯图片上传失败");
+                return new Result(false, StatusCode.ERROR, "维修报告图片上传失败");
             }
             MaintenanceImage maintenanceImage = new MaintenanceImage();
             maintenanceImage.setMaintenanceId(id);
             maintenanceImage.setImageName(destName);
             maintenanceImage.setImagePosition("/maintenance/" + destName);
             if (maintenanceImageService.save(maintenanceImage) == false)
-                return R.error("电梯图片上传失败");
+                return new Result(false, StatusCode.ERROR, "维修报告图片上传失败");
         }
-        return R.success(true);
+        return new Result(true, StatusCode.OK, "图片上传成功");
     }
 
 }

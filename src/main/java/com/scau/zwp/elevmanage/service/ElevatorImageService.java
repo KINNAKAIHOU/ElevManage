@@ -1,6 +1,7 @@
 package com.scau.zwp.elevmanage.service;
 
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.entity.ElevatorImage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -21,6 +22,6 @@ public interface ElevatorImageService extends IService<ElevatorImage> {
      * @param id 主键
      * @return 是否成功
      */
-    R<Boolean> deleteById(Integer id);
+    Result deleteById(Integer id);
 
 }

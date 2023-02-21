@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.*;
 import com.scau.zwp.elevmanage.mapper.InspectionMapper;
 import com.scau.zwp.elevmanage.mapper.MaintenanceMapper;
@@ -51,17 +53,17 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
      * @param id 主键
      * @return 实例对象
      */
-    public R<InspectionVo> queryById(Integer id) {
+    public Result queryById(Integer id) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("inspection_id", id);
         List<InspectionImage> inspectionImageList = inspectionImageService.list(queryWrapper);
         Inspection inspection = getById(id);
         if (inspection == null)
-            return R.error("通过ID查询检查报告失败");
+            return new Result(false, StatusCode.ERROR, "通过ID查询检查报告信息失败");
         else {
             InspectionVo inspectionVo = BeanUtil.copyProperties(inspection, InspectionVo.class);
             inspectionVo.setInspectionImageList(inspectionImageList);
-            return R.success(inspectionVo);
+            return new Result(true, StatusCode.OK, "通过ID查询检查报告信息成功", inspectionVo);
         }
     }
 
@@ -73,7 +75,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
      * @param size       每页大小
      * @return
      */
-    public Page<Inspection> paginQuery(Inspection inspection, Integer current, Integer size) {
+    public Result paginQuery(Inspection inspection, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Inspection> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(inspection.getInspectionNumber())) {
@@ -107,7 +109,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询检查报告分页成功", pagin);
     }
 
     /**
@@ -116,7 +118,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
      * @param inspection 实例对象
      * @return 实例对象
      */
-    public R<Boolean> insert(Inspection inspection, MultipartFile[] files) {
+    public Result insert(Inspection inspection, MultipartFile[] files) {
         String date = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "JC" + date;
         int num = 3;//编号的位数
@@ -132,12 +134,12 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         }
         inspection.setInspectionNumber(number);
         if (save(inspection) == true) {
-            if (insertInspectionImage(inspection.getId(), files).getCode() == 1)
-                return R.success(true);
+            if (insertInspectionImage(inspection.getId(), files).getCode() == 2000)
+                return new Result(true, StatusCode.OK, "添加检查报告成功");
             else
-                return R.error("电梯图片上传失败");
+                return new Result(false, StatusCode.ERROR, "检查报告图片上传失败");
         } else
-            return R.error("新增数据失败");
+            return new Result(false, StatusCode.ERROR, "添加检查报告失败");
     }
 
     /**
@@ -146,18 +148,18 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
      * @param inspection 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(Inspection inspection, MultipartFile[] files) {
+    public Result update(Inspection inspection, MultipartFile[] files) {
         if (updateById(inspection) == true) {
             if (inspection.getIsFinish() == "1") {
-                if (finish(inspection).getCode() == 0)
-                    return R.error("完成失败");
+                if (finish(inspection).getCode() == 2001)
+                    return new Result(false, StatusCode.ERROR, "检查报告完成失败");
             }
-            if (insertInspectionImage(inspection.getId(), files).getCode() == 1)
-                return R.success(true);
+            if (insertInspectionImage(inspection.getId(), files).getCode() == 2000)
+                return new Result(true, StatusCode.OK, "更新检查报告数据成功");
             else
-                return R.error("电梯图片上传失败");
+                return new Result(false, StatusCode.ERROR, "检查报告图片上传失败");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新检查报告数据失败");
     }
 
     /**
@@ -166,7 +168,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("inspection_id", id);
         List<InspectionImage> inspectionImageList = inspectionImageService.list(queryWrapper);
@@ -175,14 +177,14 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                 Integer maintenanceId = inspectionImage.getMaintenanceId();
                 if (maintenanceMapper.selectById(maintenanceId) == null) {
                     if (inspectionImageService.removeById(inspectionImage.getId()) == false)
-                        return R.error("删除检查图片失败");
+                        return new Result(false, StatusCode.ERROR, "删除检查报告图片失败");
                 }
             }
         }
         if (removeById(id) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "删除检查报告成功");
         else
-            return R.error("通过主键删除数据失败");
+            return new Result(false, StatusCode.ERROR, "删除检查报告失败");
     }
 
     /**
@@ -191,9 +193,9 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
      * @param files 图片
      * @return 是否成功
      */
-    public R<Boolean> insertInspectionImage(Integer id, MultipartFile[] files) {
+    public Result insertInspectionImage(Integer id, MultipartFile[] files) {
         if (files == null)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "图片数量为0");
         for (MultipartFile file : files) {
             String orgName = file.getOriginalFilename();
             String extName = orgName.substring(orgName.lastIndexOf('.'));
@@ -202,16 +204,16 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                 file.transferTo(new File(uploadRootPath, destName));
             } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
-                return R.error("检查报告图片上传失败");
+                return new Result(false, StatusCode.ERROR, "电梯图片上传失败");
             }
             InspectionImage inspectionImage = new InspectionImage();
             inspectionImage.setInspectionId(id);
             inspectionImage.setImageName(destName);
             inspectionImage.setImagePosition("/inspection/" + destName);
             if (inspectionImageService.save(inspectionImage) == false)
-                return R.error("检查报告图片上传失败");
+                return new Result(false, StatusCode.ERROR, "电梯图片上传失败");
         }
-        return R.success(true);
+        return new Result(true, StatusCode.OK, "图片上传成功");
     }
 
     /**
@@ -220,7 +222,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
      * @param inspection 主键
      * @return 是否成功
      */
-    public R<Boolean> finish(Inspection inspection) {
+    public Result finish(Inspection inspection) {
         Maintenance maintenance = new Maintenance();
         maintenance.setElevatorNumber(inspection.getElevatorNumber());
         maintenance.setLocationName(inspection.getLocationName());
@@ -241,7 +243,6 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                 continue;
             else
                 break;
-
         }
         maintenance.setMaintenanceNumber(number);
         if (maintenanceMapper.insert(maintenance) != 0) {
@@ -252,12 +253,13 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                 for (InspectionImage inspectionImage : inspectionImageList) {
                     inspectionImage.setMaintenanceId(maintenance.getId());
                     if (!inspectionImageService.updateById(inspectionImage)) {
-                        return R.error("添加图片失败");
+                        return new Result(false, StatusCode.ERROR, "维修报告绑定检查图片失败");
                     }
                 }
             }
-        }
-        return R.success(true);
+            return new Result(true, StatusCode.OK, "生成维修报告成功");
+        } else
+            return new Result(false, StatusCode.ERROR, "生成维修报告失败");
     }
 
 }

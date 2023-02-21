@@ -1,6 +1,8 @@
 package com.scau.zwp.elevmanage.service.serviceImpl;
 
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.MaintenanceImage;
 import com.scau.zwp.elevmanage.mapper.MaintenanceImageMapper;
 import com.scau.zwp.elevmanage.service.MaintenanceImageService;
@@ -24,11 +26,11 @@ public class MaintenanceImageServiceImpl extends ServiceImpl<MaintenanceImageMap
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         if (removeById(id) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "删除维修报告图片成功");
         else
-            return R.error("通过主键删除数据失败");
+            return new Result(false, StatusCode.ERROR, "删除维修报告图片失败");
     }
 
 }

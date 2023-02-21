@@ -1,10 +1,9 @@
 package com.scau.zwp.elevmanage.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.scau.zwp.elevmanage.common.R;
-import com.scau.zwp.elevmanage.entity.Location;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.entity.Location;
+
 
 /**
  * <p>
@@ -22,7 +21,7 @@ public interface LocationService extends IService<Location> {
      * @param id 主键
      * @return 实例对象
      */
-    R<Location> queryById(Integer id);
+    Result queryById(Integer id);
 
     /**
      * 分页查询
@@ -32,7 +31,7 @@ public interface LocationService extends IService<Location> {
      * @param size     每页大小
      * @return
      */
-    Page<Location> paginQuery(Location location, Integer current, Integer size);
+    Result paginQuery(Location location, Integer current, Integer size);
 
     /**
      * 新增数据
@@ -40,7 +39,7 @@ public interface LocationService extends IService<Location> {
      * @param location 实例对象
      * @return 实例对象
      */
-    R<Boolean> insert(Location location);
+    Result insert(Location location);
 
     /**
      * 更新数据
@@ -48,7 +47,7 @@ public interface LocationService extends IService<Location> {
      * @param location 实例对象
      * @return 实例对象
      */
-    R<Boolean> update(Location location);
+    Result update(Location location);
 
     /**
      * 通过主键删除数据
@@ -56,7 +55,7 @@ public interface LocationService extends IService<Location> {
      * @param id 主键
      * @return 是否成功
      */
-    R<Boolean> deleteById(Integer id);
+    Result deleteById(Integer id);
 
 
 }

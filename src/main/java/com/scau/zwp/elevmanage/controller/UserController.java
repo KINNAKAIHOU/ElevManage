@@ -2,6 +2,8 @@ package com.scau.zwp.elevmanage.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.service.UserService;
 import io.swagger.annotations.Api;
@@ -38,7 +40,7 @@ public class UserController {
     @ApiOperation("通过ID查询单条数据")
     @GetMapping
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "query", dataType = "Integer")
-    public R<User> queryById(@RequestParam(value = "id") Integer id) {
+    public Result queryById(@RequestParam(value = "id") Integer id) {
         return userService.queryById(id);
     }
 
@@ -49,12 +51,12 @@ public class UserController {
      */
     @ApiOperation("查询全部数据")
     @GetMapping("/getAll")
-    public R<List<User>> getAll() {
+    public Result getAll() {
         List<User> userList = userService.list();
         if (userList != null)
-            return R.success(userList);
+            return new Result(true, StatusCode.OK, "查询用户全部数据成功", userList);
         else
-            return R.error("查询所有失败");
+            return new Result(false, StatusCode.ERROR, "查询用户全部数据失败");
     }
 
 
@@ -72,10 +74,10 @@ public class UserController {
             @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Integer"),
             @ApiImplicitParam(name = "size", value = "元素", required = true, paramType = "query", dataType = "Integer"),
     })
-    public R<Page<User>> paginQuery(@RequestBody User user, @RequestParam("current") Integer current, @RequestParam("size") Integer size) {
+    public Result paginQuery(@RequestBody User user, @RequestParam("current") Integer current, @RequestParam("size") Integer size) {
         /*把Mybatis的分页对象做封装转换，MP的分页对象上有一些SQL敏感信息，还是通过spring的分页模型来封装数据吧*/
-        Page<User> pageResult = userService.paginQuery(user, current, size);
-        return R.success(pageResult);
+        Page<User> pageResult = (Page<User>) userService.paginQuery(user, current, size).getData();
+        return new Result(true, StatusCode.OK, "查询用户分页成功", pageResult);
     }
 
 
@@ -87,7 +89,7 @@ public class UserController {
      */
     @ApiOperation("新增数据")
     @PostMapping
-    public R<Boolean> add(@RequestBody User user) {
+    public Result add(@RequestBody User user) {
         return userService.insert(user);
     }
 
@@ -100,7 +102,7 @@ public class UserController {
      */
     @ApiOperation("注册用户")
     @PostMapping("/register")
-    public R<User> register(@RequestBody User user) {
+    public Result register(@RequestBody User user) {
         return userService.register(user);
     }
 
@@ -112,7 +114,7 @@ public class UserController {
      */
     @ApiOperation("登录用户")
     @PostMapping("/login")
-    public R<String> login(@RequestBody User user) {
+    public Result login(@RequestBody User user) {
         return userService.login(user);
     }
 
@@ -125,7 +127,7 @@ public class UserController {
      */
     @ApiOperation("更新数据")
     @PutMapping
-    public R<Boolean> edit(@RequestBody User user) {
+    public Result edit(@RequestBody User user) {
         return userService.update(user);
     }
 
@@ -139,9 +141,10 @@ public class UserController {
     @ApiOperation("通过主键删除数据")
     @DeleteMapping
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Boolean> deleteById(@RequestParam(value = "id") Integer id) {
+    public Result deleteById(@RequestParam(value = "id") Integer id) {
         return userService.deleteById(id);
     }
+
 
     /**
      * 通过主键封禁用户
@@ -152,14 +155,15 @@ public class UserController {
     @ApiOperation("通过主键封禁用户")
     @GetMapping("/ban")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Boolean> banById(@RequestParam(value = "id") Integer id) {
+    public Result banById(@RequestParam(value = "id") Integer id) {
         User user = userService.getById(id);
         user.setIsEnabled("0");
         if (userService.update(user).getCode() == 1)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "封禁用户成功");
         else
-            return R.error("封禁用户失败");
+            return new Result(false, StatusCode.ERROR, "封禁用户失败");
     }
+
 
     /**
      * 通过主键开启用户
@@ -170,13 +174,13 @@ public class UserController {
     @ApiOperation("通过主键开启用户")
     @GetMapping("/open")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Boolean> openById(@RequestParam(value = "id") Integer id) {
+    public Result openById(@RequestParam(value = "id") Integer id) {
         User user = userService.getById(id);
         user.setIsEnabled("1");
         if (userService.update(user).getCode() == 1)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "开启用户成功");
         else
-            return R.error("开启用户失败");
+            return new Result(false, StatusCode.ERROR, "开启用户失败");
     }
 
 }

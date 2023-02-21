@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.*;
 import com.scau.zwp.elevmanage.entity.Accessory;
 import com.scau.zwp.elevmanage.mapper.AccessoryMapper;
@@ -39,13 +41,13 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
      * @param id 主键
      * @return 实例对象
      */
-    public R<Accessory> queryById(Integer id) {
+    public Result queryById(Integer id) {
         System.out.println(id);
         Accessory accessory = getById(id);
         if (accessory == null)
-            return R.error("通过ID查询配件信息失败");
+            return new Result(false, StatusCode.ERROR, "通过ID查询配件信息失败");
         else
-            return R.success(accessory);
+            return new Result(true, StatusCode.OK, "通过ID查询配件信息成功", accessory);
     }
 
     /**
@@ -56,7 +58,7 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
      * @param size      每页大小
      * @return
      */
-    public Page<Accessory> paginQuery(Accessory accessory, Integer current, Integer size) {
+    public Result paginQuery(Accessory accessory, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Accessory> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(accessory.getAccessoryNumber())) {
@@ -81,7 +83,7 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询配件分页成功", pagin);
     }
 
     /**
@@ -90,7 +92,7 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
      * @param accessory 实例对象
      * @return 实例对象
      */
-    public R<Boolean> insert(Accessory accessory) {
+    public Result insert(Accessory accessory) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("accessory_number", accessory.getAccessoryNumber());
         if (getOne(queryWrapper) == null) {
@@ -102,14 +104,14 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
                 inventory.setSpecification(accessory.getSpecification());
                 inventory.setType(accessory.getType());
                 inventory.setUnit(accessory.getUnit());
-                if (inventoryMapper.insert(inventory)!=0) {
-                    return R.success(true);
+                if (inventoryMapper.insert(inventory) != 0) {
+                    return new Result(true, StatusCode.OK, "添加配件成功");
                 }
-                return R.error("库存管理建立失败");
+                return new Result(false, StatusCode.ERROR, "库存管理建立失败");
             } else
-                return R.error("新增数据失败");
+                return new Result(false, StatusCode.ERROR, "添加配件失败");
         } else
-            return R.error("配件编码重复");
+            return new Result(false, StatusCode.ERROR, "配件编码重复");
     }
 
     /**
@@ -118,7 +120,7 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
      * @param accessory 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(Accessory accessory) {
+    public Result update(Accessory accessory) {
         if (updateById(accessory) == true) {
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("accessory_id", accessory.getId());
@@ -139,15 +141,15 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
                 if (StrUtil.isNotBlank(accessory.getUnit())) {
                     inventory.setUnit(accessory.getUnit());
                 }
-                if (inventoryMapper.updateById(inventory) == 1) {
-                    return R.success(true);
+                if (inventoryMapper.updateById(inventory) != 0) {
+                    return new Result(true, StatusCode.OK, "更新配件数据成功");
                 } else {
-                    return R.error("库存管理建立失败");
+                    return new Result(false, StatusCode.ERROR, "库存管理更新失败");
                 }
             }
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "更新配件数据成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新配件数据失败");
     }
 
     /**
@@ -156,16 +158,16 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         if (removeById(id) == true) {
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("accessory_id", id);
             if (inventoryMapper.deleteById(queryWrapper) == 1)
-                return R.success(true);
+                return new Result(true, StatusCode.OK, "删除配件成功");
             else
-                return R.error("删除库存失败");
+                return new Result(false, StatusCode.ERROR, "删除库存失败");
         } else
-            return R.error("通过主键删除数据失败");
+            return new Result(false, StatusCode.ERROR, "删除配件失败");
     }
 
 }

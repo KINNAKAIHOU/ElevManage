@@ -2,6 +2,7 @@ package com.scau.zwp.elevmanage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.entity.Inventory;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -23,7 +24,7 @@ public interface InventoryService extends IService<Inventory> {
      * @param id 主键
      * @return 实例对象
      */
-    R<Inventory> queryById(Integer id);
+    Result queryById(Integer id);
 
 
     /**
@@ -34,7 +35,7 @@ public interface InventoryService extends IService<Inventory> {
      * @param size      每页大小
      * @return
      */
-    Page<Inventory> paginQuery(Inventory inventoryVo, Integer current, Integer size);
+    Result paginQuery(Inventory inventoryVo, Integer current, Integer size);
 
 
     /**
@@ -43,7 +44,7 @@ public interface InventoryService extends IService<Inventory> {
      * @param inventory 实例对象
      * @return 实例对象
      */
-    R<Boolean> update(Inventory inventory);
+    Result update(Inventory inventory);
 
     /**
      * 增加数量
@@ -53,7 +54,7 @@ public interface InventoryService extends IService<Inventory> {
      * @return 实例对象
      */
 
-    R<Boolean> increase(Integer accessoryId, Integer size);
+    Result increase(Integer accessoryId, Integer size);
 
 
     /**
@@ -63,7 +64,7 @@ public interface InventoryService extends IService<Inventory> {
      * @param size        数量
      * @return 实例对象
      */
-    R<Boolean> reduce(Integer accessoryId, Integer size);
+    Result reduce(Integer accessoryId, Integer size);
 
 
 }

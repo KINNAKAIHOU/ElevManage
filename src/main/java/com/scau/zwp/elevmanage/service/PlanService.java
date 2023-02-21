@@ -2,6 +2,7 @@ package com.scau.zwp.elevmanage.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.entity.Plan;
 import com.scau.zwp.elevmanage.entity.Plan;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -23,7 +24,7 @@ public interface PlanService extends IService<Plan> {
      * @param id 主键
      * @return 实例对象
      */
-    R<Plan> queryById(Integer id);
+    Result queryById(Integer id);
 
     /**
      * 分页查询
@@ -33,7 +34,7 @@ public interface PlanService extends IService<Plan> {
      * @param size    每页大小
      * @return
      */
-    Page<Plan> paginQuery(Plan plan, Integer current, Integer size);
+    Result paginQuery(Plan plan, Integer current, Integer size);
 
     /**
      * 新增数据
@@ -41,7 +42,7 @@ public interface PlanService extends IService<Plan> {
      * @param plan 实例对象
      * @return 实例对象
      */
-    R<Boolean> insert(Plan plan);
+    Result insert(Plan plan);
 
     /**
      * 更新数据
@@ -49,7 +50,7 @@ public interface PlanService extends IService<Plan> {
      * @param plan 实例对象
      * @return 实例对象
      */
-    R<Boolean> update(Plan plan);
+    Result update(Plan plan);
 
     /**
      * 通过主键删除数据
@@ -57,13 +58,13 @@ public interface PlanService extends IService<Plan> {
      * @param id 主键
      * @return 是否成功
      */
-    R<Boolean> deleteById(Integer id);
+    Result deleteById(Integer id);
 
     /**
      * 检查所有计划
      *
      * @return 是否成功
      */
-    R<Boolean> checkAllPlan();
+    Result checkAllPlan();
 
 }

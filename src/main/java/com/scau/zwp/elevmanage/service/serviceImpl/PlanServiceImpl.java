@@ -7,11 +7,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.*;
 import com.scau.zwp.elevmanage.entity.Plan;
 import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.mapper.PlanMapper;
-import com.scau.zwp.elevmanage.service.InspectionImageService;
 import com.scau.zwp.elevmanage.service.InspectionService;
 import com.scau.zwp.elevmanage.service.PlanService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -46,13 +47,13 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
      * @param id 主键
      * @return 实例对象
      */
-    public R<Plan> queryById(Integer id) {
+    public Result queryById(Integer id) {
         System.out.println(id);
         Plan plan = getById(id);
         if (plan == null)
-            return R.error("通过ID查询配件信息失败");
+            return new Result(false, StatusCode.ERROR, "通过ID查询检查计划信息失败");
         else
-            return R.success(plan);
+            return new Result(true, StatusCode.OK, "通过ID查询检查计划信息成功", plan);
     }
 
     /**
@@ -63,7 +64,7 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
      * @param size    每页大小
      * @return
      */
-    public Page<Plan> paginQuery(Plan plan, Integer current, Integer size) {
+    public Result paginQuery(Plan plan, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Plan> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(plan.getPlanNumber())) {
@@ -82,7 +83,7 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
         //3. 返回结果
-        return pagin;
+        return new Result(true, StatusCode.OK, "查询检查计划分页成功", pagin);
     }
 
     /**
@@ -91,7 +92,7 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
      * @param plan 实例对象
      * @return 实例对象
      */
-    public R<Boolean> insert(Plan plan) {
+    public Result insert(Plan plan) {
         String date = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "PL" + date;
         int num = 3;//编号的位数
@@ -107,9 +108,9 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
         }
         plan.setPlanNumber(number);
         if (save(plan) == true)
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "添加检查计划成功");
         else
-            return R.error("添加计划失败");
+            return new Result(false, StatusCode.ERROR, "添加检查计划失败");
 
     }
 
@@ -119,11 +120,11 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
      * @param plan 实例对象
      * @return 实例对象
      */
-    public R<Boolean> update(Plan plan) {
+    public Result update(Plan plan) {
         if (updateById(plan) == true) {
-            return R.success(true);
+            return new Result(true, StatusCode.OK, "更新检查计划数据成功");
         } else
-            return R.error("更新数据失败");
+            return new Result(false, StatusCode.ERROR, "更新检查计划数据失败");
     }
 
     /**
@@ -132,11 +133,11 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
      * @param id 主键
      * @return 是否成功
      */
-    public R<Boolean> deleteById(Integer id) {
+    public Result deleteById(Integer id) {
         if (removeById(id) == true) {
-            return R.error("删除计划成功");
+            return new Result(true, StatusCode.OK, "删除检查计划成功");
         } else
-            return R.error("通过主键删除计划失败");
+            return new Result(false, StatusCode.ERROR, "删除检查计划失败");
     }
 
     /**
@@ -146,7 +147,7 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
      */
     @ApiOperation("检查所有计划")
     @DeleteMapping
-    public R<Boolean> checkAllPlan() {
+    public Result checkAllPlan() {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("is_finish", 0);
         List<Plan> planList = list(queryWrapper);
@@ -183,12 +184,12 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
                         inspection.setContactNumber(elevator.getContactNumber());
                         inspection.setElevatorId(elevator.getId());
                         if (inspectionService.insert(inspection, null).getCode() == 0)
-                            return R.error("新增检查报告失败");
+                            return new Result(false, StatusCode.ERROR, "新增检查报告失败");
                     } else
-                        return R.error("检查计划失败");
+                        return new Result(false, StatusCode.ERROR, "更新检查计划数据失败");
                 }
             }
         }
-        return R.success(true);
+        return new Result(true, StatusCode.OK, "检查计划遍历成功");
     }
 }

@@ -1,6 +1,7 @@
 package com.scau.zwp.elevmanage.controller;
 
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.entity.Location;
 import com.scau.zwp.elevmanage.service.ElevatorImageService;
@@ -37,7 +38,7 @@ public class ElevatorImageController {
     @ApiOperation("通过主键删除数据")
     @DeleteMapping
     @ApiImplicitParam(name = "id", value = "电梯图片ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Boolean> deleteById(@RequestParam(value = "id") Integer id) {
+    public Result deleteById(@RequestParam(value = "id") Integer id) {
         return elevatorImageService.deleteById(id);
     }
 

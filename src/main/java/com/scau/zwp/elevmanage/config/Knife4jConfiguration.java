@@ -20,7 +20,7 @@ public class Knife4jConfiguration {
 
     @Bean(value = "defaultApi2")
     public Docket defaultApi2() {
-        Docket docket=new Docket(DocumentationType.SWAGGER_2)
+        Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
                         .title("电梯安检维修管理平台 API")
                         .description("用于《电梯安检维修管理平台》项目的Api自动生成的Swagger2文档，可以导入ApiFox")

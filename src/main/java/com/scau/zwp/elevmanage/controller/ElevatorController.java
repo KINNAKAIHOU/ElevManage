@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Accessory;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.service.ElevatorService;
@@ -43,7 +45,7 @@ public class ElevatorController {
     @ApiOperation("通过ID查询单条数据")
     @GetMapping
     @ApiImplicitParam(name = "id", value = "电梯ID", required = true, paramType = "query", dataType = "Integer")
-    public R<ElevatorVo> queryById(@RequestParam(value = "id") Integer id) {
+    public Result queryById(@RequestParam(value = "id") Integer id) {
         return elevatorService.queryById(id);
     }
 
@@ -54,12 +56,12 @@ public class ElevatorController {
      */
     @ApiOperation("查询全部数据")
     @GetMapping("/getAll")
-    public R<List<Elevator>> getAll() {
+    public Result getAll() {
         List<Elevator> elevatorList = elevatorService.list();
         if (elevatorList != null)
-            return R.success(elevatorList);
+            return new Result(true, StatusCode.OK, "查询电梯全部数据成功", elevatorList);
         else
-            return R.error("查询所有失败");
+            return new Result(false, StatusCode.ERROR, "查询电梯全部数据失败");
     }
 
     /**
@@ -76,10 +78,10 @@ public class ElevatorController {
             @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Integer"),
             @ApiImplicitParam(name = "size", value = "元素", required = true, paramType = "query", dataType = "Integer"),
     })
-    public R<Page<Elevator>> paginQuery(@RequestBody Elevator elevator, @RequestParam("current") Integer current, @RequestParam("size") Integer size) {
+    public Result paginQuery(@RequestBody Elevator elevator, @RequestParam("current") Integer current, @RequestParam("size") Integer size) {
         /*把Mybatis的分页对象做封装转换，MP的分页对象上有一些SQL敏感信息，还是通过spring的分页模型来封装数据吧*/
-        Page<Elevator> pageResult = elevatorService.paginQuery(elevator, current, size);
-        return R.success(pageResult);
+        Page<Elevator> pageResult = (Page<Elevator>) elevatorService.paginQuery(elevator, current, size).getData();
+        return new Result(true, StatusCode.OK, "查询电梯分页成功", pageResult);
     }
 
 
@@ -91,7 +93,7 @@ public class ElevatorController {
      */
     @ApiOperation("新增数据")
     @PostMapping
-    public R<Boolean> add(@RequestPart("elevator") Elevator elevator, @RequestPart(name = "files", required = false) MultipartFile[] files) {
+    public Result add(@RequestPart("elevator") Elevator elevator, @RequestPart(name = "files", required = false) MultipartFile[] files) {
         return elevatorService.insert(elevator, files);
     }
 
@@ -104,7 +106,7 @@ public class ElevatorController {
      */
     @ApiOperation("更新数据")
     @PutMapping
-    public R<Boolean> edit(@RequestPart("elevator") Elevator elevator, @RequestPart(name = "files", required = false) MultipartFile[] files) {
+    public Result edit(@RequestPart("elevator") Elevator elevator, @RequestPart(name = "files", required = false) MultipartFile[] files) {
         return elevatorService.update(elevator, files);
     }
 
@@ -118,7 +120,7 @@ public class ElevatorController {
     @ApiOperation("通过主键删除数据")
     @DeleteMapping
     @ApiImplicitParam(name = "id", value = "电梯ID", required = true, paramType = "query", dataType = "Integer")
-    public R<Boolean> deleteById(@RequestParam(value = "id") Integer id) {
+    public Result deleteById(@RequestParam(value = "id") Integer id) {
         return elevatorService.deleteById(id);
     }
 
