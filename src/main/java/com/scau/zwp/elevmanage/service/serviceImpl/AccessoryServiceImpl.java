@@ -64,19 +64,19 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
     public Result paginQuery(Accessory accessory, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Accessory> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(accessory.getAccessoryNumber())) {
+        if(StrUtil.isNotBlank(accessory.getAccessoryNumber())){
             queryWrapper.like(Accessory::getAccessoryNumber, accessory.getAccessoryNumber());
         }
-        if (StrUtil.isNotBlank(accessory.getAccessoryName())) {
+        if(StrUtil.isNotBlank(accessory.getAccessoryName())){
             queryWrapper.like(Accessory::getAccessoryName, accessory.getAccessoryName());
         }
-        if (StrUtil.isNotBlank(accessory.getSpecification())) {
+        if(StrUtil.isNotBlank(accessory.getSpecification())){
             queryWrapper.like(Accessory::getSpecification, accessory.getSpecification());
         }
-        if (StrUtil.isNotBlank(accessory.getType())) {
+        if(StrUtil.isNotBlank(accessory.getType())){
             queryWrapper.like(Accessory::getType, accessory.getType());
         }
-        if (StrUtil.isNotBlank(accessory.getUnit())) {
+        if(StrUtil.isNotBlank(accessory.getUnit())){
             queryWrapper.like(Accessory::getUnit, accessory.getUnit());
         }
         //2. 执行分页查询

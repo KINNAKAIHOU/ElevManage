@@ -68,14 +68,20 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
     public Result paginQuery(Plan plan, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Plan> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(plan.getPlanNumber())) {
+        if(StrUtil.isNotBlank(plan.getPlanNumber())){
             queryWrapper.like(Plan::getPlanNumber, plan.getPlanNumber());
         }
-        if (StrUtil.isNotBlank(plan.getIsFinish())) {
-            queryWrapper.like(Plan::getIsFinish, plan.getIsFinish());
-        }
-        if (StrUtil.isNotBlank(plan.getElevatorNumber())) {
+        if(StrUtil.isNotBlank(plan.getElevatorNumber())){
             queryWrapper.like(Plan::getElevatorNumber, plan.getElevatorNumber());
+        }
+        if(StrUtil.isNotBlank(plan.getElevatorName())){
+            queryWrapper.like(Plan::getElevatorName, plan.getElevatorName());
+        }
+        if(StrUtil.isNotBlank(plan.getIntervalUnit())){
+            queryWrapper.like(Plan::getIntervalUnit, plan.getIntervalUnit());
+        }
+        if(StrUtil.isNotBlank(plan.getIsFinish())){
+            queryWrapper.eq(Plan::getIsFinish, plan.getIsFinish());
         }
         //2. 执行分页查询
         Page<Plan> pagin = new Page<>(current, size, true);

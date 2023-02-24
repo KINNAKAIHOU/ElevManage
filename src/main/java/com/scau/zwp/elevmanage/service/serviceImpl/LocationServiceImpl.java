@@ -59,13 +59,13 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
     public Result paginQuery(Location location, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Location> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(location.getLocationName())) {
+        if(StrUtil.isNotBlank(location.getLocationName())){
             queryWrapper.like(Location::getLocationName, location.getLocationName());
         }
-        if (StrUtil.isNotBlank(location.getContactPerson())) {
+        if(StrUtil.isNotBlank(location.getContactPerson())){
             queryWrapper.like(Location::getContactPerson, location.getContactPerson());
         }
-        if (StrUtil.isNotBlank(location.getAddress())) {
+        if(StrUtil.isNotBlank(location.getAddress())){
             queryWrapper.like(Location::getAddress, location.getAddress());
         }
         //2. 执行分页查询

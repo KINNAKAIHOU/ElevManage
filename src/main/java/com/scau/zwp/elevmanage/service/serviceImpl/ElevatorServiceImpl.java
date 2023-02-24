@@ -97,8 +97,17 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
         if (StrUtil.isNotBlank(elevator.getElevatorName())) {
             queryWrapper.like(Elevator::getElevatorName, elevator.getElevatorName());
         }
+        if (StrUtil.isNotBlank(elevator.getStatus())) {
+            queryWrapper.eq(Elevator::getStatus, elevator.getStatus());
+        }
         if (StrUtil.isNotBlank(elevator.getLocationName())) {
             queryWrapper.like(Elevator::getLocationName, elevator.getLocationName());
+        }
+        if (StrUtil.isNotBlank(elevator.getAddress())) {
+            queryWrapper.like(Elevator::getAddress, elevator.getAddress());
+        }
+        if (StrUtil.isNotBlank(elevator.getContactPerson())) {
+            queryWrapper.like(Elevator::getContactPerson, elevator.getContactPerson());
         }
         if (StrUtil.isNotBlank(elevator.getManufacturerName())) {
             queryWrapper.like(Elevator::getManufacturerName, elevator.getManufacturerName());
@@ -108,9 +117,6 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
         }
         if (StrUtil.isNotBlank(elevator.getProductNumber())) {
             queryWrapper.like(Elevator::getProductNumber, elevator.getProductNumber());
-        }
-        if (StrUtil.isNotBlank(elevator.getAddress())) {
-            queryWrapper.like(Elevator::getAddress, elevator.getAddress());
         }
         //2. 执行分页查询
         Page<Elevator> pagin = new Page<>(current, size, true);

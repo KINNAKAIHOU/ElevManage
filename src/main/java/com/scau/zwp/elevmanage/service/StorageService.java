@@ -31,12 +31,14 @@ public interface StorageService extends IService<Storage> {
     /**
      * 分页查询
      *
-     * @param storage 筛选条件
+     * @param storage   筛选条件
      * @param current   当前页码
      * @param size      每页大小
+     * @param startTime 开启日期
+     * @param endTime   结束日期
      * @return
      */
-    Result paginQuery(Storage storage, Integer current, Integer size);
+    Result paginQuery(Storage storage, Integer current, Integer size, String startTime, String endTime);
 
     /**
      * 新增数据

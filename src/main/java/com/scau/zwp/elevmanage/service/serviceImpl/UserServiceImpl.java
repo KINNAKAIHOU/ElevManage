@@ -68,26 +68,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Result paginQuery(User user, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(user.getUserNumber())) {
+        if(StrUtil.isNotBlank(user.getUserNumber())){
             queryWrapper.like(User::getUserNumber, user.getUserNumber());
         }
-        if (StrUtil.isNotBlank(user.getUserName())) {
+        if(StrUtil.isNotBlank(user.getUserName())){
             queryWrapper.like(User::getUserName, user.getUserName());
         }
-        if (StrUtil.isNotBlank(user.getPassword())) {
+        if(StrUtil.isNotBlank(user.getPassword())){
             queryWrapper.like(User::getPassword, user.getPassword());
         }
-        if (StrUtil.isNotBlank(user.getGender())) {
-            queryWrapper.like(User::getGender, user.getGender());
+        if(StrUtil.isNotBlank(user.getGender())){
+            queryWrapper.eq(User::getGender, user.getGender());
         }
-        if (StrUtil.isNotBlank(user.getAge())) {
-            queryWrapper.like(User::getAge, user.getAge());
+        if(StrUtil.isNotBlank(user.getPermissionName())){
+            queryWrapper.eq(User::getPermissionName, user.getPermissionName());
         }
-        if (StrUtil.isNotBlank(user.getPermissionName())) {
-            queryWrapper.like(User::getPermissionName, user.getPermissionName());
-        }
-        if (StrUtil.isNotBlank(user.getIsEnabled())) {
-            queryWrapper.like(User::getIsEnabled, user.getIsEnabled());
+        if(StrUtil.isNotBlank(user.getIsEnabled())){
+            queryWrapper.eq(User::getIsEnabled, user.getIsEnabled());
         }
         //2. 执行分页查询
         Page<User> pagin = new Page<>(current, size, true);

@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.1.3",
   "createdTime": "2023-2-19 10:48:07",
-  "updatedTime": "2023-2-24 16:32:20",
+  "updatedTime": "2023-2-24 14:42:07",
   "dbConns": [],
   "profile": {
     "default": {
@@ -5002,6 +5002,23 @@
           "id": "07D31454-B783-4820-8B24-F383D5EF0CCD"
         },
         {
+          "defKey": "elevator_id",
+          "defName": "电梯ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
+          "refDict": "",
+          "extProps": {},
+          "id": "70A06EF9-C9A0-4FFB-9BCD-A0B8CA3BD60D"
+        },
+        {
           "defKey": "start_time",
           "defName": "开始日期",
           "comment": "",
@@ -5085,23 +5102,6 @@
           "extProps": {},
           "domain": "54611CCC-CA4B-42E1-9F32-4944C85B85A6",
           "id": "EB6480AE-CDE5-4386-BB44-37E09327C8FC"
-        },
-        {
-          "defKey": "elevator_id",
-          "defName": "电梯ID",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": true,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
-          "refDict": "",
-          "extProps": {},
-          "id": "70A06EF9-C9A0-4FFB-9BCD-A0B8CA3BD60D"
         },
         {
           "defKey": "is_finish",
@@ -5868,182 +5868,6 @@
           "refDict": "",
           "extProps": {},
           "id": "98E11B43-B9AE-420C-A544-F7EE6957C641"
-        }
-      ],
-      "correlations": [],
-      "indexes": []
-    },
-    {
-      "id": "77D36769-4743-4A25-8BC3-7E0E47D20AC0",
-      "env": {
-        "base": {
-          "nameSpace": "",
-          "codeRoot": ""
-        }
-      },
-      "defKey": "em_message",
-      "defName": "消息",
-      "comment": "",
-      "properties": {
-        "partitioned by": "(date string)",
-        "row format delimited": "",
-        "fields terminated by ','": "",
-        "collection items terminated by '-'": "",
-        "map keys terminated by ':'": "",
-        "store as textfile;": ""
-      },
-      "nameTemplate": "{defKey}[{defName}]",
-      "headers": [
-        {
-          "refKey": "hideInGraph",
-          "hideInGraph": true
-        },
-        {
-          "refKey": "defKey",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "defName",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "primaryKey",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "notNull",
-          "hideInGraph": true
-        },
-        {
-          "refKey": "autoIncrement",
-          "hideInGraph": true
-        },
-        {
-          "refKey": "domain",
-          "hideInGraph": true
-        },
-        {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "comment",
-          "hideInGraph": true
-        },
-        {
-          "refKey": "refDict",
-          "hideInGraph": true
-        },
-        {
-          "refKey": "defaultValue",
-          "hideInGraph": true
-        },
-        {
-          "refKey": "isStandard",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "uiHint",
-          "hideInGraph": true
-        },
-        {
-          "refKey": "extProps",
-          "hideInGraph": true
-        }
-      ],
-      "fields": [
-        {
-          "defKey": "id",
-          "defName": "消息ID",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": true,
-          "notNull": true,
-          "autoIncrement": true,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "extProps": {},
-          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
-          "id": "13DA3E01-FD23-4130-BE08-FB835747C98D"
-        },
-        {
-          "defKey": "message",
-          "defName": "消息",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": true,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "extProps": {},
-          "domain": "3E948CEC-3070-472C-AF92-F3CA11EC9D15",
-          "id": "414B70FA-2D16-4E5F-8A27-A2D85C37F534"
-        },
-        {
-          "defKey": "create_time",
-          "defName": "创建时间",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": true,
-          "autoIncrement": false,
-          "defaultValue": "CURRENT_TIMESTAMP",
-          "hideInGraph": false,
-          "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
-          "refDict": "",
-          "extProps": {},
-          "id": "92AB54AE-DC70-4684-B529-6DCD137AA6F7"
-        },
-        {
-          "defKey": "update_time",
-          "defName": "更新时间",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "NULL",
-          "hideInGraph": false,
-          "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
-          "refDict": "",
-          "extProps": {},
-          "id": "7592AA99-0A9B-43F5-B106-B403731B1092"
-        },
-        {
-          "defKey": "is_deleted",
-          "defName": "是否删除",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": true,
-          "autoIncrement": false,
-          "defaultValue": "0",
-          "hideInGraph": false,
-          "domain": "6F7C1C5C-D159-41E6-BF9D-54DEEFA79AFF",
-          "refDict": "",
-          "extProps": {},
-          "id": "CF53B5E2-F9B2-4F98-BD8F-64BF20FBD279"
         }
       ],
       "correlations": [],

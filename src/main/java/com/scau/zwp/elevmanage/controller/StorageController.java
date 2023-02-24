@@ -67,9 +67,11 @@ public class StorageController {
     /**
      * 分页查询
      *
-     * @param storage 筛选条件
-     * @param current 页码
-     * @param size    元素
+     * @param storage   筛选条件
+     * @param current   页码
+     * @param size      元素
+     * @param startTime 开启日期
+     * @param endTime   结束日期
      * @return 查询结果
      */
     @ApiOperation("分页查询")
@@ -77,10 +79,12 @@ public class StorageController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Integer"),
             @ApiImplicitParam(name = "size", value = "元素", required = true, paramType = "query", dataType = "Integer"),
+            @ApiImplicitParam(name = "startTime", value = "开始日期", required = false, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "endTime", value = "结束日期", required = false, paramType = "query", dataType = "String"),
     })
-    public Result paginQuery(@RequestBody Storage storage, @RequestParam("current") Integer current, @RequestParam("size") Integer size) {
+    public Result paginQuery(@RequestBody Storage storage, @RequestParam("current") Integer current, @RequestParam("size") Integer size, @RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime) {
         /*把Mybatis的分页对象做封装转换，MP的分页对象上有一些SQL敏感信息，还是通过spring的分页模型来封装数据吧*/
-        Page<Storage> pageResult = (Page<Storage>) storageService.paginQuery(storage, current, size).getData();
+        Page<Storage> pageResult = (Page<Storage>) storageService.paginQuery(storage, current, size, startTime, endTime).getData();
         return new Result(true, StatusCode.OK, "查询配件入库分页成功", pageResult);
     }
 

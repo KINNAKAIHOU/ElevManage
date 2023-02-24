@@ -25,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -89,9 +91,11 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
      * @param maintenance 筛选条件
      * @param current     当前页码
      * @param size        每页大小
+     * @param startTime   开启日期
+     * @param endTime     结束日期
      * @return
      */
-    public Result paginQuery(Maintenance maintenance, Integer current, Integer size) {
+    public Result paginQuery(Maintenance maintenance, Integer current, Integer size, String startTime, String endTime) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Maintenance> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(maintenance.getMaintenanceNumber())) {
@@ -99,6 +103,9 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
         }
         if (StrUtil.isNotBlank(maintenance.getElevatorNumber())) {
             queryWrapper.like(Maintenance::getElevatorNumber, maintenance.getElevatorNumber());
+        }
+        if (StrUtil.isNotBlank(maintenance.getElevatorName())) {
+            queryWrapper.like(Maintenance::getElevatorName, maintenance.getElevatorName());
         }
         if (StrUtil.isNotBlank(maintenance.getLocationName())) {
             queryWrapper.like(Maintenance::getLocationName, maintenance.getLocationName());
@@ -109,8 +116,26 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
         if (StrUtil.isNotBlank(maintenance.getContactPerson())) {
             queryWrapper.like(Maintenance::getContactPerson, maintenance.getContactPerson());
         }
+        if (StrUtil.isNotBlank(maintenance.getCheckDescription())) {
+            queryWrapper.like(Maintenance::getCheckDescription, maintenance.getCheckDescription());
+        }
+        if (StrUtil.isNotBlank(maintenance.getMaintenancePerson())) {
+            queryWrapper.like(Maintenance::getMaintenancePerson, maintenance.getMaintenancePerson());
+        }
+        if (StrUtil.isNotBlank(maintenance.getFaultDescription())) {
+            queryWrapper.like(Maintenance::getFaultDescription, maintenance.getFaultDescription());
+        }
         if (StrUtil.isNotBlank(maintenance.getIsFinish())) {
-            queryWrapper.like(Maintenance::getIsFinish, maintenance.getIsFinish());
+            queryWrapper.eq(Maintenance::getIsFinish, maintenance.getIsFinish());
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        if (startTime != "") {
+            LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
+            queryWrapper.ge(Maintenance::getMaintenanceData, startDateTime);
+        }
+        if (endTime != "") {
+            LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
+            queryWrapper.le(Maintenance::getMaintenanceData, endDateTime);
         }
         //2. 执行分页查询
         Page<Maintenance> pagin = new Page<>(current, size, true);

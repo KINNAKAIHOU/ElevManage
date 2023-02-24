@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -65,12 +67,14 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
     /**
      * 分页查询
      *
-     * @param storage 筛选条件
-     * @param current 当前页码
-     * @param size    每页大小
+     * @param storage   筛选条件
+     * @param current   当前页码
+     * @param size      每页大小
+     * @param startTime 开启日期
+     * @param endTime   结束日期
      * @return
      */
-    public Result paginQuery(Storage storage, Integer current, Integer size) {
+    public Result paginQuery(Storage storage, Integer current, Integer size, String startTime, String endTime) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Storage> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(storage.getStorageNumber())) {
@@ -87,6 +91,15 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
         }
         if (StrUtil.isNotBlank(storage.getAddress())) {
             queryWrapper.like(Storage::getAddress, storage.getAddress());
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        if (startTime != "") {
+            LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
+            queryWrapper.ge(Storage::getStorageTime, startDateTime);
+        }
+        if (endTime != "") {
+            LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
+            queryWrapper.le(Storage::getStorageTime, endDateTime);
         }
         //2. 执行分页查询
         Page<Storage> pagin = new Page<>(current, size, true);

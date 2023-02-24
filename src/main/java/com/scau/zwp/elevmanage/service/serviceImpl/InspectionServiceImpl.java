@@ -26,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -78,7 +80,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
      * @param size       每页大小
      * @return
      */
-    public Result paginQuery(Inspection inspection, Integer current, Integer size) {
+    public Result paginQuery(Inspection inspection, Integer current, Integer size, String startTime, String endTime) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Inspection> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(inspection.getInspectionNumber())) {
@@ -86,6 +88,9 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         }
         if (StrUtil.isNotBlank(inspection.getElevatorNumber())) {
             queryWrapper.like(Inspection::getElevatorNumber, inspection.getElevatorNumber());
+        }
+        if (StrUtil.isNotBlank(inspection.getElevatorName())) {
+            queryWrapper.like(Inspection::getElevatorName, inspection.getElevatorName());
         }
         if (StrUtil.isNotBlank(inspection.getLocationName())) {
             queryWrapper.like(Inspection::getLocationName, inspection.getLocationName());
@@ -96,14 +101,26 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         if (StrUtil.isNotBlank(inspection.getContactPerson())) {
             queryWrapper.like(Inspection::getContactPerson, inspection.getContactPerson());
         }
+        if (StrUtil.isNotBlank(inspection.getCheckDescription())) {
+            queryWrapper.like(Inspection::getCheckDescription, inspection.getCheckDescription());
+        }
         if (StrUtil.isNotBlank(inspection.getInspectionPerson())) {
             queryWrapper.like(Inspection::getInspectionPerson, inspection.getInspectionPerson());
         }
         if (StrUtil.isNotBlank(inspection.getIsFinish())) {
-            queryWrapper.like(Inspection::getIsFinish, inspection.getIsFinish());
+            queryWrapper.eq(Inspection::getIsFinish, inspection.getIsFinish());
         }
         if (StrUtil.isNotBlank(inspection.getIsFault())) {
-            queryWrapper.like(Inspection::getIsFault, inspection.getIsFault());
+            queryWrapper.eq(Inspection::getIsFault, inspection.getIsFault());
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        if (startTime != "") {
+            LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
+            queryWrapper.ge(Inspection::getInspectionData, startDateTime);
+        }
+        if (endTime != "") {
+            LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
+            queryWrapper.le(Inspection::getInspectionData, endDateTime);
         }
         //2. 执行分页查询
         Page<Inspection> pagin = new Page<>(current, size, true);

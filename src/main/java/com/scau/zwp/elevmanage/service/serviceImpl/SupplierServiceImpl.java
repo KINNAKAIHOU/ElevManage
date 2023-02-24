@@ -49,13 +49,13 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
     public Result paginQuery(Supplier supplier, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Supplier> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(supplier.getSupplierName())) {
+        if(StrUtil.isNotBlank(supplier.getSupplierName())){
             queryWrapper.like(Supplier::getSupplierName, supplier.getSupplierName());
         }
-        if (StrUtil.isNotBlank(supplier.getContactPerson())) {
+        if(StrUtil.isNotBlank(supplier.getContactPerson())){
             queryWrapper.like(Supplier::getContactPerson, supplier.getContactPerson());
         }
-        if (StrUtil.isNotBlank(supplier.getAddress())) {
+        if(StrUtil.isNotBlank(supplier.getAddress())){
             queryWrapper.like(Supplier::getAddress, supplier.getAddress());
         }
         //2. 执行分页查询
