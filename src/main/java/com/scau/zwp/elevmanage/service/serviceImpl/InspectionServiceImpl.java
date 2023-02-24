@@ -17,6 +17,7 @@ import com.scau.zwp.elevmanage.mapper.MaintenanceMapper;
 import com.scau.zwp.elevmanage.service.InspectionImageService;
 import com.scau.zwp.elevmanage.service.InspectionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.scau.zwp.elevmanage.service.MessageService;
 import com.scau.zwp.elevmanage.vo.InspectionVo;
 import com.sun.corba.se.impl.protocol.INSServerRequestDispatcher;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,6 +52,8 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
     private String uploadRootPath;
     @Resource
     private ElevatorMapper elevatorMapper;
+    @Resource
+    private MessageService messageService;
 
     /**
      * 通过ID查询单条数据
@@ -165,9 +168,12 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
             elevator.setStatus("待检查");
         elevatorMapper.updateById(elevator);//修改电梯的状态
         if (save(inspection) == true) {
-            if (insertInspectionImage(inspection.getId(), files).getCode() == 2000)
+            if (insertInspectionImage(inspection.getId(), files).getCode() == 2000) {
+                Message message = new Message();
+                message.setMessage("添加新检查报告  " + inspection.getInspectionNumber() + "--" + inspection.getElevatorNumber() + ":" + inspection.getElevatorName());
+                messageService.save(message);
                 return new Result(true, StatusCode.OK, "添加检查报告成功");
-            else
+            } else
                 return new Result(false, StatusCode.ERROR, "检查报告图片上传失败");
         } else
             return new Result(false, StatusCode.ERROR, "添加检查报告失败");
@@ -196,9 +202,12 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                     elevatorMapper.updateById(elevator);//修改电梯的状态
                 }
             }
-            if (insertInspectionImage(inspection.getId(), files).getCode() == 2000)
+            if (insertInspectionImage(inspection.getId(), files).getCode() == 2000) {
+                Message message = new Message();
+                message.setMessage(inspection.getInspectionPerson() + "  完成检查报告  " + inspection.getInspectionNumber() + "--" + inspection.getElevatorNumber() + ":" + inspection.getElevatorName());
+                messageService.save(message);
                 return new Result(true, StatusCode.OK, "更新检查报告数据成功");
-            else
+            } else
                 return new Result(false, StatusCode.ERROR, "检查报告图片上传失败");
         } else
             return new Result(false, StatusCode.ERROR, "更新检查报告数据失败");
@@ -234,9 +243,12 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                 elevatorMapper.updateById(elevator);//修改电梯的状态
             }
         }
-        if (removeById(id) == true)
+        if (removeById(id) == true) {
+            Message message = new Message();
+            message.setMessage("删除检查报告  " + inspection.getInspectionNumber() + "--" + inspection.getElevatorNumber() + ":" + inspection.getElevatorName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "删除检查报告成功");
-        else
+        } else
             return new Result(false, StatusCode.ERROR, "删除检查报告失败");
     }
 
@@ -314,7 +326,13 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                     }
                 }
             }
-            return new Result(true, StatusCode.OK, "生成维修报告成功");
+            {
+                Message message = new Message();
+                message.setMessage("添加新检查报告  " + maintenance.getMaintenanceNumber() + "--" + maintenance.getElevatorNumber() + ":" + maintenance.getElevatorName());
+                messageService.save(message);
+                return new Result(true, StatusCode.OK, "生成维修报告成功");
+            }
+
         } else
             return new Result(false, StatusCode.ERROR, "生成维修报告失败");
     }

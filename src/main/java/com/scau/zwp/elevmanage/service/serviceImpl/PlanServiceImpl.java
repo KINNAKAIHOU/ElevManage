@@ -14,6 +14,7 @@ import com.scau.zwp.elevmanage.entity.Plan;
 import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.mapper.PlanMapper;
 import com.scau.zwp.elevmanage.service.InspectionService;
+import com.scau.zwp.elevmanage.service.MessageService;
 import com.scau.zwp.elevmanage.service.PlanService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.swagger.annotations.ApiOperation;
@@ -40,6 +41,8 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
     private ElevatorMapper elevatorMapper;
     @Resource
     private InspectionService inspectionService;
+    @Resource
+    private MessageService messageService;
 
 
     /**
@@ -68,19 +71,19 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
     public Result paginQuery(Plan plan, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Plan> queryWrapper = new LambdaQueryWrapper<>();
-        if(StrUtil.isNotBlank(plan.getPlanNumber())){
+        if (StrUtil.isNotBlank(plan.getPlanNumber())) {
             queryWrapper.like(Plan::getPlanNumber, plan.getPlanNumber());
         }
-        if(StrUtil.isNotBlank(plan.getElevatorNumber())){
+        if (StrUtil.isNotBlank(plan.getElevatorNumber())) {
             queryWrapper.like(Plan::getElevatorNumber, plan.getElevatorNumber());
         }
-        if(StrUtil.isNotBlank(plan.getElevatorName())){
+        if (StrUtil.isNotBlank(plan.getElevatorName())) {
             queryWrapper.like(Plan::getElevatorName, plan.getElevatorName());
         }
-        if(StrUtil.isNotBlank(plan.getIntervalUnit())){
+        if (StrUtil.isNotBlank(plan.getIntervalUnit())) {
             queryWrapper.like(Plan::getIntervalUnit, plan.getIntervalUnit());
         }
-        if(StrUtil.isNotBlank(plan.getIsFinish())){
+        if (StrUtil.isNotBlank(plan.getIsFinish())) {
             queryWrapper.eq(Plan::getIsFinish, plan.getIsFinish());
         }
         //2. 执行分页查询
@@ -133,9 +136,12 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
         if (plan.getEndTime().isBefore(nextTime))
             return new Result(false, StatusCode.ERROR, "添加检查计划失败,结束日期早于下一次生成检查日期");
         plan.setNextTime(nextTime);
-        if (save(plan) == true)
+        if (save(plan) == true) {
+            Message message = new Message();
+            message.setMessage("添加新检查计划  " + plan.getPlanNumber() + "--" + plan.getElevatorNumber() + ":" + plan.getElevatorName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "添加检查计划成功");
-        else
+        } else
             return new Result(false, StatusCode.ERROR, "添加检查计划失败");
 
     }
@@ -167,6 +173,9 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
             return new Result(false, StatusCode.ERROR, "更新检查计划数据失败,结束日期早于下一次生成检查日期");
         plan.setNextTime(nextTime);
         if (updateById(plan) == true) {
+            Message message = new Message();
+            message.setMessage("更新检查计划内容  " + plan.getPlanNumber() + "--" + plan.getElevatorNumber() + ":" + plan.getElevatorName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "更新检查计划数据成功");
         } else
             return new Result(false, StatusCode.ERROR, "更新检查计划数据失败");
@@ -179,7 +188,11 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
      * @return 是否成功
      */
     public Result deleteById(Integer id) {
+        Plan plan = getById(id);
         if (removeById(id) == true) {
+            Message message = new Message();
+            message.setMessage("删除检查计划  " + plan.getPlanNumber() + "--" + plan.getElevatorNumber() + ":" + plan.getElevatorName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "删除检查计划成功");
         } else
             return new Result(false, StatusCode.ERROR, "删除检查计划失败");

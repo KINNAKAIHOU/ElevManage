@@ -7,11 +7,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
+import com.scau.zwp.elevmanage.entity.Message;
 import com.scau.zwp.elevmanage.entity.Supplier;
 import com.scau.zwp.elevmanage.mapper.SupplierMapper;
+import com.scau.zwp.elevmanage.service.MessageService;
 import com.scau.zwp.elevmanage.service.SupplierService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -23,6 +27,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> implements SupplierService {
+
+    @Resource
+    private MessageService messageService;
+
     /**
      * 通过ID查询单条数据
      *
@@ -49,13 +57,13 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
     public Result paginQuery(Supplier supplier, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Supplier> queryWrapper = new LambdaQueryWrapper<>();
-        if(StrUtil.isNotBlank(supplier.getSupplierName())){
+        if (StrUtil.isNotBlank(supplier.getSupplierName())) {
             queryWrapper.like(Supplier::getSupplierName, supplier.getSupplierName());
         }
-        if(StrUtil.isNotBlank(supplier.getContactPerson())){
+        if (StrUtil.isNotBlank(supplier.getContactPerson())) {
             queryWrapper.like(Supplier::getContactPerson, supplier.getContactPerson());
         }
-        if(StrUtil.isNotBlank(supplier.getAddress())){
+        if (StrUtil.isNotBlank(supplier.getAddress())) {
             queryWrapper.like(Supplier::getAddress, supplier.getAddress());
         }
         //2. 执行分页查询
@@ -75,9 +83,12 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
      * @return 实例对象
      */
     public Result insert(Supplier supplier) {
-        if (save(supplier) == true)
+        if (save(supplier) == true) {
+            Message message = new Message();
+            message.setMessage("添加新供货商  " + supplier.getSupplierName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "添加供货商成功");
-        else
+        } else
             return new Result(false, StatusCode.ERROR, "添加供货商失败");
     }
 
@@ -89,6 +100,9 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
      */
     public Result update(Supplier supplier) {
         if (updateById(supplier) == true) {
+            Message message = new Message();
+            message.setMessage("更新供货商内容  " + supplier.getSupplierName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "更新供货商数据成功");
         } else
             return new Result(false, StatusCode.ERROR, "更新供货商数据失败");
@@ -101,9 +115,13 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
      * @return 是否成功
      */
     public Result deleteById(Integer id) {
-        if (removeById(id) == true)
+        Supplier supplier = getById(id);
+        if (removeById(id) == true) {
+            Message message = new Message();
+            message.setMessage("删除供货商  " + supplier.getSupplierName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "删除供货商成功");
-        else
+        } else
             return new Result(false, StatusCode.ERROR, "删除供货商失败");
     }
 

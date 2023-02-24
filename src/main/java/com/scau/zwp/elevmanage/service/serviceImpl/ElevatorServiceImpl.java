@@ -11,17 +11,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
-import com.scau.zwp.elevmanage.entity.Elevator;
-import com.scau.zwp.elevmanage.entity.ElevatorImage;
-import com.scau.zwp.elevmanage.entity.Location;
-import com.scau.zwp.elevmanage.entity.Manufacturer;
+import com.scau.zwp.elevmanage.entity.*;
 import com.scau.zwp.elevmanage.mapper.ElevatorImageMapper;
 import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
-import com.scau.zwp.elevmanage.service.ElevatorImageService;
-import com.scau.zwp.elevmanage.service.ElevatorService;
+import com.scau.zwp.elevmanage.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scau.zwp.elevmanage.service.LocationService;
-import com.scau.zwp.elevmanage.service.ManufacturerService;
 import com.scau.zwp.elevmanage.vo.ElevatorVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +49,8 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
     private ManufacturerService manufacturerService;
     @Resource
     private LocationService locationService;
+    @Resource
+    private MessageService messageService;
 
     @Value("${spring.servlet.multipart.location}" + "/elevator/")
     private String uploadRootPath;
@@ -168,9 +164,12 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
         elevator.setManufacturerName(manufacturer.getManufacturerName());
         elevator.setAddress(location.getAddress());
         if (save(elevator) == true) {
-            if (insertElevatorImage(elevator.getId(), files).getCode() == 2000)
+            if (insertElevatorImage(elevator.getId(), files).getCode() == 2000) {
+                Message message = new Message();
+                message.setMessage("添加新电梯  " + elevator.getElevatorNumber() + ":" + elevator.getElevatorName());
+                messageService.save(message);
                 return new Result(true, StatusCode.OK, "添加电梯成功");
-            else
+            } else
                 return new Result(false, StatusCode.ERROR, "电梯图片上传失败");
         } else
             return new Result(false, StatusCode.ERROR, "添加电梯失败");
@@ -184,9 +183,12 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      */
     public Result update(Elevator elevator, MultipartFile[] files) {
         if (updateById(elevator) == true) {
-            if (insertElevatorImage(elevator.getId(), files).getCode() == 2000)
+            if (insertElevatorImage(elevator.getId(), files).getCode() == 2000) {
+                Message message = new Message();
+                message.setMessage("更新电梯内容  " + elevator.getElevatorNumber() + ":" + elevator.getElevatorName());
+                messageService.save(message);
                 return new Result(true, StatusCode.OK, "更新电梯数据成功");
-            else
+            } else
                 return new Result(false, StatusCode.ERROR, "电梯图片上传失败");
         } else
             return new Result(false, StatusCode.ERROR, "更新电梯数据失败");
@@ -208,9 +210,13 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
                     return new Result(false, StatusCode.ERROR, "删除电梯图片失败");
             }
         }
-        if (removeById(id) == true)
+        Elevator elevator = getById(id);
+        if (removeById(id) == true) {
+            Message message = new Message();
+            message.setMessage("删除电梯  " + elevator.getElevatorNumber() + ":" + elevator.getElevatorName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "删除电梯成功");
-        else
+        } else
             return new Result(false, StatusCode.ERROR, "删除电梯失败");
     }
 

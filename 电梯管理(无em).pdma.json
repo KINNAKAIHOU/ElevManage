@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.1.3",
   "createdTime": "2023-2-19 10:48:07",
-  "updatedTime": "2023-2-24 16:32:20",
+  "updatedTime": "2023-2-24 20:40:06",
   "dbConns": [],
   "profile": {
     "default": {
@@ -1265,7 +1265,7 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
@@ -4117,7 +4117,7 @@
           "id": "204A22FF-1DBA-41D3-88EB-FFD6E6B5B301"
         },
         {
-          "defKey": "maintenance_number",
+          "defKey": "inspection_number",
           "defName": "检查编号",
           "comment": "",
           "type": "",
@@ -5378,7 +5378,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "5ECC3403-C082-45B2-8F86-B4C40F3FF533"
         },
         {

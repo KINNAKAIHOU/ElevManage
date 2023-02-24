@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ElevatorImageServiceImpl extends ServiceImpl<ElevatorImageMapper, ElevatorImage> implements ElevatorImageService {
+
     /**
      * 通过主键删除数据
      *

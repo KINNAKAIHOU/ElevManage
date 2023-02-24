@@ -10,9 +10,11 @@ import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.entity.Location;
+import com.scau.zwp.elevmanage.entity.Message;
 import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.mapper.LocationMapper;
 import com.scau.zwp.elevmanage.service.LocationService;
+import com.scau.zwp.elevmanage.service.MessageService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,9 +31,9 @@ import java.util.List;
 @Service
 public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> implements LocationService {
     @Resource
-    private LocationMapper locationMapper;
-    @Resource
     private ElevatorMapper elevatorMapper;
+    @Resource
+    private MessageService messageService;
 
     /**
      * 通过ID查询单条数据
@@ -59,13 +61,13 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
     public Result paginQuery(Location location, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Location> queryWrapper = new LambdaQueryWrapper<>();
-        if(StrUtil.isNotBlank(location.getLocationName())){
+        if (StrUtil.isNotBlank(location.getLocationName())) {
             queryWrapper.like(Location::getLocationName, location.getLocationName());
         }
-        if(StrUtil.isNotBlank(location.getContactPerson())){
+        if (StrUtil.isNotBlank(location.getContactPerson())) {
             queryWrapper.like(Location::getContactPerson, location.getContactPerson());
         }
-        if(StrUtil.isNotBlank(location.getAddress())){
+        if (StrUtil.isNotBlank(location.getAddress())) {
             queryWrapper.like(Location::getAddress, location.getAddress());
         }
         //2. 执行分页查询
@@ -85,9 +87,12 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
      * @return 实例对象
      */
     public Result insert(Location location) {
-        if (save(location) == true)
+        if (save(location) == true) {
+            Message message = new Message();
+            message.setMessage("添加新场所  " + location.getLocationName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "添加场所成功");
-        else
+        } else
             return new Result(false, StatusCode.ERROR, "添加场所失败");
     }
 
@@ -112,6 +117,9 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
                         return new Result(false, StatusCode.ERROR, "电梯信息更新失败");
                 }
             }
+            Message message = new Message();
+            message.setMessage("更新场所内容  " + location.getLocationName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "更新场所数据成功");
         } else
             return new Result(false, StatusCode.ERROR, "更新场所数据失败");
@@ -125,9 +133,13 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
      * @return 是否成功
      */
     public Result deleteById(Integer id) {
-        if (removeById(id) == true)
+        Location location = getById(id);
+        if (removeById(id) == true) {
+            Message message = new Message();
+            message.setMessage("删除场所  " + location.getLocationName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "删除场所成功");
-        else
+        } else
             return new Result(false, StatusCode.ERROR, "删除场所失败");
     }
 

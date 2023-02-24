@@ -56,19 +56,19 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
     public Result paginQuery(Inventory inventory, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Inventory> queryWrapper = new LambdaQueryWrapper<>();
-        if(StrUtil.isNotBlank(inventory.getAccessoryNumber())){
+        if (StrUtil.isNotBlank(inventory.getAccessoryNumber())) {
             queryWrapper.like(Inventory::getAccessoryNumber, inventory.getAccessoryNumber());
         }
-        if(StrUtil.isNotBlank(inventory.getAccessoryName())){
+        if (StrUtil.isNotBlank(inventory.getAccessoryName())) {
             queryWrapper.like(Inventory::getAccessoryName, inventory.getAccessoryName());
         }
-        if(StrUtil.isNotBlank(inventory.getSpecification())){
+        if (StrUtil.isNotBlank(inventory.getSpecification())) {
             queryWrapper.like(Inventory::getSpecification, inventory.getSpecification());
         }
-        if(StrUtil.isNotBlank(inventory.getType())){
+        if (StrUtil.isNotBlank(inventory.getType())) {
             queryWrapper.like(Inventory::getType, inventory.getType());
         }
-        if(StrUtil.isNotBlank(inventory.getUnit())){
+        if (StrUtil.isNotBlank(inventory.getUnit())) {
             queryWrapper.like(Inventory::getUnit, inventory.getUnit());
         }
         //2. 执行分页查询

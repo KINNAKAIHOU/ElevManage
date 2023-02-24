@@ -17,6 +17,7 @@ import com.scau.zwp.elevmanage.mapper.InventoryMapper;
 import com.scau.zwp.elevmanage.service.AccessoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scau.zwp.elevmanage.service.InventoryService;
+import com.scau.zwp.elevmanage.service.MessageService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,8 @@ import java.util.List;
 public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory> implements AccessoryService {
     @Resource
     private InventoryMapper inventoryMapper;
+    @Resource
+    private MessageService messageService;
 
     /**
      * 通过ID查询单条数据
@@ -64,19 +67,19 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
     public Result paginQuery(Accessory accessory, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Accessory> queryWrapper = new LambdaQueryWrapper<>();
-        if(StrUtil.isNotBlank(accessory.getAccessoryNumber())){
+        if (StrUtil.isNotBlank(accessory.getAccessoryNumber())) {
             queryWrapper.like(Accessory::getAccessoryNumber, accessory.getAccessoryNumber());
         }
-        if(StrUtil.isNotBlank(accessory.getAccessoryName())){
+        if (StrUtil.isNotBlank(accessory.getAccessoryName())) {
             queryWrapper.like(Accessory::getAccessoryName, accessory.getAccessoryName());
         }
-        if(StrUtil.isNotBlank(accessory.getSpecification())){
+        if (StrUtil.isNotBlank(accessory.getSpecification())) {
             queryWrapper.like(Accessory::getSpecification, accessory.getSpecification());
         }
-        if(StrUtil.isNotBlank(accessory.getType())){
+        if (StrUtil.isNotBlank(accessory.getType())) {
             queryWrapper.like(Accessory::getType, accessory.getType());
         }
-        if(StrUtil.isNotBlank(accessory.getUnit())){
+        if (StrUtil.isNotBlank(accessory.getUnit())) {
             queryWrapper.like(Accessory::getUnit, accessory.getUnit());
         }
         //2. 执行分页查询
@@ -108,6 +111,7 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
             else
                 break;
         }
+        accessory.setAccessoryNumber(number);
         if (save(accessory) == true) {
             Inventory inventory = new Inventory();
             inventory.setAccessoryId(accessory.getId());
@@ -117,6 +121,9 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
             inventory.setType(accessory.getType());
             inventory.setUnit(accessory.getUnit());
             if (inventoryMapper.insert(inventory) != 0) {
+                Message message = new Message();
+                message.setMessage("添加新配件  " + accessory.getAccessoryNumber() + ":" + accessory.getAccessoryName());
+                messageService.save(message);
                 return new Result(true, StatusCode.OK, "添加配件成功");
             }
             return new Result(false, StatusCode.ERROR, "库存管理建立失败");
@@ -140,11 +147,17 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
                 inventory.setType(accessory.getType());
                 inventory.setUnit(accessory.getUnit());
                 if (inventoryMapper.updateById(inventory) != 0) {
+                    Message message = new Message();
+                    message.setMessage("更新配件内容  " + accessory.getAccessoryNumber() + ":" + accessory.getAccessoryName());
+                    messageService.save(message);
                     return new Result(true, StatusCode.OK, "更新配件数据成功");
                 } else {
                     return new Result(false, StatusCode.ERROR, "库存管理更新失败");
                 }
             }
+            Message message = new Message();
+            message.setMessage("更新配件内容  " + accessory.getAccessoryNumber() + ":" + accessory.getAccessoryName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "更新配件数据成功");
         } else
             return new Result(false, StatusCode.ERROR, "更新配件数据失败");
@@ -157,12 +170,16 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
      * @return 是否成功
      */
     public Result deleteById(Integer id) {
+        Accessory accessory = getById(id);
         if (removeById(id) == true) {
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("accessory_id", id);
-            if (inventoryMapper.deleteById(queryWrapper) == 1)
+            if (inventoryMapper.delete(queryWrapper) == 1) {
+                Message message = new Message();
+                message.setMessage("删除配件  " + accessory.getAccessoryNumber() + ":" + accessory.getAccessoryName());
+                messageService.save(message);
                 return new Result(true, StatusCode.OK, "删除配件成功");
-            else
+            } else
                 return new Result(false, StatusCode.ERROR, "删除库存失败");
         } else
             return new Result(false, StatusCode.ERROR, "删除配件失败");

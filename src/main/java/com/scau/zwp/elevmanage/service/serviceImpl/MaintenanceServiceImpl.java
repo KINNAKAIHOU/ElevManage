@@ -53,6 +53,8 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
     private ElevatorMapper elevatorMapper;
     @Resource
     private InspectionMapper inspectionMapper;
+    @Resource
+    private MessageService messageService;
 
     @Value("${spring.servlet.multipart.location}" + "/maintenance/")
     private String uploadRootPath;
@@ -190,6 +192,9 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
                         return new Result(false, StatusCode.ERROR, "维修报告详情登记失败");
                 }
             }
+            Message message = new Message();
+            message.setMessage("添加维修报告  " + maintenance.getMaintenanceNumber() + "--" + maintenance.getElevatorNumber() + ":" + maintenance.getElevatorName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "添加维修报告成功");
         } else
             return new Result(false, StatusCode.ERROR, "添加维修报告失败");
@@ -230,6 +235,9 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
                 else elevator.setStatus("待维修");
                 elevatorMapper.updateById(elevator);
             }
+            Message message = new Message();
+            message.setMessage(maintenance.getMaintenancePerson() + "  完成维修报告  " + maintenance.getMaintenanceNumber() + "--" + maintenance.getElevatorNumber() + ":" + maintenance.getElevatorName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "更新维修报告成功");
         } else
             return new Result(false, StatusCode.ERROR, "更新维修报告失败");
@@ -272,9 +280,13 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
                     inspectionImageService.removeById(inspectionImage.getId());
             }
         }
-        if (removeById(id) == true)
+        Maintenance maintenance = getById(id);
+        if (removeById(id) == true) {
+            Message message = new Message();
+            message.setMessage("删除维修报告  " + maintenance.getMaintenanceNumber() + "--" + maintenance.getElevatorNumber() + ":" + maintenance.getElevatorName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "删除维修报告成功");
-        else
+        } else
             return new Result(false, StatusCode.ERROR, "删除维修报告失败");
     }
 

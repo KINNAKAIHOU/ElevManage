@@ -42,6 +42,8 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
     private InventoryService inventoryService;
     @Resource
     private SupplierService supplierService;
+    @Resource
+    private MessageService messageService;
 
     /**
      * 通过ID查询单条数据
@@ -148,6 +150,9 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
                         return new Result(false, StatusCode.ERROR, "配件入库详情登记失败");
                 }
             }
+            Message message = new Message();
+            message.setMessage("添加新入库消息  " + storage.getStorageNumber() + "--" + storage.getSupplierName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "配件入库登记成功");
         } else
             return new Result(false, StatusCode.ERROR, "配件入库登记失败");
@@ -162,6 +167,9 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
      */
     public Result update(Storage storage) {
         if (updateById(storage) == true) {
+            Message message = new Message();
+            message.setMessage("更新入库消息内容  " + storage.getStorageNumber() + "--" + storage.getSupplierName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "更新配件入库数据成功");
         } else
             return new Result(false, StatusCode.ERROR, "更新配件入库数据失败");
@@ -187,6 +195,10 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
                         return new Result(false, StatusCode.ERROR, "删除配件入库详情登记失败");
                 }
             }
+            Storage storage = getById(id);
+            Message message = new Message();
+            message.setMessage("删除入库消息  " + storage.getStorageNumber() + "--" + storage.getSupplierName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "删除配件入库成功");
         } else
             return new Result(false, StatusCode.ERROR, "删除配件入库失败");

@@ -50,7 +50,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new JWTInterceptor())
                 .addPathPatterns("/user/**", "/column/**", "/order/**", "/product/**")   //其他接口token验证
-                .excludePathPatterns("/user/login","/doc.html#/home");  //所有用户都放心
+                .excludePathPatterns("/user/login", "/doc.html#/home");  //所有用户都放心
     }
 
     //解决跨域问题

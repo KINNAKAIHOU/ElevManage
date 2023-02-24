@@ -84,7 +84,7 @@ public class Maintenance {
 
     @ApiModelProperty("维修日期")
     @TableField("maintenance_data")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime maintenanceData;
 
     @ApiModelProperty("维修人")

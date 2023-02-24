@@ -11,9 +11,11 @@ import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.entity.Manufacturer;
+import com.scau.zwp.elevmanage.entity.Message;
 import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.mapper.ManufacturerMapper;
 import com.scau.zwp.elevmanage.service.ManufacturerService;
+import com.scau.zwp.elevmanage.service.MessageService;
 import org.springframework.stereotype.Service;
 
 
@@ -31,9 +33,9 @@ import java.util.List;
 @Service
 public class ManufacturerServiceImpl extends ServiceImpl<ManufacturerMapper, Manufacturer> implements ManufacturerService {
     @Resource
-    private ManufacturerMapper manufacturerMapper;
-    @Resource
     private ElevatorMapper elevatorMapper;
+    @Resource
+    private MessageService messageService;
 
     /**
      * 通过ID查询单条数据
@@ -61,16 +63,16 @@ public class ManufacturerServiceImpl extends ServiceImpl<ManufacturerMapper, Man
     public Result paginQuery(Manufacturer manufacturer, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Manufacturer> queryWrapper = new LambdaQueryWrapper<>();
-        if(StrUtil.isNotBlank(manufacturer.getManufacturerName())){
+        if (StrUtil.isNotBlank(manufacturer.getManufacturerName())) {
             queryWrapper.like(Manufacturer::getManufacturerName, manufacturer.getManufacturerName());
         }
-        if(StrUtil.isNotBlank(manufacturer.getContactPerson())){
+        if (StrUtil.isNotBlank(manufacturer.getContactPerson())) {
             queryWrapper.like(Manufacturer::getContactPerson, manufacturer.getContactPerson());
         }
-        if(StrUtil.isNotBlank(manufacturer.getPrefix())){
+        if (StrUtil.isNotBlank(manufacturer.getPrefix())) {
             queryWrapper.like(Manufacturer::getPrefix, manufacturer.getPrefix());
         }
-        if(StrUtil.isNotBlank(manufacturer.getAddress())){
+        if (StrUtil.isNotBlank(manufacturer.getAddress())) {
             queryWrapper.like(Manufacturer::getAddress, manufacturer.getAddress());
         }
         //2. 执行分页查询
@@ -95,9 +97,12 @@ public class ManufacturerServiceImpl extends ServiceImpl<ManufacturerMapper, Man
         if (getOne(queryWrapper) != null) {
             return new Result(false, StatusCode.ERROR, "电梯厂家编号重复");
         } else {
-            if (save(manufacturer) == true)
+            if (save(manufacturer) == true) {
+                Message message = new Message();
+                message.setMessage("添加新电梯厂家  " + manufacturer.getManufacturerName());
+                messageService.save(message);
                 return new Result(true, StatusCode.OK, "添加电梯厂家");
-            else
+            } else
                 return new Result(false, StatusCode.ERROR, "添加电梯厂家失败");
         }
 
@@ -121,6 +126,9 @@ public class ManufacturerServiceImpl extends ServiceImpl<ManufacturerMapper, Man
                         return new Result(false, StatusCode.ERROR, "电梯信息更新失败");
                 }
             }
+            Message message = new Message();
+            message.setMessage("更新电梯厂家内容  " + manufacturer.getManufacturerName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "更新电梯厂家数据成功");
         } else
             return new Result(false, StatusCode.ERROR, "更新电梯厂家数据失败");
@@ -133,9 +141,13 @@ public class ManufacturerServiceImpl extends ServiceImpl<ManufacturerMapper, Man
      * @return 是否成功
      */
     public Result deleteById(Integer id) {
-        if (removeById(id) == true)
+        Manufacturer manufacturer = getById(id);
+        if (removeById(id) == true) {
+            Message message = new Message();
+            message.setMessage("删除电梯厂家  " + manufacturer.getManufacturerName());
+            messageService.save(message);
             return new Result(true, StatusCode.OK, "删除电梯厂家成功");
-        else
+        } else
             return new Result(false, StatusCode.ERROR, "删除电梯厂家失败");
     }
 
