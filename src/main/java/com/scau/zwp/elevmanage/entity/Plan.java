@@ -41,9 +41,9 @@ public class Plan {
     @TableField("elevator_number")
     private String elevatorNumber;
 
-    @ApiModelProperty("电梯ID")
-    @TableField("elevator_id")
-    private Integer elevatorId;
+    @ApiModelProperty("电梯名称")
+    @TableField("elevator_name")
+    private String elevatorName;
 
     @ApiModelProperty("开始日期")
     @TableField("start_time")
@@ -65,11 +65,15 @@ public class Plan {
 
     @ApiModelProperty("间隔时间单位")
     @TableField("Interval_unit")
-    private Integer intervalUnit;
+    private String intervalUnit;
 
     @ApiModelProperty("是否完成")
     @TableField("is_finish")
     private String isFinish;
+
+    @ApiModelProperty("电梯ID")
+    @TableField("elevator_id")
+    private Integer elevatorId;
 
     @ApiModelProperty("备注")
     @TableField("remarks")

@@ -104,14 +104,10 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
             List<Elevator> elevatorList = elevatorMapper.selectList(queryWrapper);
             if (elevatorList != null) {
                 for (Elevator elevator : elevatorList) {
-                    if (location.getLocationName() != null)
-                        elevator.setLocationName(location.getLocationName());
-                    if (location.getAddress() != null)
-                        elevator.setAddress(location.getAddress());
-                    if (location.getContactPerson() != null)
-                        elevator.setContactPerson(location.getContactPerson());
-                    if (location.getContactNumber() != null)
-                        elevator.setContactNumber(location.getContactNumber());
+                    elevator.setLocationName(location.getLocationName());
+                    elevator.setAddress(location.getAddress());
+                    elevator.setContactPerson(location.getContactPerson());
+                    elevator.setContactNumber(location.getContactNumber());
                     if (elevatorMapper.updateById(elevator) == 0)
                         return new Result(false, StatusCode.ERROR, "电梯信息更新失败");
                 }

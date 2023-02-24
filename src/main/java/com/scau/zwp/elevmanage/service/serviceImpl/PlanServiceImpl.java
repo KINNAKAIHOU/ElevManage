@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -107,6 +108,25 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
                 break;
         }
         plan.setPlanNumber(number);
+        Elevator elevator = elevatorMapper.selectById(plan.getElevatorId());
+        plan.setElevatorNumber(elevator.getElevatorNumber());
+        plan.setElevatorName(elevator.getElevatorName());
+        LocalDateTime startTime = plan.getStartTime();
+        LocalDateTime nextTime = null;
+        String unit = plan.getIntervalUnit();
+        int size = plan.getIntervalTime();
+        if (unit == "天") {
+            nextTime = startTime.plusDays(size);
+        } else if (unit == "周") {
+            nextTime = startTime.plusWeeks(size);
+        } else if (unit == "月") {
+            nextTime = startTime.plusMonths(size);
+        } else {
+            nextTime = startTime.plusYears(size);
+        }
+        if (plan.getEndTime().isBefore(nextTime))
+            return new Result(false, StatusCode.ERROR, "添加检查计划失败,结束日期早于下一次生成检查日期");
+        plan.setNextTime(nextTime);
         if (save(plan) == true)
             return new Result(true, StatusCode.OK, "添加检查计划成功");
         else
@@ -121,6 +141,25 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
      * @return 实例对象
      */
     public Result update(Plan plan) {
+        Elevator elevator = elevatorMapper.selectById(plan.getElevatorId());
+        plan.setElevatorNumber(elevator.getElevatorNumber());
+        plan.setElevatorName(elevator.getElevatorName());
+        LocalDateTime startTime = plan.getStartTime();
+        LocalDateTime nextTime = null;
+        String unit = plan.getIntervalUnit();
+        int size = plan.getIntervalTime();
+        if (unit == "天") {
+            nextTime = startTime.plusDays(size);
+        } else if (unit == "周") {
+            nextTime = startTime.plusWeeks(size);
+        } else if (unit == "月") {
+            nextTime = startTime.plusMonths(size);
+        } else {
+            nextTime = startTime.plusYears(size);
+        }
+        if (plan.getEndTime().isBefore(nextTime))
+            return new Result(false, StatusCode.ERROR, "更新检查计划数据失败,结束日期早于下一次生成检查日期");
+        plan.setNextTime(nextTime);
         if (updateById(plan) == true) {
             return new Result(true, StatusCode.OK, "更新检查计划数据成功");
         } else
@@ -151,20 +190,21 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("is_finish", 0);
         List<Plan> planList = list(queryWrapper);
+        List<Plan> renewPlanList = new ArrayList<>();
         if (planList != null) {
             for (Plan plan : planList) {
                 LocalDateTime nextTime = plan.getNextTime();
-                if (nextTime == null)
-                    nextTime = plan.getStartTime();
                 LocalDateTime nowTime = LocalDateTime.now();
                 nextTime.withHour(0).withMinute(0).withSecond(0);
-                System.out.println(nextTime);
+                //System.out.println(nextTime);
                 if (nowTime.isAfter(nextTime)) {
-                    int num = plan.getIntervalUnit();
+                    String unit = plan.getIntervalUnit();
                     int size = plan.getIntervalTime();
-                    if (num == 1) {
+                    if (unit == "天") {
                         nextTime = nextTime.plusDays(size);
-                    } else if (num == 2) {
+                    } else if (unit == "周") {
+                        nextTime = nextTime.plusWeeks(size);
+                    } else if (unit == "天") {
                         nextTime = nextTime.plusMonths(size);
                     } else {
                         nextTime = nextTime.plusYears(size);
@@ -175,21 +215,16 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
                         plan.setIsFinish("1");
                     plan.setNextTime(nextTime);
                     if (updateById(plan)) {
+                        renewPlanList.add(plan);
                         Inspection inspection = new Inspection();
-                        Elevator elevator = elevatorMapper.selectById(plan.getElevatorId());
-                        inspection.setElevatorNumber(elevator.getElevatorNumber());
-                        inspection.setLocationName(elevator.getLocationName());
-                        inspection.setAddress(elevator.getAddress());
-                        inspection.setContactPerson(elevator.getContactPerson());
-                        inspection.setContactNumber(elevator.getContactNumber());
-                        inspection.setElevatorId(elevator.getId());
-                        if (inspectionService.insert(inspection, null).getCode() == 0)
+                        inspection.setElevatorId(plan.getElevatorId());
+                        if (inspectionService.insert(inspection, null).getCode() == 2001)
                             return new Result(false, StatusCode.ERROR, "新增检查报告失败");
                     } else
                         return new Result(false, StatusCode.ERROR, "更新检查计划数据失败");
                 }
             }
         }
-        return new Result(true, StatusCode.OK, "检查计划遍历成功");
+        return new Result(true, StatusCode.OK, "检查计划遍历成功", renewPlanList);
     }
 }

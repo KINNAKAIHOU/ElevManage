@@ -9,11 +9,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
+import com.scau.zwp.elevmanage.common.TokenUser;
 import com.scau.zwp.elevmanage.entity.Elevator;
 import com.scau.zwp.elevmanage.entity.Storage;
 import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.mapper.UserMapper;
+import com.scau.zwp.elevmanage.service.PermissionService;
 import com.scau.zwp.elevmanage.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scau.zwp.elevmanage.utils.JWTUtils;
@@ -37,6 +39,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Resource
     private StringEncryptor stringEncryptor;
+    @Resource
+    private PermissionService permissionService;
 
     /**
      * 通过ID查询单条数据
@@ -133,6 +137,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     public Result register(User user) {
         user.setPassword(stringEncryptor.encrypt(user.getPassword()));
+        user.setPermissionName(permissionService.getById(user.getPermissionId()).getPermissionName());
         if (insert(user).getCode() == 2000)
             return new Result(true, StatusCode.OK, "添加用户成功", user);
         else
@@ -149,21 +154,40 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Result login(User user) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_number", user.getUserNumber());
+        queryWrapper.eq("is_enabled", "1");
         User newUser = getOne(queryWrapper);
         if (newUser == null)
             return new Result(false, StatusCode.ERROR, "用户编号不存在");
-        System.out.println(stringEncryptor.decrypt(newUser.getPassword()));
+        /*System.out.println(stringEncryptor.decrypt(newUser.getPassword()));*/
         if (stringEncryptor.decrypt(newUser.getPassword()).equals(user.getPassword())) {
             Map<String, User> payload = new HashMap<>();
             payload.put("user", user);
             String token = "";
             token = JWTUtils.getToken(payload);
-            List<Object> list = new ArrayList<>();
-            list.add(token);
-            list.add(newUser);
-            return new Result(true, StatusCode.OK, "登录成功", list);
-        }
-        return new Result(false, StatusCode.ERROR, "密码错误");
+            user.setPassword("");
+            return new Result(true, StatusCode.OK, "登录成功", new TokenUser(token, newUser));
+        } else
+            return new Result(false, StatusCode.ERROR, "密码错误");
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param id          用户ID
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @return 实例对象
+     */
+    public Result renewPassword(Integer id, String oldPassword, String newPassword) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("id", id);
+        User user = getOne(queryWrapper);
+        if (stringEncryptor.decrypt(user.getPassword()).equals(oldPassword)) {
+            user.setPassword(stringEncryptor.encrypt(newPassword));
+            update(user);
+            return new Result(true, StatusCode.OK, "修改密码成功");
+        } else
+            return new Result(false, StatusCode.ERROR, "旧密码输入错误");
     }
 
 
@@ -174,6 +198,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return 实例对象
      */
     public Result update(User user) {
+        user.setPassword(stringEncryptor.encrypt(user.getPassword()));
+        user.setPermissionName(permissionService.getById(user.getPermissionId()).getPermissionName());
         if (updateById(user) == true) {
             return new Result(true, StatusCode.OK, "更新用户数据成功");
         } else

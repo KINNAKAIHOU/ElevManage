@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.1.3",
   "createdTime": "2023-2-19 10:48:07",
-  "updatedTime": "2023-2-24 16:14:46",
+  "updatedTime": "2023-2-24 00:30:38",
   "dbConns": [],
   "profile": {
     "default": {
@@ -2506,23 +2506,6 @@
           "id": "9AD3FB7F-B8AD-486F-ABD0-2AA1CC38473E"
         },
         {
-          "defKey": "supplier_id",
-          "defName": "供货商ID",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": true,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "extProps": {},
-          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
-          "id": "F9619F94-2166-4FDB-B680-10CB382F5EBB"
-        },
-        {
           "defKey": "remarks",
           "defName": "备注",
           "comment": "",
@@ -5002,6 +4985,23 @@
           "id": "07D31454-B783-4820-8B24-F383D5EF0CCD"
         },
         {
+          "defKey": "elevator_id",
+          "defName": "电梯ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
+          "refDict": "",
+          "extProps": {},
+          "id": "70A06EF9-C9A0-4FFB-9BCD-A0B8CA3BD60D"
+        },
+        {
           "defKey": "start_time",
           "defName": "开始日期",
           "comment": "",
@@ -5085,23 +5085,6 @@
           "extProps": {},
           "domain": "54611CCC-CA4B-42E1-9F32-4944C85B85A6",
           "id": "EB6480AE-CDE5-4386-BB44-37E09327C8FC"
-        },
-        {
-          "defKey": "elevator_id",
-          "defName": "电梯ID",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": true,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
-          "refDict": "",
-          "extProps": {},
-          "id": "70A06EF9-C9A0-4FFB-9BCD-A0B8CA3BD60D"
         },
         {
           "defKey": "is_finish",

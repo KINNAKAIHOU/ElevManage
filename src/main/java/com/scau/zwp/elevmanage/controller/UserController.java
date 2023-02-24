@@ -118,6 +118,25 @@ public class UserController {
         return userService.login(user);
     }
 
+    /**
+     * 修改密码
+     *
+     * @param id          用户ID
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @return 实例对象
+     */
+    @ApiOperation("修改密码")
+    @PutMapping("/renewPassword")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "query", dataType = "Integer"),
+            @ApiImplicitParam(name = "oldPassword", value = "旧密码", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "newPassword", value = "新密码", required = true, paramType = "query", dataType = "Integer"),
+    })
+    public Result renewPassword(@RequestParam(value = "id") Integer id, @RequestParam(value = "oldPassword") String oldPassword, @RequestParam(value = "newPassword") String newPassword) {
+        return userService.renewPassword(id, oldPassword, newPassword);
+    }
+
 
     /**
      * 更新数据

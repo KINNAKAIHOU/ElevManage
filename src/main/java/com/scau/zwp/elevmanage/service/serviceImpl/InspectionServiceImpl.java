@@ -11,6 +11,7 @@ import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.*;
+import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.mapper.InspectionMapper;
 import com.scau.zwp.elevmanage.mapper.MaintenanceMapper;
 import com.scau.zwp.elevmanage.service.InspectionImageService;
@@ -46,6 +47,8 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
     private MaintenanceMapper maintenanceMapper;
     @Value("${spring.servlet.multipart.location}" + "/inspection/")
     private String uploadRootPath;
+    @Resource
+    private ElevatorMapper elevatorMapper;
 
     /**
      * 通过ID查询单条数据
@@ -133,6 +136,17 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                 break;
         }
         inspection.setInspectionNumber(number);
+        Elevator elevator = elevatorMapper.selectById(inspection.getElevatorId());
+        inspection.setElevatorNumber(elevator.getElevatorNumber());
+        inspection.setElevatorName(elevator.getElevatorName());
+        inspection.setLocationName(elevator.getLocationName());
+        inspection.setAddress(elevator.getAddress());
+        inspection.setContactPerson(elevator.getContactPerson());
+        inspection.setContactNumber(elevator.getContactNumber());
+        inspection.setElevatorId(elevator.getId());
+        if (elevator.getStatus() != "待维修")
+            elevator.setStatus("待检查");
+        elevatorMapper.updateById(elevator);//修改电梯的状态
         if (save(inspection) == true) {
             if (insertInspectionImage(inspection.getId(), files).getCode() == 2000)
                 return new Result(true, StatusCode.OK, "添加检查报告成功");
@@ -149,10 +163,21 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
      * @return 实例对象
      */
     public Result update(Inspection inspection, MultipartFile[] files) {
+        inspection.setIsFinish("1");
         if (updateById(inspection) == true) {
-            if (inspection.getIsFinish() == "1") {
+            if (inspection.getIsFault() == "1") {
                 if (finish(inspection).getCode() == 2001)
                     return new Result(false, StatusCode.ERROR, "检查报告完成失败");
+            }
+            Elevator elevator = elevatorMapper.selectById(inspection.getElevatorId());
+            if (elevator.getStatus() == "待检查") {
+                QueryWrapper queryWrapper = new QueryWrapper();
+                queryWrapper.eq("is_finish", "0");
+                queryWrapper.eq("elevator_id", inspection.getElevatorId());
+                if (list(queryWrapper).size() == 0) {
+                    elevator.setStatus("正常");
+                    elevatorMapper.updateById(elevator);//修改电梯的状态
+                }
             }
             if (insertInspectionImage(inspection.getId(), files).getCode() == 2000)
                 return new Result(true, StatusCode.OK, "更新检查报告数据成功");
@@ -179,6 +204,17 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                     if (inspectionImageService.removeById(inspectionImage.getId()) == false)
                         return new Result(false, StatusCode.ERROR, "删除检查报告图片失败");
                 }
+            }
+        }
+        Elevator elevator = elevatorMapper.selectById(id);
+        Inspection inspection = getById(id);
+        if (elevator.getStatus() == "待检查" && inspection.getIsFinish() == "0") {
+            QueryWrapper neQueryWrapper = new QueryWrapper();
+            neQueryWrapper.eq("is_finish", "0");
+            queryWrapper.eq("elevator_id", inspection.getElevatorId());
+            if (list(queryWrapper).size() == 1) {
+                elevator.setStatus("正常");
+                elevatorMapper.updateById(elevator);//修改电梯的状态
             }
         }
         if (removeById(id) == true)
@@ -225,10 +261,11 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
     public Result finish(Inspection inspection) {
         Maintenance maintenance = new Maintenance();
         maintenance.setElevatorNumber(inspection.getElevatorNumber());
+        maintenance.setElevatorName(inspection.getElevatorName());
         maintenance.setLocationName(inspection.getLocationName());
         maintenance.setAddress(inspection.getAddress());
-        maintenance.setContactNumber(inspection.getContactNumber());
         maintenance.setContactPerson(inspection.getContactPerson());
+        maintenance.setContactNumber(inspection.getContactNumber());
         maintenance.setCheckDescription(inspection.getCheckDescription());
         maintenance.setElevatorId(inspection.getElevatorId());
         String date = DateUtil.format(new Date(), "yyyyMMdd");
@@ -244,6 +281,9 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
             else
                 break;
         }
+        Elevator elevator = elevatorMapper.selectById(inspection.getElevatorId());
+        elevator.setStatus("待维修");
+        elevatorMapper.updateById(elevator);
         maintenance.setMaintenanceNumber(number);
         if (maintenanceMapper.insert(maintenance) != 0) {
             QueryWrapper queryWrapper = new QueryWrapper();

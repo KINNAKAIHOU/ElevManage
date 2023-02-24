@@ -2,6 +2,7 @@ package com.scau.zwp.elevmanage;
 
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.extra.pinyin.PinyinUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.scau.zwp.elevmanage.controller.ElevatorController;
 import com.scau.zwp.elevmanage.entity.Elevator;
@@ -14,6 +15,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+
+import net.sourceforge.pinyin4j.PinyinHelper;
+import org.springframework.util.StringUtils;
+
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -61,6 +66,23 @@ class ElevManageApplicationTests {
 //        StorageItem storageItem = new StorageItem();
 //        storageItem.getAccessoryId();
 //        storageServicer.insert(storage,);
+
+        String str = "三星";
+//        StringBuilder convert = new StringBuilder();
+//        if (StringUtils.isEmpty(str)) {
+//            System.out.println(str);
+//        }
+//        char word = str.charAt(0);
+//        String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word);
+//        if (pinyinArray != null) {
+//            convert.append(pinyinArray[0].charAt(0));
+//        } else {
+//            convert.append(word);
+//        }
+//        System.out.println(convert.toString().toUpperCase());
+
+        System.out.println(PinyinUtil.getFirstLetter(str, "").toUpperCase());
+
     }
 
 }

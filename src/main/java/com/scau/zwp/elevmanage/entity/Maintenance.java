@@ -42,6 +42,10 @@ public class Maintenance {
     @TableField("elevator_number")
     private String elevatorNumber;
 
+    @ApiModelProperty("电梯名称")
+    @TableField("elevator_name")
+    private String elevatorName;
+
     @ApiModelProperty("电梯地点")
     @TableField("location_name")
     private String locationName;

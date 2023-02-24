@@ -2,6 +2,7 @@ package com.scau.zwp.elevmanage.config;
 
 import com.scau.zwp.elevmanage.utils.JWTInterceptor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -16,13 +17,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Value("${spring.servlet.multipart.location}")
     public String uploadRootPath;
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String fullPath = "file:" + uploadRootPath;
-        registry.addResourceHandler("/**")
-                .addResourceLocations(fullPath);
-        System.out.println("静态资源路径：" + fullPath);
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        String fullPath = "file:" + uploadRootPath;
+//        registry.addResourceHandler("/**")
+//                .addResourceLocations(fullPath);
+//        System.out.println("静态资源路径：" + fullPath);
+//    }
 
 //    @Override
 //    public void addCorsMappings(CorsRegistry registry) {
@@ -49,6 +50,21 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new JWTInterceptor())
                 .addPathPatterns("/user/**", "/column/**", "/order/**", "/product/**")   //其他接口token验证
-                .excludePathPatterns("/user/login");  //所有用户都放心
+                .excludePathPatterns("/user/login","/doc.html#/home");  //所有用户都放心
     }
+
+    //解决跨域问题
+//    @Bean
+//    public FilterRegistrationBean corsFilter() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.addAllowedOriginPattern("*");
+//        config.addAllowedHeader("*");
+//        config.addAllowedMethod("*");
+//        source.registerCorsConfiguration("/**", config);
+//        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+//        bean.setOrder(0);
+//        return bean;
+//    }
 }

@@ -42,9 +42,17 @@ public class Elevator {
     @TableField("elevator_name")
     private String elevatorName;
 
+    @ApiModelProperty("电梯状态")
+    @TableField("status")
+    private String status;
+
     @ApiModelProperty("场所名称")
     @TableField("location_name")
     private String locationName;
+
+    @ApiModelProperty("详细地址")
+    @TableField("address")
+    private String address;
 
     @ApiModelProperty("联系人")
     @TableField("contact_person")
@@ -69,10 +77,6 @@ public class Elevator {
     @ApiModelProperty("产品编号")
     @TableField("product_number")
     private String productNumber;
-
-    @ApiModelProperty("详细地址")
-    @TableField("address")
-    private String address;
 
     @ApiModelProperty("电梯厂家ID")
     @TableField("manufacturer_id")

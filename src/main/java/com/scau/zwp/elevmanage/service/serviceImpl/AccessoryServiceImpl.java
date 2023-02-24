@@ -1,6 +1,8 @@
 package com.scau.zwp.elevmanage.service.serviceImpl;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.pinyin.PinyinUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -93,25 +96,32 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
      * @return 实例对象
      */
     public Result insert(Accessory accessory) {
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("accessory_number", accessory.getAccessoryNumber());
-        if (getOne(queryWrapper) == null) {
-            if (save(accessory) == true) {
-                Inventory inventory = new Inventory();
-                inventory.setAccessoryId(accessory.getId());
-                inventory.setAccessoryNumber(accessory.getAccessoryNumber());
-                inventory.setAccessoryName(accessory.getAccessoryName());
-                inventory.setSpecification(accessory.getSpecification());
-                inventory.setType(accessory.getType());
-                inventory.setUnit(accessory.getUnit());
-                if (inventoryMapper.insert(inventory) != 0) {
-                    return new Result(true, StatusCode.OK, "添加配件成功");
-                }
-                return new Result(false, StatusCode.ERROR, "库存管理建立失败");
-            } else
-                return new Result(false, StatusCode.ERROR, "添加配件失败");
+        String prefix = PinyinUtil.getFirstLetter(accessory.getAccessoryName(), "").toUpperCase();
+        int num = 3;//编号的位数
+        String number = "";
+        for (int i = 1; i <= 100; i++) {//要输出的编号个数为100个，从001........100
+            QueryWrapper<Accessory> queryWrapper = new QueryWrapper<>();
+            number = prefix + String.format("%0" + num + "d", i);//格式化字符串，把i格式化成num位的字符串，不足的位补0;例：String.format("%05d",123);结果为“00123”
+            queryWrapper.eq("accessory_number", number);
+            if (getOne(queryWrapper) != null)
+                continue;
+            else
+                break;
+        }
+        if (save(accessory) == true) {
+            Inventory inventory = new Inventory();
+            inventory.setAccessoryId(accessory.getId());
+            inventory.setAccessoryNumber(accessory.getAccessoryNumber());
+            inventory.setAccessoryName(accessory.getAccessoryName());
+            inventory.setSpecification(accessory.getSpecification());
+            inventory.setType(accessory.getType());
+            inventory.setUnit(accessory.getUnit());
+            if (inventoryMapper.insert(inventory) != 0) {
+                return new Result(true, StatusCode.OK, "添加配件成功");
+            }
+            return new Result(false, StatusCode.ERROR, "库存管理建立失败");
         } else
-            return new Result(false, StatusCode.ERROR, "配件编码重复");
+            return new Result(false, StatusCode.ERROR, "添加配件失败");
     }
 
     /**
@@ -126,21 +136,9 @@ public class AccessoryServiceImpl extends ServiceImpl<AccessoryMapper, Accessory
             queryWrapper.eq("accessory_id", accessory.getId());
             Inventory inventory = inventoryMapper.selectOne(queryWrapper);
             if (inventory != null) {
-                if (StrUtil.isNotBlank(accessory.getAccessoryNumber())) {
-                    inventory.setAccessoryNumber(accessory.getAccessoryNumber());
-                }
-                if (StrUtil.isNotBlank(accessory.getAccessoryName())) {
-                    inventory.setAccessoryName(accessory.getAccessoryName());
-                }
-                if (StrUtil.isNotBlank(accessory.getSpecification())) {
-                    inventory.setSpecification(accessory.getSpecification());
-                }
-                if (StrUtil.isNotBlank(accessory.getType())) {
-                    inventory.setType(accessory.getType());
-                }
-                if (StrUtil.isNotBlank(accessory.getUnit())) {
-                    inventory.setUnit(accessory.getUnit());
-                }
+                inventory.setSpecification(accessory.getSpecification());
+                inventory.setType(accessory.getType());
+                inventory.setUnit(accessory.getUnit());
                 if (inventoryMapper.updateById(inventory) != 0) {
                     return new Result(true, StatusCode.OK, "更新配件数据成功");
                 } else {

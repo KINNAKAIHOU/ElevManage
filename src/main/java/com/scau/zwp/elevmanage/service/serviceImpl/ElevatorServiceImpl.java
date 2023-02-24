@@ -115,6 +115,16 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
         //2. 执行分页查询
         Page<Elevator> pagin = new Page<>(current, size, true);
         IPage<Elevator> selectResult = page(pagin, queryWrapper);
+        List<Elevator> elevatorList = selectResult.getRecords();
+        for (Elevator elevator1 : elevatorList) {
+            QueryWrapper newQueryWrapper = new QueryWrapper();
+            newQueryWrapper.eq("elevator_id", elevator1.getId());
+            List<ElevatorImage> elevatorImageList = elevatorImageService.list(newQueryWrapper);
+            ElevatorVo elevatorVo = BeanUtil.copyProperties(elevator1, ElevatorVo.class);
+            elevatorVo.setElevatorImageList(elevatorImageList);
+
+        }
+        selectResult.setRecords(elevatorList);
         pagin.setPages(selectResult.getPages());
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
@@ -146,10 +156,11 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
         }
         elevator.setElevatorNumber(number);
         elevator.setLocationName(location.getLocationName());
+        elevator.setAddress(location.getAddress());
+        elevator.setContactPerson(location.getContactPerson());
+        elevator.setContactNumber(location.getContactNumber());
         elevator.setManufacturerName(manufacturer.getManufacturerName());
         elevator.setAddress(location.getAddress());
-        elevator.setLocationId(location.getId());
-        elevator.setManufacturerId(manufacturer.getId());
         if (save(elevator) == true) {
             if (insertElevatorImage(elevator.getId(), files).getCode() == 2000)
                 return new Result(true, StatusCode.OK, "添加电梯成功");

@@ -144,13 +144,13 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
     public Result checkAllInventory() {
         List<Inventory> inventoryList = list();
         if (inventoryList != null) {
-            List<String> stringList = new ArrayList<>();
+            List<Inventory> warringInventoryList = new ArrayList<>();
             for (Inventory inventory : inventoryList) {
                 if (inventory.getQuantity() < inventory.getWarningQuantity())
-                    stringList.add(inventory.getAccessoryNumber() + "-" + inventory.getAccessoryName() + ":数量低于预警数量");
+                    warringInventoryList.add(inventory);
             }
-            if (!stringList.isEmpty()) {
-                return new Result(true, StatusCode.OK, "检查所有库存成功,有配件数量低于预警", stringList);
+            if (!warringInventoryList.isEmpty()) {
+                return new Result(true, StatusCode.OK, "检查所有库存成功,有配件数量低于预警", warringInventoryList);
             } else
                 return new Result(true, StatusCode.OK, "检查所有库存成功,没有配件数量低于预警");
         } else

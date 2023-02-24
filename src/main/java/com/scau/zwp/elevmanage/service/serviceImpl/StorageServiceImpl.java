@@ -13,10 +13,7 @@ import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.*;
 import com.scau.zwp.elevmanage.entity.Storage;
 import com.scau.zwp.elevmanage.mapper.StorageMapper;
-import com.scau.zwp.elevmanage.service.InspectionService;
-import com.scau.zwp.elevmanage.service.InventoryService;
-import com.scau.zwp.elevmanage.service.StorageItemService;
-import com.scau.zwp.elevmanage.service.StorageService;
+import com.scau.zwp.elevmanage.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scau.zwp.elevmanage.vo.ElevatorVo;
 import com.scau.zwp.elevmanage.vo.StorageVo;
@@ -41,6 +38,8 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
     private StorageItemService storageItemService;
     @Resource
     private InventoryService inventoryService;
+    @Resource
+    private SupplierService supplierService;
 
     /**
      * 通过ID查询单条数据
@@ -120,6 +119,11 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
                 break;
         }
         storage.setStorageNumber(number);
+        Supplier supplier = supplierService.getById(storage.getSupplierId());
+        storage.setSupplierName(supplier.getSupplierName());
+        storage.setContactPerson(supplier.getContactPerson());
+        storage.setContactNumber(supplier.getContactNumber());
+        storage.setAddress(supplier.getAddress());
         if (save(storage) == true) {
             if (storageItems != null) {
                 for (StorageItem storageItem : storageItems) {

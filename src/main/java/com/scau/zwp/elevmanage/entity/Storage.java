@@ -66,6 +66,10 @@ public class Storage {
     @TableField("total_price")
     private BigDecimal totalPrice;
 
+    @ApiModelProperty("供货商ID")
+    @TableField("supplier_id")
+    private Integer supplierId;
+
     @ApiModelProperty("备注")
     @TableField("remarks")
     private String remarks;

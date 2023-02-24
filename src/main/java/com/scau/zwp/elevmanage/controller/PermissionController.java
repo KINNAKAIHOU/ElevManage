@@ -1,7 +1,10 @@
 package com.scau.zwp.elevmanage.controller;
 
 import com.scau.zwp.elevmanage.common.R;
+import com.scau.zwp.elevmanage.common.Result;
+import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Permission;
+import com.scau.zwp.elevmanage.entity.Plan;
 import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.service.PermissionService;
 import io.swagger.annotations.Api;
@@ -35,12 +38,12 @@ public class PermissionController {
      */
     @ApiOperation("查询全部数据")
     @GetMapping("/getAll")
-    public R<List<Permission>> getAll() {
+    public Result getAll() {
         List<Permission> permissionList = permissionService.list();
         if (permissionList != null)
-            return R.success(permissionList);
+            return new Result(true, StatusCode.OK, "查询权限全部数据成功", permissionList);
         else
-            return R.error("查询所有失败");
+            return new Result(false, StatusCode.ERROR, "查询权限全部数据失败");
     }
 
 }

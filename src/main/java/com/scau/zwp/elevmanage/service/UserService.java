@@ -6,10 +6,14 @@ import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import jdk.nashorn.internal.parser.Token;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
@@ -61,6 +65,17 @@ public interface UserService extends IService<User> {
      * @return 实例对象
      */
     Result login(User user);
+
+    /**
+     * 修改密码
+     *
+     * @param id          用户ID
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @return 实例对象
+     */
+
+    Result renewPassword(Integer id, String oldPassword, String newPassword) ;
 
 
     /**
