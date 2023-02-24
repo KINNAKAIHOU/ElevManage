@@ -1,0 +1,4815 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "用于《电梯安检维修管理平台》项目的Api自动生成的Swagger2文档，可以导入ApiFox",
+    "version": "1.0",
+    "title": "电梯安检维修管理平台 API",
+    "termsOfService": "http://localhost:8080/"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "主页对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "供货商对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "场所对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "库存管理对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "权限对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "检查报告图片对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "检查报告对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "检查计划对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "消息对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "用户对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "电梯厂家对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "电梯图片对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "电梯对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "维修报告图片对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "维修报告对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "配件入库对象功能接口",
+      "x-order": "2147483647"
+    },
+    {
+      "name": "配件对象功能接口",
+      "x-order": "2147483647"
+    }
+  ],
+  "paths": {
+    "/accessory": {
+      "get": {
+        "tags": [
+          "配件对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "配件ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "配件对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "accessory",
+            "description": "accessory",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Accessory对象",
+              "originalRef": "Accessory对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "配件对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "accessory",
+            "description": "accessory",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Accessory对象",
+              "originalRef": "Accessory对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "配件对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "配件ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/accessory/getAll": {
+      "get": {
+        "tags": [
+          "配件对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/accessory/pagin": {
+      "post": {
+        "tags": [
+          "配件对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "in": "body",
+            "name": "accessory",
+            "description": "accessory",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Accessory对象",
+              "originalRef": "Accessory对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/elevator": {
+      "get": {
+        "tags": [
+          "电梯对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "电梯ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "电梯对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "elevator",
+            "description": "elevator",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Elevator对象",
+              "originalRef": "Elevator对象"
+            }
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "files",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "file"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "电梯对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "elevator",
+            "description": "elevator",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Elevator对象",
+              "originalRef": "Elevator对象"
+            }
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "files",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "file"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "电梯对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "电梯ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/elevator/getAll": {
+      "get": {
+        "tags": [
+          "电梯对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/elevator/pagin": {
+      "post": {
+        "tags": [
+          "电梯对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "in": "body",
+            "name": "elevator",
+            "description": "elevator",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Elevator对象",
+              "originalRef": "Elevator对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/elevatorImage": {
+      "delete": {
+        "tags": [
+          "电梯图片对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "电梯图片ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/index": {
+      "get": {
+        "tags": [
+          "主页对象功能接口"
+        ],
+        "summary": "获取主页数据数据",
+        "operationId": "indexUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inspection": {
+      "get": {
+        "tags": [
+          "检查报告对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "检查报告ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "检查报告对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "files",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "file"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "formData",
+            "name": "inspection",
+            "description": "inspection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Inspection对象",
+              "originalRef": "Inspection对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "检查报告对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "files",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "file"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "formData",
+            "name": "inspection",
+            "description": "inspection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Inspection对象",
+              "originalRef": "Inspection对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "检查报告对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_3",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "检查报告ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inspection/finish": {
+      "post": {
+        "tags": [
+          "检查报告对象功能接口"
+        ],
+        "summary": "确认完成",
+        "operationId": "finishUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "inspection",
+            "description": "inspection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Inspection对象",
+              "originalRef": "Inspection对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inspection/getAll": {
+      "get": {
+        "tags": [
+          "检查报告对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_2",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inspection/pagin": {
+      "post": {
+        "tags": [
+          "检查报告对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "结束日期",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "开始日期",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "inspection",
+            "description": "inspection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Inspection对象",
+              "originalRef": "Inspection对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inspectionImage": {
+      "delete": {
+        "tags": [
+          "检查报告图片对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_4",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "维修报告图片ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inventory": {
+      "get": {
+        "tags": [
+          "库存管理对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_3",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "配件ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "库存管理对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "inventory",
+            "description": "inventory",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Inventory对象",
+              "originalRef": "Inventory对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inventory/checkAllInventory": {
+      "get": {
+        "tags": [
+          "库存管理对象功能接口"
+        ],
+        "summary": "检查所有库存",
+        "operationId": "checkAllInventoryUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inventory/getAll": {
+      "get": {
+        "tags": [
+          "库存管理对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_3",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inventory/increase": {
+      "put": {
+        "tags": [
+          "库存管理对象功能接口"
+        ],
+        "summary": "增加数量",
+        "operationId": "increaseUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accessoryId",
+            "in": "query",
+            "description": "配件ID",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "数量",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inventory/pagin": {
+      "post": {
+        "tags": [
+          "库存管理对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "in": "body",
+            "name": "inventoryVo",
+            "description": "inventoryVo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Inventory对象",
+              "originalRef": "Inventory对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/inventory/reduce": {
+      "put": {
+        "tags": [
+          "库存管理对象功能接口"
+        ],
+        "summary": "减少数量",
+        "operationId": "reduceUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "accessoryId",
+            "in": "query",
+            "description": "配件ID",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "数量",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/location": {
+      "get": {
+        "tags": [
+          "场所对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_4",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "场所ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "场所对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "location",
+            "description": "location",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Location对象",
+              "originalRef": "Location对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "场所对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "location",
+            "description": "location",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Location对象",
+              "originalRef": "Location对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "场所对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_5",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "场所ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/location/getAll": {
+      "get": {
+        "tags": [
+          "场所对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_4",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/location/pagin": {
+      "post": {
+        "tags": [
+          "场所对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "in": "body",
+            "name": "location",
+            "description": "location",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Location对象",
+              "originalRef": "Location对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/maintenance": {
+      "get": {
+        "tags": [
+          "维修报告对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_5",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "维修报告ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "维修报告对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "files",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "file"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "formData",
+            "name": "maintenance",
+            "description": "maintenance",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Maintenance对象",
+              "originalRef": "Maintenance对象"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "maintenanceItemList",
+            "description": "maintenanceItemList",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MaintenanceItem对象",
+                "originalRef": "MaintenanceItem对象"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "维修报告对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "files",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "file"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "formData",
+            "name": "maintenance",
+            "description": "maintenance",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Maintenance对象",
+              "originalRef": "Maintenance对象"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "maintenanceItemList",
+            "description": "maintenanceItemList",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MaintenanceItem对象",
+                "originalRef": "MaintenanceItem对象"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "维修报告对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_6",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "维修报告ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/maintenance/getAll": {
+      "get": {
+        "tags": [
+          "维修报告对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_5",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/maintenance/pagin": {
+      "post": {
+        "tags": [
+          "维修报告对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "结束日期",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "开始日期",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "maintenance",
+            "description": "maintenance",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Maintenance对象",
+              "originalRef": "Maintenance对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/maintenanceImage": {
+      "delete": {
+        "tags": [
+          "维修报告图片对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_7",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "维修报告图片ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/manufacturer": {
+      "get": {
+        "tags": [
+          "电梯厂家对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_6",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "电梯厂家ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "电梯厂家对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "manufacturer",
+            "description": "manufacturer",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Manufacturer对象",
+              "originalRef": "Manufacturer对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "电梯厂家对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "manufacturer",
+            "description": "manufacturer",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Manufacturer对象",
+              "originalRef": "Manufacturer对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "电梯厂家对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_8",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "电梯厂家ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/manufacturer/getAll": {
+      "get": {
+        "tags": [
+          "电梯厂家对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_6",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/manufacturer/pagin": {
+      "post": {
+        "tags": [
+          "电梯厂家对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "in": "body",
+            "name": "elevator",
+            "description": "elevator",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Manufacturer对象",
+              "originalRef": "Manufacturer对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/message": {
+      "get": {
+        "tags": [
+          "消息对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_7",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "消息ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/message/getAll": {
+      "get": {
+        "tags": [
+          "消息对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_7",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/message/getNew": {
+      "get": {
+        "tags": [
+          "消息对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getNewUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/permission/getAll": {
+      "get": {
+        "tags": [
+          "权限对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_8",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/plan": {
+      "get": {
+        "tags": [
+          "检查计划对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_8",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "检查计划ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "检查计划对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "plan",
+            "description": "plan",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Plan对象",
+              "originalRef": "Plan对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "检查计划对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "plan",
+            "description": "plan",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Plan对象",
+              "originalRef": "Plan对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "检查计划对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_9",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "检查计划ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/plan/checkAllPlan": {
+      "get": {
+        "tags": [
+          "检查计划对象功能接口"
+        ],
+        "summary": "检查所有计划",
+        "operationId": "checkAllPlanUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/plan/getAll": {
+      "get": {
+        "tags": [
+          "检查计划对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_9",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/plan/pagin": {
+      "post": {
+        "tags": [
+          "检查计划对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "in": "body",
+            "name": "plan",
+            "description": "plan",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Plan对象",
+              "originalRef": "Plan对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/storage": {
+      "get": {
+        "tags": [
+          "配件入库对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_9",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "配件入库ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "配件入库对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "storage",
+            "description": "storage",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Storage对象",
+              "originalRef": "Storage对象"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "storageItems",
+            "description": "storageItems",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StorageItem对象",
+                "originalRef": "StorageItem对象"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "配件入库对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "storage",
+            "description": "storage",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Storage对象",
+              "originalRef": "Storage对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "配件入库对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_10",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "配件入库ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/storage/getAll": {
+      "get": {
+        "tags": [
+          "配件入库对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_10",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/storage/pagin": {
+      "post": {
+        "tags": [
+          "配件入库对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "结束日期",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "开始日期",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "storage",
+            "description": "storage",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Storage对象",
+              "originalRef": "Storage对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/supplier": {
+      "get": {
+        "tags": [
+          "供货商对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_10",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "供货商ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "供货商对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "supplier",
+            "description": "supplier",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Supplier对象",
+              "originalRef": "Supplier对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "供货商对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "supplier",
+            "description": "supplier",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Supplier对象",
+              "originalRef": "Supplier对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "供货商对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_11",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "供货商ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/supplier/getAll": {
+      "get": {
+        "tags": [
+          "供货商对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_11",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/supplier/pagin": {
+      "post": {
+        "tags": [
+          "供货商对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "in": "body",
+            "name": "supplier",
+            "description": "supplier",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Supplier对象",
+              "originalRef": "Supplier对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "通过ID查询单条数据",
+        "operationId": "queryByIdUsingGET_11",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "用户ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "post": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "新增数据",
+        "operationId": "addUsingPOST_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User对象",
+              "originalRef": "User对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "put": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "更新数据",
+        "operationId": "editUsingPUT_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User对象",
+              "originalRef": "User对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      },
+      "delete": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "通过主键删除数据",
+        "operationId": "deleteByIdUsingDELETE_12",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "用户ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/user/ban": {
+      "get": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "通过主键封禁用户",
+        "operationId": "banByIdUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "用户ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/user/getAll": {
+      "get": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "查询全部数据",
+        "operationId": "getAllUsingGET_12",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "登录用户",
+        "operationId": "loginUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User对象",
+              "originalRef": "User对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/user/open": {
+      "get": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "通过主键开启用户",
+        "operationId": "openByIdUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "用户ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/user/pagin": {
+      "post": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "分页查询",
+        "operationId": "paginQueryUsingPOST_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "元素",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User对象",
+              "originalRef": "User对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/user/register": {
+      "post": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "注册用户",
+        "operationId": "registerUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User对象",
+              "originalRef": "User对象"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    },
+    "/user/renewPassword": {
+      "put": {
+        "tags": [
+          "用户对象功能接口"
+        ],
+        "summary": "修改密码",
+        "operationId": "renewPasswordUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "用户ID",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "newPassword",
+            "in": "query",
+            "description": "新密码",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "oldPassword",
+            "in": "query",
+            "description": "旧密码",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result",
+              "originalRef": "Result"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false,
+        "x-order": "2147483647"
+      }
+    }
+  },
+  "definitions": {
+    "Accessory对象": {
+      "type": "object",
+      "properties": {
+        "accessoryName": {
+          "type": "string",
+          "description": "配件名称"
+        },
+        "accessoryNumber": {
+          "type": "string",
+          "description": "配件编号"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "配件ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "specification": {
+          "type": "string",
+          "description": "规格型号"
+        },
+        "type": {
+          "type": "string",
+          "description": "配件类型"
+        },
+        "unit": {
+          "type": "string",
+          "description": "单位"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "Accessory对象",
+      "description": "配件"
+    },
+    "Elevator对象": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "详细地址"
+        },
+        "contactNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "联系电话"
+        },
+        "contactPerson": {
+          "type": "string",
+          "description": "联系人"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "elevatorName": {
+          "type": "string",
+          "description": "电梯名称"
+        },
+        "elevatorNumber": {
+          "type": "string",
+          "description": "电梯编号"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "电梯id"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "loadSpeed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "载重速度"
+        },
+        "locationId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "场所ID"
+        },
+        "locationName": {
+          "type": "string",
+          "description": "场所名称"
+        },
+        "manufacturerId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "电梯厂家ID"
+        },
+        "manufacturerName": {
+          "type": "string",
+          "description": "生产厂家"
+        },
+        "model": {
+          "type": "string",
+          "description": "设备型号"
+        },
+        "productNumber": {
+          "type": "string",
+          "description": "产品编号"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "status": {
+          "type": "string",
+          "description": "电梯状态"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "Elevator对象",
+      "description": "电梯"
+    },
+    "Inspection对象": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "详细地址"
+        },
+        "checkDescription": {
+          "type": "string",
+          "description": "检查描述"
+        },
+        "contactNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "联系电话"
+        },
+        "contactPerson": {
+          "type": "string",
+          "description": "联系人"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "elevatorId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "电梯ID"
+        },
+        "elevatorName": {
+          "type": "string",
+          "description": "电梯名称"
+        },
+        "elevatorNumber": {
+          "type": "string",
+          "description": "电梯编号"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "检查报告ID"
+        },
+        "inspectionData": {
+          "type": "string",
+          "format": "date-time",
+          "description": "检查日期"
+        },
+        "inspectionNumber": {
+          "type": "string"
+        },
+        "inspectionPerson": {
+          "type": "string",
+          "description": "检查人"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "isFault": {
+          "type": "string",
+          "description": "是否故障"
+        },
+        "isFinish": {
+          "type": "string",
+          "description": "是否完成"
+        },
+        "locationName": {
+          "type": "string",
+          "description": "电梯地点"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "Inspection对象",
+      "description": "检查报告"
+    },
+    "Inventory对象": {
+      "type": "object",
+      "properties": {
+        "accessoryId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "配件ID"
+        },
+        "accessoryName": {
+          "type": "string",
+          "description": "配件名称"
+        },
+        "accessoryNumber": {
+          "type": "string",
+          "description": "配件编号"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "库存管理ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "库存数量"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "specification": {
+          "type": "string",
+          "description": "规格型号"
+        },
+        "type": {
+          "type": "string",
+          "description": "配件类型"
+        },
+        "unit": {
+          "type": "string",
+          "description": "单位"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        },
+        "warningQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "预警数量"
+        }
+      },
+      "title": "Inventory对象",
+      "description": "库存管理"
+    },
+    "Location对象": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "场所地址"
+        },
+        "contactNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "联系电话"
+        },
+        "contactPerson": {
+          "type": "string",
+          "description": "联系人"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "fax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "传真"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "场所ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "locationName": {
+          "type": "string",
+          "description": "场所名称"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "telephone": {
+          "type": "integer",
+          "format": "int32",
+          "description": "手机"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "Location对象",
+      "description": "场所"
+    },
+    "MaintenanceItem对象": {
+      "type": "object",
+      "properties": {
+        "accessoryId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "配件ID"
+        },
+        "accessoryName": {
+          "type": "string",
+          "description": "配件名称"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "维修报告详情ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "maintenanceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "维修报告ID"
+        },
+        "purchasePrice": {
+          "type": "number",
+          "description": "进货价"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "数量"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "specification": {
+          "type": "string",
+          "description": "规格型号"
+        },
+        "totalPrice": {
+          "type": "number",
+          "description": "金额"
+        },
+        "type": {
+          "type": "string",
+          "description": "配件类型"
+        },
+        "unit": {
+          "type": "string",
+          "description": "单位"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "MaintenanceItem对象",
+      "description": "维修报告详情"
+    },
+    "Maintenance对象": {
+      "type": "object",
+      "properties": {
+        "accessoryPrice": {
+          "type": "number",
+          "description": "配件费用"
+        },
+        "address": {
+          "type": "string",
+          "description": "详细地址"
+        },
+        "checkDescription": {
+          "type": "string",
+          "description": "检查描述"
+        },
+        "contactNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "联系电话"
+        },
+        "contactPerson": {
+          "type": "string",
+          "description": "联系人"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "elevatorId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "电梯ID"
+        },
+        "elevatorName": {
+          "type": "string",
+          "description": "电梯名称"
+        },
+        "elevatorNumber": {
+          "type": "string",
+          "description": "电梯编号"
+        },
+        "faultDescription": {
+          "type": "string",
+          "description": "故障描述"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "维修报告ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "isFinish": {
+          "type": "string",
+          "description": "是否完成"
+        },
+        "locationName": {
+          "type": "string",
+          "description": "电梯地点"
+        },
+        "maintenanceData": {
+          "type": "string",
+          "format": "date-time",
+          "description": "维修日期"
+        },
+        "maintenanceNumber": {
+          "type": "string",
+          "description": "维修编号"
+        },
+        "maintenancePerson": {
+          "type": "string",
+          "description": "维修人"
+        },
+        "maintenancePrice": {
+          "type": "number",
+          "description": "维修工费"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "totalPrice": {
+          "type": "number",
+          "description": "总费用"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "Maintenance对象",
+      "description": "维修报告"
+    },
+    "Manufacturer对象": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "公司地址"
+        },
+        "contactNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "联系电话"
+        },
+        "contactPerson": {
+          "type": "string",
+          "description": "联系人"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "fax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "传真"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "厂家ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "manufacturerName": {
+          "type": "string",
+          "description": "厂家名称"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "编号前缀"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "telephone": {
+          "type": "integer",
+          "format": "int32",
+          "description": "手机"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "Manufacturer对象",
+      "description": "电梯厂家"
+    },
+    "Plan对象": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "elevatorId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "电梯ID"
+        },
+        "elevatorName": {
+          "type": "string",
+          "description": "电梯名称"
+        },
+        "elevatorNumber": {
+          "type": "string",
+          "description": "电梯编号"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "结束日期"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "检查计划ID"
+        },
+        "intervalTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "间隔时间"
+        },
+        "intervalUnit": {
+          "type": "string",
+          "description": "间隔时间单位"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "isFinish": {
+          "type": "string",
+          "description": "是否完成"
+        },
+        "nextTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "下一次检查日期"
+        },
+        "planNumber": {
+          "type": "string",
+          "description": "计划编号"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "开始日期"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "Plan对象",
+      "description": "检查计划"
+    },
+    "Result": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data": {
+          "type": "object"
+        },
+        "flag": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "Result"
+    },
+    "StorageItem对象": {
+      "type": "object",
+      "properties": {
+        "accessoryId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "配件ID"
+        },
+        "accessoryName": {
+          "type": "string",
+          "description": "配件名称"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "入库详情ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "purchasePrice": {
+          "type": "number",
+          "description": "进货价"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "数量"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "specification": {
+          "type": "string",
+          "description": "规格型号"
+        },
+        "storageId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "配件入库ID"
+        },
+        "totalPrice": {
+          "type": "number",
+          "description": "金额"
+        },
+        "type": {
+          "type": "string",
+          "description": "配件类型"
+        },
+        "unit": {
+          "type": "string",
+          "description": "单位"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "StorageItem对象",
+      "description": "入库详情"
+    },
+    "Storage对象": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "场所地址"
+        },
+        "contactNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "联系电话"
+        },
+        "contactPerson": {
+          "type": "string",
+          "description": "联系人"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "配件入库ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "operatorPerson": {
+          "type": "string",
+          "description": "经办人"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "storageNumber": {
+          "type": "string",
+          "description": "入库编号"
+        },
+        "storageTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "入库日期"
+        },
+        "supplierId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "供货商ID"
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "供货商名称"
+        },
+        "totalPrice": {
+          "type": "number",
+          "description": "总金额"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "Storage对象",
+      "description": "配件入库"
+    },
+    "Supplier对象": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "场所地址"
+        },
+        "contactNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "联系电话"
+        },
+        "contactPerson": {
+          "type": "string",
+          "description": "联系人"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "fax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "传真"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "供货商ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "供货商名称"
+        },
+        "telephone": {
+          "type": "integer",
+          "format": "int32",
+          "description": "手机"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "title": "Supplier对象",
+      "description": "供货商"
+    },
+    "User对象": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "string",
+          "description": "年龄"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "gender": {
+          "type": "string",
+          "description": "性别"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "用户ID"
+        },
+        "isDeleted": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "isEnabled": {
+          "type": "string",
+          "description": "是否启用"
+        },
+        "password": {
+          "type": "string",
+          "description": "用户密码"
+        },
+        "permissionId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "权限ID"
+        },
+        "permissionName": {
+          "type": "string",
+          "description": "权限名字"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        },
+        "userName": {
+          "type": "string",
+          "description": "用户名称"
+        },
+        "userNumber": {
+          "type": "string",
+          "description": "用户编号"
+        }
+      },
+      "title": "User对象",
+      "description": "用户"
+    }
+  }
+}
