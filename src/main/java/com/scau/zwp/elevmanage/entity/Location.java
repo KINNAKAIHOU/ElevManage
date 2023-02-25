@@ -42,15 +42,15 @@ public class Location {
 
     @ApiModelProperty("联系电话")
     @TableField("contact_number")
-    private Integer contactNumber;
+    private String contactNumber;
 
     @ApiModelProperty("手机")
     @TableField("telephone")
-    private Integer telephone;
+    private String telephone;
 
     @ApiModelProperty("传真")
     @TableField("fax")
-    private Integer fax;
+    private String fax;
 
     @ApiModelProperty("场所地址")
     @TableField("address")

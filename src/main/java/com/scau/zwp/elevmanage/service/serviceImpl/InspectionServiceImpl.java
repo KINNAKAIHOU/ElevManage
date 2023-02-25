@@ -164,7 +164,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         inspection.setContactPerson(elevator.getContactPerson());
         inspection.setContactNumber(elevator.getContactNumber());
         inspection.setElevatorId(elevator.getId());
-        if (elevator.getStatus() != "待维修")
+        if (elevator.getStatus().equals("正常"))
             elevator.setStatus("待检查");
         elevatorMapper.updateById(elevator);//修改电梯的状态
         if (save(inspection) == true) {
@@ -188,12 +188,9 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
     public Result update(Inspection inspection, MultipartFile[] files) {
         inspection.setIsFinish("1");
         if (updateById(inspection) == true) {
-            if (inspection.getIsFault() == "1") {
-                if (finish(inspection).getCode() == 2001)
-                    return new Result(false, StatusCode.ERROR, "检查报告完成失败");
-            }
+            inspection = getById(inspection.getId());
             Elevator elevator = elevatorMapper.selectById(inspection.getElevatorId());
-            if (elevator.getStatus() == "待检查") {
+            if (elevator.getStatus().equals("待检查")) {
                 QueryWrapper queryWrapper = new QueryWrapper();
                 queryWrapper.eq("is_finish", "0");
                 queryWrapper.eq("elevator_id", inspection.getElevatorId());
@@ -206,6 +203,10 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                 Message message = new Message();
                 message.setMessage(inspection.getInspectionPerson() + "  完成检查报告  " + inspection.getInspectionNumber() + "--" + inspection.getElevatorNumber() + ":" + inspection.getElevatorName());
                 messageService.save(message);
+                if (inspection.getIsFault().equals("1")) {
+                    if (finish(inspection).getCode() == 2001)
+                        return new Result(false, StatusCode.ERROR, "检查报告完成失败");
+                }
                 return new Result(true, StatusCode.OK, "更新检查报告数据成功");
             } else
                 return new Result(false, StatusCode.ERROR, "检查报告图片上传失败");
@@ -234,7 +235,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         }
         Elevator elevator = elevatorMapper.selectById(id);
         Inspection inspection = getById(id);
-        if (elevator.getStatus() == "待检查" && inspection.getIsFinish() == "0") {
+        if (elevator.getStatus().equals("待检查") && inspection.getIsFinish() == "0") {
             QueryWrapper neQueryWrapper = new QueryWrapper();
             neQueryWrapper.eq("is_finish", "0");
             queryWrapper.eq("elevator_id", inspection.getElevatorId());
@@ -297,6 +298,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         maintenance.setContactNumber(inspection.getContactNumber());
         maintenance.setCheckDescription(inspection.getCheckDescription());
         maintenance.setElevatorId(inspection.getElevatorId());
+        maintenance.setApplicant(inspection.getInspectionPerson());
         String date = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "WX" + date;
         int num = 3;//编号的位数

@@ -11,6 +11,7 @@ import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.*;
+import com.scau.zwp.elevmanage.mapper.AccessoryMapper;
 import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.mapper.InspectionMapper;
 import com.scau.zwp.elevmanage.mapper.MaintenanceMapper;
@@ -55,6 +56,8 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
     private InspectionMapper inspectionMapper;
     @Resource
     private MessageService messageService;
+    @Resource
+    private AccessoryMapper accessoryMapper;
 
     @Value("${spring.servlet.multipart.location}" + "/maintenance/")
     private String uploadRootPath;
@@ -155,8 +158,8 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
      * @param maintenance 实例对象
      * @return 实例对象
      */
-    public Result insert(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files) {
-        Elevator elevator = new Elevator();
+    public Result insert(Maintenance maintenance, MultipartFile[] files) {
+        Elevator elevator = elevatorMapper.selectById(maintenance.getElevatorId());
         maintenance.setElevatorNumber(elevator.getElevatorNumber());
         maintenance.setElevatorName(elevator.getElevatorName());
         maintenance.setLocationName(elevator.getLocationName());
@@ -182,16 +185,16 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
         if (save(maintenance) == true) {
             if (insertInspectionImage(maintenance.getId(), files).getCode() == 2001)
                 return new Result(false, StatusCode.ERROR, "检查报告图片上传失败");
-            if (maintenanceItemList != null) {
-                for (MaintenanceItem maintenanceItem : maintenanceItemList) {
-                    maintenanceItem.setMaintenanceId(maintenance.getId());
-                    if (maintenanceItemService.save(maintenanceItem) == true) {
-                        if (inventoryService.reduce(maintenanceItem.getAccessoryId(), maintenanceItem.getQuantity()).getCode() != 1)
-                            return new Result(false, StatusCode.ERROR, "库存登记失败");
-                    } else
-                        return new Result(false, StatusCode.ERROR, "维修报告详情登记失败");
-                }
-            }
+//            if (maintenanceItemList != null) {
+//                for (MaintenanceItem maintenanceItem : maintenanceItemList) {
+//                    maintenanceItem.setMaintenanceId(maintenance.getId());
+//                    if (maintenanceItemService.save(maintenanceItem) == true) {
+//                        if (inventoryService.reduce(maintenanceItem.getAccessoryId(), maintenanceItem.getQuantity()).getCode() != 1)
+//                            return new Result(false, StatusCode.ERROR, "库存登记失败");
+//                    } else
+//                        return new Result(false, StatusCode.ERROR, "维修报告详情登记失败");
+//                }
+//            }
             Message message = new Message();
             message.setMessage("添加维修报告  " + maintenance.getMaintenanceNumber() + "--" + maintenance.getElevatorNumber() + ":" + maintenance.getElevatorName());
             messageService.save(message);
@@ -210,13 +213,20 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
     public Result update(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files) {
         maintenance.setIsFinish("1");
         if (updateById(maintenance) == true) {
+            maintenance = getById(maintenance.getId());
             if (insertMaintenanceImage(maintenance.getId(), files).getCode() == 2001)
                 return new Result(false, StatusCode.ERROR, "维修报告图片上传失败");
             if (maintenanceItemList != null) {
                 for (MaintenanceItem maintenanceItem : maintenanceItemList) {
+                    Accessory accessory = accessoryMapper.selectById(maintenanceItem.getAccessoryId());
                     maintenanceItem.setMaintenanceId(maintenance.getId());
+                    maintenanceItem.setAccessoryNumber(accessory.getAccessoryNumber());
+                    maintenanceItem.setAccessoryName(accessory.getAccessoryName());
+                    maintenanceItem.setSpecification(accessory.getSpecification());
+                    maintenanceItem.setType(accessory.getType());
+                    maintenanceItem.setUnit(accessory.getUnit());
                     if (maintenanceItemService.save(maintenanceItem) == true) {
-                        if (inventoryService.reduce(maintenanceItem.getAccessoryId(), maintenanceItem.getQuantity()).getCode() != 1)
+                        if (inventoryService.reduce(maintenanceItem.getAccessoryId(), maintenanceItem.getQuantity()).getCode() != 2000)
                             return new Result(false, StatusCode.ERROR, "库存登记失败");
                     } else
                         return new Result(false, StatusCode.ERROR, "维修报告详情登记失败");
@@ -281,6 +291,21 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
             }
         }
         Maintenance maintenance = getById(id);
+        Elevator elevator = elevatorMapper.selectById(maintenance.getElevatorId());
+        if (maintenance.getIsFinish().equals("0")) {
+            QueryWrapper newqueryWrapper = new QueryWrapper();
+            queryWrapper.eq("is_finish", "0");
+            queryWrapper.eq("elevator_id", maintenance.getElevatorId());
+            if (list(newqueryWrapper).size() == 0) {
+                QueryWrapper newqueryWrapper1 = new QueryWrapper();
+                queryWrapper.eq("is_finish", "0");
+                queryWrapper.eq("elevator_id", maintenance.getElevatorId());
+                if (inspectionMapper.selectList(newqueryWrapper1).size() == 0)
+                    elevator.setStatus("正常");
+                else elevator.setStatus("待维修");
+                elevatorMapper.updateById(elevator);
+            }
+        }
         if (removeById(id) == true) {
             Message message = new Message();
             message.setMessage("删除维修报告  " + maintenance.getMaintenanceNumber() + "--" + maintenance.getElevatorNumber() + ":" + maintenance.getElevatorName());

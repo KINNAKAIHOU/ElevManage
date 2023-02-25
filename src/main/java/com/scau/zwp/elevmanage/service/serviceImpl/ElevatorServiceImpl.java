@@ -204,7 +204,7 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("elevator_id", id);
         List<ElevatorImage> elevatorImageList = elevatorImageService.list(queryWrapper);
-        if (elevatorImageList != null) {
+        if (elevatorImageList.isEmpty()) {
             for (ElevatorImage elevatorImage : elevatorImageList) {
                 if (elevatorImageService.removeById(elevatorImage.getId()) == false)
                     return new Result(false, StatusCode.ERROR, "删除电梯图片失败");

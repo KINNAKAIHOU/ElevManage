@@ -48,7 +48,7 @@ public interface MaintenanceService extends IService<Maintenance> {
      * @param maintenance 实例对象
      * @return 实例对象
      */
-    Result insert(Maintenance maintenance, List<MaintenanceItem> maintenanceItemList, MultipartFile[] files);
+    Result insert(Maintenance maintenance, MultipartFile[] files);
 
     /**
      * 更新数据

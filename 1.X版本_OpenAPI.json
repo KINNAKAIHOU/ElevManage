@@ -1787,19 +1787,6 @@
               "$ref": "#/definitions/Maintenance对象",
               "originalRef": "Maintenance对象"
             }
-          },
-          {
-            "in": "formData",
-            "name": "maintenanceItemList",
-            "description": "maintenanceItemList",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MaintenanceItem对象",
-                "originalRef": "MaintenanceItem对象"
-              }
-            }
           }
         ],
         "responses": {
@@ -3948,8 +3935,7 @@
           "description": "详细地址"
         },
         "contactNumber": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "联系电话"
         },
         "contactPerson": {
@@ -4038,8 +4024,7 @@
           "description": "检查描述"
         },
         "contactNumber": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "联系电话"
         },
         "contactPerson": {
@@ -4161,6 +4146,10 @@
           "type": "string",
           "description": "单位"
         },
+        "unitPrice": {
+          "type": "number",
+          "description": "单价"
+        },
         "updateTime": {
           "type": "string",
           "format": "date-time",
@@ -4183,8 +4172,7 @@
           "description": "场所地址"
         },
         "contactNumber": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "联系电话"
         },
         "contactPerson": {
@@ -4197,8 +4185,7 @@
           "description": "创建时间"
         },
         "fax": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "传真"
         },
         "id": {
@@ -4219,8 +4206,7 @@
           "description": "备注"
         },
         "telephone": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "手机"
         },
         "updateTime": {
@@ -4238,64 +4224,78 @@
         "accessoryId": {
           "type": "integer",
           "format": "int32",
-          "description": "配件ID"
+          "description": "配件ID",
+          "refType": null
         },
         "accessoryName": {
           "type": "string",
-          "description": "配件名称"
+          "description": "配件名称",
+          "refType": null
         },
         "createTime": {
           "type": "string",
           "format": "date-time",
-          "description": "创建时间"
+          "description": "创建时间",
+          "refType": null
         },
         "id": {
           "type": "integer",
           "format": "int32",
-          "description": "维修报告详情ID"
+          "description": "维修报告详情ID",
+          "refType": null
         },
         "isDeleted": {
           "type": "string",
-          "description": "是否删除"
+          "description": "是否删除",
+          "refType": null
         },
         "maintenanceId": {
           "type": "integer",
           "format": "int32",
-          "description": "维修报告ID"
+          "description": "维修报告ID",
+          "refType": null
         },
         "purchasePrice": {
           "type": "number",
-          "description": "进货价"
+          "description": "进货价",
+          "refType": null
         },
         "quantity": {
           "type": "integer",
           "format": "int32",
-          "description": "数量"
+          "description": "数量",
+          "refType": null
         },
         "remarks": {
           "type": "string",
-          "description": "备注"
+          "description": "备注",
+          "refType": null
         },
         "specification": {
           "type": "string",
-          "description": "规格型号"
+          "description": "规格型号",
+          "refType": null
         },
         "totalPrice": {
           "type": "number",
-          "description": "金额"
+          "description": "金额",
+          "refType": null
         },
         "type": {
           "type": "string",
-          "description": "配件类型"
+          "description": "配件类型",
+          "refType": null
         },
         "unit": {
           "type": "string",
-          "description": "单位"
+          "description": "单位",
+          "refType": null
         },
         "updateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "更新时间"
+          "description": "更新时间",
+          "refType": null
         }
       },
       "title": "MaintenanceItem对象",
@@ -4306,93 +4306,113 @@
       "properties": {
         "accessoryPrice": {
           "type": "number",
-          "description": "配件费用"
+          "description": "配件费用",
+          "refType": null
         },
         "address": {
           "type": "string",
-          "description": "详细地址"
+          "description": "详细地址",
+          "refType": null
         },
         "checkDescription": {
           "type": "string",
-          "description": "检查描述"
+          "description": "检查描述",
+          "refType": null
         },
         "contactNumber": {
-          "type": "integer",
-          "format": "int32",
-          "description": "联系电话"
+          "type": "string",
+          "description": "联系电话",
+          "refType": null
         },
         "contactPerson": {
           "type": "string",
-          "description": "联系人"
+          "description": "联系人",
+          "refType": null
         },
         "createTime": {
           "type": "string",
           "format": "date-time",
-          "description": "创建时间"
+          "description": "创建时间",
+          "refType": null
         },
         "elevatorId": {
           "type": "integer",
           "format": "int32",
-          "description": "电梯ID"
+          "description": "电梯ID",
+          "refType": null
         },
         "elevatorName": {
           "type": "string",
-          "description": "电梯名称"
+          "description": "电梯名称",
+          "refType": null
         },
         "elevatorNumber": {
           "type": "string",
-          "description": "电梯编号"
+          "description": "电梯编号",
+          "refType": null
         },
         "faultDescription": {
           "type": "string",
-          "description": "故障描述"
+          "description": "故障描述",
+          "refType": null
         },
         "id": {
           "type": "integer",
           "format": "int32",
-          "description": "维修报告ID"
+          "description": "维修报告ID",
+          "refType": null
         },
         "isDeleted": {
           "type": "string",
-          "description": "是否删除"
+          "description": "是否删除",
+          "refType": null
         },
         "isFinish": {
           "type": "string",
-          "description": "是否完成"
+          "description": "是否完成",
+          "refType": null
         },
         "locationName": {
           "type": "string",
-          "description": "电梯地点"
+          "description": "电梯地点",
+          "refType": null
         },
         "maintenanceData": {
           "type": "string",
           "format": "date-time",
-          "description": "维修日期"
+          "description": "维修日期",
+          "refType": null
         },
         "maintenanceNumber": {
           "type": "string",
-          "description": "维修编号"
+          "description": "维修编号",
+          "refType": null
         },
         "maintenancePerson": {
           "type": "string",
-          "description": "维修人"
+          "description": "维修人",
+          "refType": null
         },
         "maintenancePrice": {
           "type": "number",
-          "description": "维修工费"
+          "description": "维修工费",
+          "refType": null
         },
         "remarks": {
           "type": "string",
-          "description": "备注"
+          "description": "备注",
+          "refType": null
         },
         "totalPrice": {
           "type": "number",
-          "description": "总费用"
+          "description": "总费用",
+          "refType": null
         },
         "updateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "更新时间"
+          "description": "更新时间",
+          "refType": null
         }
       },
       "title": "Maintenance对象",
@@ -4406,8 +4426,7 @@
           "description": "公司地址"
         },
         "contactNumber": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "联系电话"
         },
         "contactPerson": {
@@ -4420,8 +4439,7 @@
           "description": "创建时间"
         },
         "fax": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "传真"
         },
         "id": {
@@ -4446,8 +4464,7 @@
           "description": "备注"
         },
         "telephone": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "手机"
         },
         "updateTime": {
@@ -4565,6 +4582,10 @@
           "type": "string",
           "description": "配件名称"
         },
+        "accessoryNumber": {
+          "type": "string",
+          "description": "配件编号"
+        },
         "createTime": {
           "type": "string",
           "format": "date-time",
@@ -4630,8 +4651,7 @@
           "description": "场所地址"
         },
         "contactNumber": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "联系电话"
         },
         "contactPerson": {
@@ -4699,8 +4719,7 @@
           "description": "场所地址"
         },
         "contactNumber": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "联系电话"
         },
         "contactPerson": {
@@ -4713,8 +4732,7 @@
           "description": "创建时间"
         },
         "fax": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "传真"
         },
         "id": {
@@ -4735,8 +4753,7 @@
           "description": "供货商名称"
         },
         "telephone": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "手机"
         },
         "updateTime": {

@@ -38,6 +38,10 @@ public class Maintenance {
     @TableField("maintenance_number")
     private String maintenanceNumber;
 
+    @ApiModelProperty("申请人")
+    @TableField("applicant")
+    private String applicant;
+
     @ApiModelProperty("电梯编号")
     @TableField("elevator_number")
     private String elevatorNumber;
@@ -60,7 +64,7 @@ public class Maintenance {
 
     @ApiModelProperty("联系电话")
     @TableField("contact_number")
-    private Integer contactNumber;
+    private String contactNumber;
 
     @ApiModelProperty("检查描述")
     @TableField("check_description")

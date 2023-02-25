@@ -57,7 +57,7 @@ public class Storage {
 
     @ApiModelProperty("联系电话")
     @TableField("contact_number")
-    private Integer contactNumber;
+    private String contactNumber;
 
     @ApiModelProperty("场所地址")
     @TableField("address")

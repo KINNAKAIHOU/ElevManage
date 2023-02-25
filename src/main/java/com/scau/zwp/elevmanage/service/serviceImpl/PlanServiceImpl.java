@@ -124,11 +124,11 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
         LocalDateTime nextTime = null;
         String unit = plan.getIntervalUnit();
         int size = plan.getIntervalTime();
-        if (unit == "天") {
+        if (unit.equals("天")) {
             nextTime = startTime.plusDays(size);
-        } else if (unit == "周") {
+        } else if (unit.equals("周")) {
             nextTime = startTime.plusWeeks(size);
-        } else if (unit == "月") {
+        } else if (unit.equals("月")) {
             nextTime = startTime.plusMonths(size);
         } else {
             nextTime = startTime.plusYears(size);
@@ -219,11 +219,11 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
                 if (nowTime.isAfter(nextTime)) {
                     String unit = plan.getIntervalUnit();
                     int size = plan.getIntervalTime();
-                    if (unit == "天") {
+                    if (unit.equals("天")) {
                         nextTime = nextTime.plusDays(size);
-                    } else if (unit == "周") {
+                    } else if (unit.equals("周")) {
                         nextTime = nextTime.plusWeeks(size);
-                    } else if (unit == "天") {
+                    } else if (unit.equals("月")) {
                         nextTime = nextTime.plusMonths(size);
                     } else {
                         nextTime = nextTime.plusYears(size);

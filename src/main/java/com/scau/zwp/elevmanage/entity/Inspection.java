@@ -59,7 +59,7 @@ public class Inspection {
 
     @ApiModelProperty("联系电话")
     @TableField("contact_number")
-    private Integer contactNumber;
+    private String contactNumber;
 
     @ApiModelProperty("检查描述")
     @TableField("check_description")

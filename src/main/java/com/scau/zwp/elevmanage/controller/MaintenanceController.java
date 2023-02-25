@@ -96,8 +96,8 @@ public class MaintenanceController {
      */
     @ApiOperation("新增数据")
     @PostMapping
-    public Result add(@RequestPart("maintenance") Maintenance maintenance, @RequestPart("maintenanceItemList") List<MaintenanceItem> maintenanceItemList, @RequestPart(name = "files", required = false) MultipartFile[] files) {
-        return maintenanceService.insert(maintenance, maintenanceItemList, files);
+    public Result add(@RequestPart("maintenance") Maintenance maintenance, @RequestPart(name = "files", required = false) MultipartFile[] files) {
+        return maintenanceService.insert(maintenance, files);
     }
 
 

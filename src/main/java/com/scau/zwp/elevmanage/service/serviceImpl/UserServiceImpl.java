@@ -119,6 +119,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         user.setUserNumber(number);
         user.setIsEnabled("1");
+        user.setPermissionName(permissionService.getById(user.getPermissionId()).getPermissionName());
         if (save(user) == true)
             return new Result(true, StatusCode.OK, "添加用户成功");
         else

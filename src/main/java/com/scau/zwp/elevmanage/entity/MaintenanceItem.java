@@ -41,6 +41,10 @@ public class MaintenanceItem {
     @TableField("accessory_id")
     private Integer accessoryId;
 
+    @ApiModelProperty("配件编号")
+    @TableField("accessory_number")
+    private String accessoryNumber;
+
     @ApiModelProperty("配件名称")
     @TableField("accessory_name")
     private String accessoryName;

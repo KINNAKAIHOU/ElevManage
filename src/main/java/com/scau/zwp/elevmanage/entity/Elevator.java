@@ -60,7 +60,7 @@ public class Elevator {
 
     @ApiModelProperty("联系电话")
     @TableField("contact_number")
-    private Integer contactNumber;
+    private String contactNumber;
 
     @ApiModelProperty("生产厂家")
     @TableField("manufacturer_name")

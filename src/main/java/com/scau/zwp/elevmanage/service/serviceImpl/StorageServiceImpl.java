@@ -12,6 +12,7 @@ import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.*;
 import com.scau.zwp.elevmanage.entity.Storage;
+import com.scau.zwp.elevmanage.mapper.AccessoryMapper;
 import com.scau.zwp.elevmanage.mapper.StorageMapper;
 import com.scau.zwp.elevmanage.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -44,6 +45,8 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
     private SupplierService supplierService;
     @Resource
     private MessageService messageService;
+    @Resource
+    private AccessoryMapper accessoryMapper;
 
     /**
      * 通过ID查询单条数据
@@ -142,7 +145,13 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
         if (save(storage) == true) {
             if (storageItems != null) {
                 for (StorageItem storageItem : storageItems) {
+                    Accessory accessory = accessoryMapper.selectById(storageItem.getAccessoryId());
                     storageItem.setStorageId(storage.getId());
+                    storageItem.setAccessoryNumber(accessory.getAccessoryNumber());
+                    storageItem.setAccessoryName(accessory.getAccessoryName());
+                    storageItem.setSpecification(accessory.getSpecification());
+                    storageItem.setType(accessory.getType());
+                    storageItem.setUnit(accessory.getUnit());
                     if (storageItemService.save(storageItem) == true) {
                         if (inventoryService.increase(storageItem.getAccessoryId(), storageItem.getQuantity()).getCode() == 2001)
                             return new Result(false, StatusCode.ERROR, "库存登记失败");

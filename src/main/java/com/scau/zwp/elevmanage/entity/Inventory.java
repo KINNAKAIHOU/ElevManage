@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModel;
@@ -55,6 +56,10 @@ public class Inventory {
     @ApiModelProperty("单位")
     @TableField("unit")
     private String unit;
+
+    @ApiModelProperty("单价")
+    @TableField("unit_price")
+    private BigDecimal unitPrice;
 
     @ApiModelProperty("库存数量")
     @TableField("quantity")
