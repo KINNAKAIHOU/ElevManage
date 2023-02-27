@@ -71,7 +71,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 queryWrapper.like(User::getUserNumber, user.getUserNumber());
             }
             if (StrUtil.isNotBlank(user.getUserName())) {
-                queryWrapper.like(User::getUserName, user.getUserName());
+                queryWrapper.or().like(User::getUserName, user.getUserName());
             }
             if (StrUtil.isNotBlank(user.getPassword())) {
                 queryWrapper.like(User::getPassword, user.getPassword());

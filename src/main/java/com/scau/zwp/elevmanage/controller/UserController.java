@@ -137,6 +137,7 @@ public class UserController {
         return userService.register(user);
     }
 
+
     /**
      * 登录用户
      *
@@ -180,6 +181,7 @@ public class UserController {
     public Result edit(@RequestBody User user) {
         return userService.update(user);
     }
+
 
     /**
      * 通过主键删除数据

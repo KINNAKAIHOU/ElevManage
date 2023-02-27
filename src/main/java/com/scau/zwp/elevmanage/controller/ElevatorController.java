@@ -1,5 +1,7 @@
 package com.scau.zwp.elevmanage.controller;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -19,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import sun.plugin.javascript.navig4.LayerArray;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -106,8 +110,8 @@ public class ElevatorController {
      */
     @ApiOperation("更新数据")
     @PutMapping
-    public Result edit(@RequestPart("elevator") Elevator elevator, @RequestPart(name = "files", required = false) MultipartFile[] files) {
-        return elevatorService.update(elevator, files);
+    public Result edit(@RequestPart("elevator") Elevator elevator, @RequestPart(name = "files", required = false) MultipartFile[] files, @RequestPart("deleteImageIds") Integer[] deleteImageIds) {
+        return elevatorService.update(elevator, files, deleteImageIds);
     }
 
 
@@ -122,6 +126,30 @@ public class ElevatorController {
     @ApiImplicitParam(name = "id", value = "电梯ID", required = true, paramType = "query", dataType = "Integer")
     public Result deleteById(@RequestParam(value = "id") Integer id) {
         return elevatorService.deleteById(id);
+    }
+
+
+    /**
+     * 通过主键删除多个数据
+     *
+     * @param idsStr 主键
+     * @return 是否成功
+     */
+    @ApiOperation("通过主键删除多个数据")
+    @DeleteMapping("/deleteMore")
+    @ApiImplicitParam(name = "idsStr", value = "电梯ID列表", required = true, paramType = "query", dataType = "String")
+    public Result deleteMore(@RequestParam(value = "idsStr") String idsStr) {
+        Assert.isTrue(StrUtil.isNotBlank(idsStr), "删除的电梯数据为空");
+        List<Integer> intList = Arrays.stream(idsStr.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        for (Integer integer : intList) {
+            if (deleteById(integer).getCode() != 2000) {
+                return new Result(false, StatusCode.ERROR, "删除电梯失败");
+            }
+        }
+        return new Result(true, StatusCode.OK, "删除电梯成功");
     }
 
 }

@@ -49,7 +49,7 @@ public interface ElevatorService extends IService<Elevator> {
      * @param elevator 实例对象
      * @return 实例对象
      */
-    Result update(Elevator elevator, MultipartFile[] files);
+    Result update(Elevator elevator, MultipartFile[] files,Integer[] deleteImageIds);
 
     /**
      * 通过主键删除数据

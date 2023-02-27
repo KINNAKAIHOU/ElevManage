@@ -64,11 +64,11 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
         if (StrUtil.isNotBlank(location.getLocationName())) {
             queryWrapper.like(Location::getLocationName, location.getLocationName());
         }
-        if (StrUtil.isNotBlank(location.getContactPerson())) {
-            queryWrapper.like(Location::getContactPerson, location.getContactPerson());
-        }
-        if (StrUtil.isNotBlank(location.getAddress())) {
-            queryWrapper.like(Location::getAddress, location.getAddress());
+        if (StrUtil.isNotBlank(location.getContactPerson()) || StrUtil.isNotBlank(location.getAddress())) {
+            queryWrapper.and(wrapper -> wrapper
+                    .like(Location::getContactPerson, location.getContactPerson())
+                    .or()
+                    .like(Location::getAddress, location.getAddress()));
         }
         //2. 执行分页查询
         Page<Location> pagin = new Page<>(current, size, true);

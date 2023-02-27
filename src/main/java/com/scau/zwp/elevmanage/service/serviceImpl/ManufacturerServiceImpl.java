@@ -10,6 +10,7 @@ import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.entity.Elevator;
+import com.scau.zwp.elevmanage.entity.Location;
 import com.scau.zwp.elevmanage.entity.Manufacturer;
 import com.scau.zwp.elevmanage.entity.Message;
 import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
@@ -64,16 +65,13 @@ public class ManufacturerServiceImpl extends ServiceImpl<ManufacturerMapper, Man
         //1. 构建动态查询条件
         LambdaQueryWrapper<Manufacturer> queryWrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotBlank(manufacturer.getManufacturerName())) {
-            queryWrapper.like(Manufacturer::getManufacturerName, manufacturer.getManufacturerName());
+            queryWrapper.or().like(Manufacturer::getManufacturerName, manufacturer.getManufacturerName());
         }
-        if (StrUtil.isNotBlank(manufacturer.getContactPerson())) {
-            queryWrapper.like(Manufacturer::getContactPerson, manufacturer.getContactPerson());
-        }
-        if (StrUtil.isNotBlank(manufacturer.getPrefix())) {
-            queryWrapper.like(Manufacturer::getPrefix, manufacturer.getPrefix());
-        }
-        if (StrUtil.isNotBlank(manufacturer.getAddress())) {
-            queryWrapper.like(Manufacturer::getAddress, manufacturer.getAddress());
+        if (StrUtil.isNotBlank(manufacturer.getContactPerson()) || StrUtil.isNotBlank(manufacturer.getAddress())) {
+            queryWrapper.and(wrapper -> wrapper
+                    .like(Manufacturer::getContactPerson, manufacturer.getContactPerson())
+                    .or()
+                    .like(Manufacturer::getAddress, manufacturer.getAddress()));
         }
         //2. 执行分页查询
         Page<Manufacturer> pagin = new Page<>(current, size, true);

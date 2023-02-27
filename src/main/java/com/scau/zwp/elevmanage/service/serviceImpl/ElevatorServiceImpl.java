@@ -27,6 +27,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -87,51 +88,37 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
     public Result paginQuery(Elevator elevator, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Elevator> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(elevator.getElevatorNumber())) {
-            queryWrapper.like(Elevator::getElevatorNumber, elevator.getElevatorNumber());
-        }
         if (StrUtil.isNotBlank(elevator.getElevatorName())) {
             queryWrapper.like(Elevator::getElevatorName, elevator.getElevatorName());
         }
         if (StrUtil.isNotBlank(elevator.getStatus())) {
             queryWrapper.eq(Elevator::getStatus, elevator.getStatus());
         }
-        if (StrUtil.isNotBlank(elevator.getLocationName())) {
-            queryWrapper.like(Elevator::getLocationName, elevator.getLocationName());
+        if (elevator.getManufacturerId() != null) {
+            queryWrapper.like(Elevator::getManufacturerId, elevator.getManufacturerId());
         }
-        if (StrUtil.isNotBlank(elevator.getAddress())) {
-            queryWrapper.like(Elevator::getAddress, elevator.getAddress());
-        }
-        if (StrUtil.isNotBlank(elevator.getContactPerson())) {
-            queryWrapper.like(Elevator::getContactPerson, elevator.getContactPerson());
-        }
-        if (StrUtil.isNotBlank(elevator.getManufacturerName())) {
-            queryWrapper.like(Elevator::getManufacturerName, elevator.getManufacturerName());
-        }
-        if (StrUtil.isNotBlank(elevator.getModel())) {
-            queryWrapper.like(Elevator::getModel, elevator.getModel());
-        }
-        if (StrUtil.isNotBlank(elevator.getProductNumber())) {
-            queryWrapper.like(Elevator::getProductNumber, elevator.getProductNumber());
+        if (elevator.getLocationId() != null) {
+            queryWrapper.like(Elevator::getLocationId, elevator.getLocationId());
         }
         //2. 执行分页查询
         Page<Elevator> pagin = new Page<>(current, size, true);
         IPage<Elevator> selectResult = page(pagin, queryWrapper);
         List<Elevator> elevatorList = selectResult.getRecords();
+        List<ElevatorVo> elevatorVoList = new ArrayList<>();
         for (Elevator elevator1 : elevatorList) {
             QueryWrapper newQueryWrapper = new QueryWrapper();
             newQueryWrapper.eq("elevator_id", elevator1.getId());
             List<ElevatorImage> elevatorImageList = elevatorImageService.list(newQueryWrapper);
             ElevatorVo elevatorVo = BeanUtil.copyProperties(elevator1, ElevatorVo.class);
             elevatorVo.setElevatorImageList(elevatorImageList);
-
+            elevatorVoList.add(elevatorVo);
         }
-        selectResult.setRecords(elevatorList);
-        pagin.setPages(selectResult.getPages());
-        pagin.setTotal(selectResult.getTotal());
-        pagin.setRecords(selectResult.getRecords());
+        Page<ElevatorVo> paginVo = new Page<>(current, size, true);
+        paginVo.setPages(selectResult.getPages());
+        paginVo.setTotal(selectResult.getTotal());
+        paginVo.setRecords(elevatorVoList);
         //3. 返回结果
-        return new Result(true, StatusCode.OK, "查询电梯分页成功", pagin);
+        return new Result(true, StatusCode.OK, "查询电梯分页成功", paginVo);
     }
 
     /**
@@ -181,7 +168,10 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
      * @param elevator 实例对象
      * @return 实例对象
      */
-    public Result update(Elevator elevator, MultipartFile[] files) {
+    public Result update(Elevator elevator, MultipartFile[] files, Integer[] deleteImageIds) {
+        for (Integer integer : deleteImageIds) {
+            elevatorImageService.deleteById(integer);
+        }
         if (updateById(elevator) == true) {
             if (insertElevatorImage(elevator.getId(), files).getCode() == 2000) {
                 Message message = new Message();
@@ -204,7 +194,7 @@ public class ElevatorServiceImpl extends ServiceImpl<ElevatorMapper, Elevator> i
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("elevator_id", id);
         List<ElevatorImage> elevatorImageList = elevatorImageService.list(queryWrapper);
-        if (elevatorImageList.isEmpty()) {
+        if (!elevatorImageList.isEmpty()) {
             for (ElevatorImage elevatorImage : elevatorImageList) {
                 if (elevatorImageService.removeById(elevatorImage.getId()) == false)
                     return new Result(false, StatusCode.ERROR, "删除电梯图片失败");
