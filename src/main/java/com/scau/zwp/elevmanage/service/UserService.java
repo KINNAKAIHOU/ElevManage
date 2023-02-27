@@ -1,5 +1,6 @@
 package com.scau.zwp.elevmanage.service;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
@@ -94,4 +95,5 @@ public interface UserService extends IService<User> {
      */
     Result deleteById(Integer id);
 
+    Result getUserLoginInfo(DecodedJWT verify);
 }

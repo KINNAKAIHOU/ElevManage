@@ -4,84 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b87a6c7b-f5dc-4cbc-8307-8f6c720c7066" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/.back_电梯管理(无em)/电梯管理(无em)-backup-2023225125815.pdma.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.back_电梯管理(无em)/电梯管理(无em)-backup-2023225130035.pdma.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.back_电梯管理(无em)/电梯管理(无em)-backup-2023225132501.pdma.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/099B8284-70BB-4F59-9021-E34A55406C6B.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/15B07A71-384F-4E7F-9752-210E297542D1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/1F6C05F7-4F4E-4C7D-A7D3-0F9A0D2FB517.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/2D0D761C-A7AE-4F1B-8621-8FEF2F9BEB66.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/2FFFBFD9-17D9-4596-9C9A-B2841E1AE2D5.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/36A35603-F29C-4F46-B873-12DA30931CA4.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/3DDF5123-5F69-4F45-867E-41A71F3FE508.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/41596214-3572-420A-9A11-3E73C31390C7.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/42B33B04-DA06-4BFF-9040-E9319C9281DD.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/52574D07-AA27-4410-8C8F-92E5BAFEE6DF.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/68CE48B7-611B-4A2E-AD9E-78472CF63884.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/73021E9D-554D-4385-8FF3-637F957C31BB.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/7EDF3675-0A08-4EAB-82D0-BDB3D953C289.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/92C6BE24-F8E1-4EC5-990A-D1D91E0198B6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/9319381C-274D-44B5-897F-3D387481AF1A.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/95A27E03-D6AE-4398-B73E-A69DC57AFBF3.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/96972F8E-2545-4854-8B90-D9691B715577.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/9723356A-5C7D-4DF2-B891-7B4936E26591.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/977005CF-054B-4402-A189-6957D16E071B.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/9E1FCA6B-9888-4924-94D1-F705EBE2560D.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/9F76D9F4-5D46-4E5C-B6D3-6FCEC50CE37C.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/A29881EC-39B9-4B36-BCAE-60C7C0247151.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/A4E6CABC-811D-430D-B224-6F1C25D7A88D.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/BCB0604E-2D0B-4EDB-82D3-E616F8CE8641.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/C97B5131-A195-4F31-88FD-63B441C29841.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/CC2DBA69-E0D9-4C23-98E0-A219954AC022.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/D6C657B8-E5D0-40CB-9244-8E0C1F60AD6E.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/DA7F2987-B8B0-4197-9F7D-B28BEDE15B1E.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/E29107C9-D7E0-4283-91ED-C685FF5EBEB8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/E7A02EC1-745D-409F-81C0-BD033BD06213.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/EC4ACF8A-00FE-4422-956B-7D3E54A442ED.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/elevator/EEBF27AA-9F97-4FFF-BAC2-99967CD598D1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/inspection/806BEFD4-186E-42A4-B05D-30B2F028F13C.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/inspection/AD9BE99B-CED3-4C60-A8AD-54F89AA10DB8.png" afterDir="false" />
+    <list default="true" id="b87a6c7b-f5dc-4cbc-8307-8f6c720c7066" name="变更" comment="完善了全部功能（等待前端对接）">
+      <change afterPath="$PROJECT_DIR$/.back_电梯管理(无em)/电梯管理(无em)-backup-2023225145812.pdma.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.back_电梯管理(无em)/电梯管理(无em)-backup-2023225151738.pdma.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.back_电梯管理(无em)/电梯管理(无em)-backup-2023226003704.pdma.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elevmanage.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/03B491A1-860D-468D-8AE8-84501AAB3E9D.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/1282085C-2F88-4633-A64D-A684E267901F.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/17CBE2FF-45EB-4AEB-A4C0-1B00A747CC9B.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/252460CE-5CB7-4608-8EB8-C4E0E352A4BB.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/29513F52-E201-4ED5-84DB-1BCAB6F01627.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/55C4C5F6-C53D-4253-A3C0-A2930B4B8B50.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/978BA040-7B99-447D-A7E8-40E7B908E07F.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/D0A89728-FA9E-4162-99E2-86E625AF0FED.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/D8CE1376-5967-4B0B-9ECC-CE3B6214EBCA.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/F370B845-22D4-45AA-AC1A-23B2451122D7.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/maintenance/C095FECA-83C0-4843-A4D0-88298EEEDC99.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/maintenance/E4847209-5E09-4339-B61B-6016EEE6E6A6.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/电梯管理(无em)-DDL-2023225154845.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e8f368f4-07d1-49bb-ae83-38716076c345.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e8f368f4-07d1-49bb-ae83-38716076c345.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.X版本_OpenAPI.json" beforeDir="false" afterPath="$PROJECT_DIR$/1.X版本_OpenAPI.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/MaintenanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/MaintenanceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Elevator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Elevator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Inspection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Inspection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Maintenance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Maintenance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/MaintenanceItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/MaintenanceItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Manufacturer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Manufacturer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/StorageItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/StorageItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/entity/Supplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/MaintenanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/MaintenanceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/ElevatorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/ElevatorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/PlanServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/PlanServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/config/WebMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/MaintenanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/MaintenanceController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Elevator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Elevator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Inspection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Inspection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Inventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Location.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Location.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/utils/JWTInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/utils/JWTInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/utils/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/utils/JWTUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/config/WebMvcConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/config/WebMvcConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Maintenance.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Maintenance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/MaintenanceItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/MaintenanceItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Manufacturer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Manufacturer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Storage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Storage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/StorageItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/StorageItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Supplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/entity/Supplier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/MaintenanceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/MaintenanceService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/ElevatorServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/ElevatorServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/LocationServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/LocationServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/PlanServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/PlanServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/utils/JWTInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/utils/JWTInterceptor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/utils/JWTUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/utils/JWTUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/电梯管理(无em).pdma.json" beforeDir="false" afterPath="$PROJECT_DIR$/电梯管理(无em).pdma.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/电梯管理-DDL-2023218214301.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +98,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindow运行.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../admin-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../elevManage-front" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -231,7 +192,10 @@
       <workItem from="1677236637944" duration="79000" />
       <workItem from="1677236783939" duration="7437000" />
       <workItem from="1677246509697" duration="4695000" />
-      <workItem from="1677296074782" duration="13539000" />
+      <workItem from="1677296074782" duration="14090000" />
+      <workItem from="1677313901698" duration="10977000" />
+      <workItem from="1677379431977" duration="23787000" />
+      <workItem from="1677469865150" duration="348000" />
     </task>
     <task id="LOCAL-00001" summary="第一次模板">
       <created>1676771533846</created>
@@ -373,7 +337,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677247889219</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="完善了全部功能（等待前端对接）">
+      <created>1677311452687</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1677311452687</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +396,12 @@
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="((StandardSession)((StandardSessionFacade)session).session).attributes" custom="org.apache.catalina.session.StandardSessionFacade,org.apache.catalina.session.StandardSession" />
+        <watch expression="((BasicHeader)((JWTDecoder)verify).header).type" custom="com.auth0.jwt.JWTDecoder,com.auth0.jwt.impl.BasicHeader" />
+        <watch expression="((BasicHeader)((JWTDecoder)verify).header).type" custom="com.auth0.jwt.JWTDecoder,com.auth0.jwt.impl.BasicHeader" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/elevManage$ElevManageApplication.ic" NAME="ElevManageApplication 覆盖结果" MODIFIED="1677383549263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

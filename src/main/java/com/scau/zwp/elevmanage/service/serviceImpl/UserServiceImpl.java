@@ -2,29 +2,28 @@ package com.scau.zwp.elevmanage.service.serviceImpl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.scau.zwp.elevmanage.common.R;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
 import com.scau.zwp.elevmanage.common.TokenUser;
-import com.scau.zwp.elevmanage.entity.Elevator;
-import com.scau.zwp.elevmanage.entity.Storage;
-import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.entity.User;
 import com.scau.zwp.elevmanage.mapper.UserMapper;
 import com.scau.zwp.elevmanage.service.PermissionService;
 import com.scau.zwp.elevmanage.service.UserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scau.zwp.elevmanage.utils.JWTUtils;
-import jdk.nashorn.internal.parser.Token;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -49,7 +48,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return 实例对象
      */
     public Result queryById(Integer id) {
-        System.out.println(id);
         User user = getById(id);
         if (user == null)
             return new Result(false, StatusCode.ERROR, "通过ID查询用户信息失败");
@@ -68,27 +66,36 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Result paginQuery(User user, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        if(StrUtil.isNotBlank(user.getUserNumber())){
-            queryWrapper.like(User::getUserNumber, user.getUserNumber());
-        }
-        if(StrUtil.isNotBlank(user.getUserName())){
-            queryWrapper.like(User::getUserName, user.getUserName());
-        }
-        if(StrUtil.isNotBlank(user.getPassword())){
-            queryWrapper.like(User::getPassword, user.getPassword());
-        }
-        if(StrUtil.isNotBlank(user.getGender())){
-            queryWrapper.eq(User::getGender, user.getGender());
-        }
-        if(StrUtil.isNotBlank(user.getPermissionName())){
-            queryWrapper.eq(User::getPermissionName, user.getPermissionName());
-        }
-        if(StrUtil.isNotBlank(user.getIsEnabled())){
-            queryWrapper.eq(User::getIsEnabled, user.getIsEnabled());
+        if (user != null) {
+            if (StrUtil.isNotBlank(user.getUserNumber())) {
+                queryWrapper.like(User::getUserNumber, user.getUserNumber());
+            }
+            if (StrUtil.isNotBlank(user.getUserName())) {
+                queryWrapper.like(User::getUserName, user.getUserName());
+            }
+            if (StrUtil.isNotBlank(user.getPassword())) {
+                queryWrapper.like(User::getPassword, user.getPassword());
+            }
+            if (StrUtil.isNotBlank(user.getGender())) {
+                queryWrapper.eq(User::getGender, user.getGender());
+            }
+            if (StrUtil.isNotBlank(user.getPermissionName())) {
+                queryWrapper.eq(User::getPermissionName, user.getPermissionName());
+            }
+            if (StrUtil.isNotBlank(user.getIsEnabled())) {
+                queryWrapper.eq(User::getIsEnabled, user.getIsEnabled());
+            }
+            if (user.getPermissionId() != null)
+                queryWrapper.eq(User::getPermissionId, user.getPermissionId());
         }
         //2. 执行分页查询
         Page<User> pagin = new Page<>(current, size, true);
         IPage<User> selectResult = page(pagin, queryWrapper);
+        List<User> userList = selectResult.getRecords();
+        for (User user1 : userList) {
+            user1.setPassword(stringEncryptor.decrypt(user1.getPassword()));
+        }
+        selectResult.setRecords(userList);
         pagin.setPages(selectResult.getPages());
         pagin.setTotal(selectResult.getTotal());
         pagin.setRecords(selectResult.getRecords());
@@ -120,6 +127,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setUserNumber(number);
         user.setIsEnabled("1");
         user.setPermissionName(permissionService.getById(user.getPermissionId()).getPermissionName());
+        user.setPassword(stringEncryptor.encrypt(user.getPassword()));
         if (save(user) == true)
             return new Result(true, StatusCode.OK, "添加用户成功");
         else
@@ -134,7 +142,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return 实例对象
      */
     public Result register(User user) {
-        user.setPassword(stringEncryptor.encrypt(user.getPassword()));
+        user.setPassword(user.getPassword());
         user.setPermissionName(permissionService.getById(user.getPermissionId()).getPermissionName());
         if (insert(user).getCode() == 2000)
             return new Result(true, StatusCode.OK, "添加用户成功", user);
@@ -158,8 +166,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return new Result(false, StatusCode.ERROR, "用户编号不存在");
         /*System.out.println(stringEncryptor.decrypt(newUser.getPassword()));*/
         if (stringEncryptor.decrypt(newUser.getPassword()).equals(user.getPassword())) {
-            Map<String, User> payload = new HashMap<>();
-            payload.put("user", user);
+            Map<String, String> payload = new HashMap<>();
+            payload.put("userNumber", user.getUserNumber());
             String token = "";
             token = JWTUtils.getToken(payload);
             user.setPassword("");
@@ -180,12 +188,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("id", id);
         User user = getOne(queryWrapper);
-        if (stringEncryptor.decrypt(user.getPassword()).equals(oldPassword)) {
+        if (oldPassword != null) {
+            if (stringEncryptor.decrypt(user.getPassword()).equals(oldPassword)) {
+                user.setPassword(newPassword);
+                update(user);
+                return new Result(true, StatusCode.OK, "修改密码成功");
+            } else
+                return new Result(false, StatusCode.ERROR, "旧密码输入错误");
+        } else {
+//            String string = stringEncryptor.encrypt(newPassword);
             user.setPassword(stringEncryptor.encrypt(newPassword));
             update(user);
             return new Result(true, StatusCode.OK, "修改密码成功");
-        } else
-            return new Result(false, StatusCode.ERROR, "旧密码输入错误");
+        }
     }
 
 
@@ -196,7 +211,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return 实例对象
      */
     public Result update(User user) {
-        user.setPassword(stringEncryptor.encrypt(user.getPassword()));
+        if (user.getPassword() != null) {
+            user.setPassword(user.getPassword());
+            user.setPermissionName(permissionService.getById(user.getPermissionId()).getPermissionName());
+        }
         user.setPermissionName(permissionService.getById(user.getPermissionId()).getPermissionName());
         if (updateById(user) == true) {
             return new Result(true, StatusCode.OK, "更新用户数据成功");
@@ -216,5 +234,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         else
             return new Result(false, StatusCode.ERROR, "删除用户失败");
     }
+
+
+    @Override
+    public Result getUserLoginInfo(DecodedJWT verify) {
+        User user = lambdaQuery()
+                .eq(User::getUserNumber, verify.getClaim("userNumber").asString())
+                .one();
+        if (user == null)
+            return new Result(false, StatusCode.ERROR, "不存在对应用户");
+        return new Result(true, StatusCode.OK, "获取用户信息成功", user);
+    }
+
 
 }

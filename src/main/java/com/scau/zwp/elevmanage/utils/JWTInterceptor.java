@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -22,7 +23,21 @@ public class JWTInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Map<String, Object> map = new HashMap<>();
         //获取请求头中令牌
-        String token = request.getHeader("token");
+        String token = null;
+        Cookie[] cookies = request.getCookies();
+        if(cookies == null) {
+            System.out.println("cookies is null");
+            return false;
+        } else {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("elevManage-token"))
+                    token = cookie.getValue();
+            }
+        }
+        if (token == null) {
+            System.out.println("token is null");
+            return false;
+        }
         try {
             JWTUtils.verify(token);//验证令牌
             return true;//放行请求

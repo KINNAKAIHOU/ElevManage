@@ -1,32 +1,15 @@
 package com.scau.zwp.elevmanage;
 
 
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.extra.pinyin.PinyinUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.scau.zwp.elevmanage.controller.ElevatorController;
-import com.scau.zwp.elevmanage.entity.Elevator;
-import com.scau.zwp.elevmanage.entity.Storage;
-import com.scau.zwp.elevmanage.entity.StorageItem;
-import com.scau.zwp.elevmanage.mapper.ElevatorMapper;
 import com.scau.zwp.elevmanage.service.StorageService;
-import org.apache.ibatis.annotations.Mapper;
+import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-
-import net.sourceforge.pinyin4j.PinyinHelper;
-import org.springframework.util.StringUtils;
-
-import java.math.BigDecimal;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @SpringBootTest
 class ElevManageApplicationTests {
@@ -36,6 +19,8 @@ class ElevManageApplicationTests {
     @Resource
     StorageService storageServicer;
     private LocalDateTime LocalDateTime;
+    @Resource
+    private StringEncryptor stringEncryptor;
 
 
     @Test
@@ -83,6 +68,21 @@ class ElevManageApplicationTests {
 
         System.out.println(PinyinUtil.getFirstLetter(str, "").toUpperCase());
 
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.encrypt("123456789"));
+        System.out.println(stringEncryptor.decrypt("6bZeUysR18gLItmcNO2yEBYv14IZnSqpP6zdh0hturyy9KF28lYi33BJ2CmkPRN3Vak7CQQCYuW6ALt8Jpc54VbFLNEDxkYVKKbOyPEVv9FgUMpcKiiKbVpZ5Ect42feMQBhsBQ0978YtaFFNluITg=="));
     }
 
 }
