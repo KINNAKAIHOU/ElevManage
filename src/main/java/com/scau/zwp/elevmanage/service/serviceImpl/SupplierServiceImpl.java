@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
+import com.scau.zwp.elevmanage.entity.Location;
 import com.scau.zwp.elevmanage.entity.Message;
 import com.scau.zwp.elevmanage.entity.Supplier;
 import com.scau.zwp.elevmanage.mapper.SupplierMapper;
@@ -60,11 +61,11 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
         if (StrUtil.isNotBlank(supplier.getSupplierName())) {
             queryWrapper.like(Supplier::getSupplierName, supplier.getSupplierName());
         }
-        if (StrUtil.isNotBlank(supplier.getContactPerson())) {
-            queryWrapper.like(Supplier::getContactPerson, supplier.getContactPerson());
-        }
-        if (StrUtil.isNotBlank(supplier.getAddress())) {
-            queryWrapper.like(Supplier::getAddress, supplier.getAddress());
+        if (StrUtil.isNotBlank(supplier.getContactPerson()) || StrUtil.isNotBlank(supplier.getAddress())) {
+            queryWrapper.and(wrapper -> wrapper
+                    .like(Supplier::getContactPerson, supplier.getContactPerson())
+                    .or()
+                    .like(Supplier::getAddress, supplier.getAddress()));
         }
         //2. 执行分页查询
         Page<Supplier> pagin = new Page<>(current, size, true);

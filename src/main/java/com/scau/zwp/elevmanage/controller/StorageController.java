@@ -1,5 +1,7 @@
 package com.scau.zwp.elevmanage.controller;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
@@ -17,8 +19,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -82,7 +86,7 @@ public class StorageController {
             @ApiImplicitParam(name = "startTime", value = "开始日期", required = false, paramType = "query", dataType = "String"),
             @ApiImplicitParam(name = "endTime", value = "结束日期", required = false, paramType = "query", dataType = "String"),
     })
-    public Result paginQuery(@RequestBody Storage storage, @RequestParam("current") Integer current, @RequestParam("size") Integer size, @RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime) {
+    public Result paginQuery(@RequestBody Storage storage, @RequestParam("current") Integer current, @RequestParam("size") Integer size, @RequestParam(value = "startTime", required = false) String startTime, @RequestParam(value = "endTime", required = false) String endTime) {
         /*把Mybatis的分页对象做封装转换，MP的分页对象上有一些SQL敏感信息，还是通过spring的分页模型来封装数据吧*/
         Page<Storage> pageResult = (Page<Storage>) storageService.paginQuery(storage, current, size, startTime, endTime).getData();
         return new Result(true, StatusCode.OK, "查询配件入库分页成功", pageResult);
@@ -126,6 +130,30 @@ public class StorageController {
     @ApiImplicitParam(name = "id", value = "配件入库ID", required = true, paramType = "query", dataType = "Integer")
     public Result deleteById(@RequestParam(value = "id") Integer id) {
         return storageService.deleteById(id);
+    }
+
+
+    /**
+     * 通过主键删除多个数据
+     *
+     * @param idsStr 主键
+     * @return 是否成功
+     */
+    @ApiOperation("通过主键删除多个数据")
+    @DeleteMapping("/deleteMore")
+    @ApiImplicitParam(name = "idsStr", value = "配件入库ID列表", required = true, paramType = "query", dataType = "String")
+    public Result deleteMore(@RequestParam(value = "idsStr") String idsStr) {
+        Assert.isTrue(StrUtil.isNotBlank(idsStr), "删除的配件入库数据为空");
+        List<Integer> intList = Arrays.stream(idsStr.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        for (Integer integer : intList) {
+            if (deleteById(integer).getCode() != 2000) {
+                return new Result(false, StatusCode.ERROR, "删除配件入库失败");
+            }
+        }
+        return new Result(true, StatusCode.OK, "删除配件入库成功");
     }
 
 

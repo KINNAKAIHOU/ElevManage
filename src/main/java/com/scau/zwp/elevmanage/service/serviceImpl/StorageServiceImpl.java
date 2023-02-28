@@ -82,27 +82,18 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
     public Result paginQuery(Storage storage, Integer current, Integer size, String startTime, String endTime) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Storage> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(storage.getStorageNumber())) {
-            queryWrapper.like(Storage::getStorageNumber, storage.getStorageNumber());
-        }
         if (StrUtil.isNotBlank(storage.getOperatorPerson())) {
             queryWrapper.like(Storage::getOperatorPerson, storage.getOperatorPerson());
         }
-        if (StrUtil.isNotBlank(storage.getSupplierName())) {
-            queryWrapper.like(Storage::getSupplierName, storage.getSupplierName());
-        }
-        if (StrUtil.isNotBlank(storage.getContactPerson())) {
-            queryWrapper.like(Storage::getContactPerson, storage.getContactPerson());
-        }
-        if (StrUtil.isNotBlank(storage.getAddress())) {
-            queryWrapper.like(Storage::getAddress, storage.getAddress());
+        if (storage.getSupplierId()!=null) {
+            queryWrapper.like(Storage::getSupplierId, storage.getSupplierId());
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        if (startTime != "") {
+        if (startTime != null) {
             LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
             queryWrapper.ge(Storage::getStorageTime, startDateTime);
         }
-        if (endTime != "") {
+        if (endTime != null) {
             LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
             queryWrapper.le(Storage::getStorageTime, endDateTime);
         }

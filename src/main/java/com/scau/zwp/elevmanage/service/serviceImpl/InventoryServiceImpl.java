@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
 import com.scau.zwp.elevmanage.common.StatusCode;
+import com.scau.zwp.elevmanage.entity.Accessory;
 import com.scau.zwp.elevmanage.entity.Inventory;
 import com.scau.zwp.elevmanage.mapper.InventoryMapper;
 import com.scau.zwp.elevmanage.service.InventoryService;
@@ -56,20 +57,11 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
     public Result paginQuery(Inventory inventory, Integer current, Integer size) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Inventory> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(inventory.getAccessoryNumber())) {
-            queryWrapper.like(Inventory::getAccessoryNumber, inventory.getAccessoryNumber());
-        }
         if (StrUtil.isNotBlank(inventory.getAccessoryName())) {
             queryWrapper.like(Inventory::getAccessoryName, inventory.getAccessoryName());
         }
-        if (StrUtil.isNotBlank(inventory.getSpecification())) {
-            queryWrapper.like(Inventory::getSpecification, inventory.getSpecification());
-        }
         if (StrUtil.isNotBlank(inventory.getType())) {
             queryWrapper.like(Inventory::getType, inventory.getType());
-        }
-        if (StrUtil.isNotBlank(inventory.getUnit())) {
-            queryWrapper.like(Inventory::getUnit, inventory.getUnit());
         }
         //2. 执行分页查询
         Page<Inventory> pagin = new Page<>(current, size, true);
