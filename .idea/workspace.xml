@@ -6,24 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b87a6c7b-f5dc-4cbc-8307-8f6c720c7066" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/AccessoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/AccessoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/StorageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/StorageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/SupplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/SupplierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/InventoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/InventoryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/AccessoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/AccessoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/InventoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/InventoryServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/SupplierServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/SupplierServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/AccessoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/AccessoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/StorageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/StorageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/SupplierController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/SupplierController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/AccessoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/AccessoryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/InventoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/InventoryServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/SupplierServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/SupplierServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/电梯管理(无em).pdma.json" beforeDir="false" afterPath="$PROJECT_DIR$/电梯管理(无em).pdma.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +165,8 @@
       <workItem from="1677469865150" duration="23295000" />
       <workItem from="1677562810080" duration="10233000" />
       <workItem from="1677585039445" duration="645000" />
+      <workItem from="1677586447717" duration="205000" />
+      <workItem from="1677586698832" duration="6612000" />
     </task>
     <task id="LOCAL-00001" summary="第一次模板">
       <created>1676771533846</created>
@@ -341,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677508442052</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="完善了全部功能（前端中）">
+      <created>1677586544756</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1677586544756</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

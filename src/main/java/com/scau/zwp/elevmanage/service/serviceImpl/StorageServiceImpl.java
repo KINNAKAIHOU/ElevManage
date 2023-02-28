@@ -89,11 +89,11 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
             queryWrapper.like(Storage::getSupplierId, storage.getSupplierId());
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        if (startTime != null) {
+        if (startTime != null && startTime!="") {
             LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
             queryWrapper.ge(Storage::getStorageTime, startDateTime);
         }
-        if (endTime != null) {
+        if (endTime  != null && startTime!="") {
             LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
             queryWrapper.le(Storage::getStorageTime, endDateTime);
         }
@@ -182,6 +182,7 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
      * @return 是否成功
      */
     public Result deleteById(Integer id) {
+        Storage storage = getById(id);
         if (removeById(id) == true) {
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("storage_id", id);
@@ -195,7 +196,6 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
                         return new Result(false, StatusCode.ERROR, "删除配件入库详情登记失败");
                 }
             }
-            Storage storage = getById(id);
             Message message = new Message();
             message.setMessage("删除入库消息  " + storage.getStorageNumber() + "--" + storage.getSupplierName());
             messageService.save(message);

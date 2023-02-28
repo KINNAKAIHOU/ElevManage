@@ -49,8 +49,8 @@ mybatis-plus:
       # table-prefix: em_
     banner: off
     # 在控制台开启mybatis日志
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #springfox:
 #  documentation:
