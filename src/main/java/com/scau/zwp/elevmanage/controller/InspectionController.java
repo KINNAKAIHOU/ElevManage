@@ -78,7 +78,8 @@ public class InspectionController {
             @ApiImplicitParam(name = "startTime", value = "开始日期", required = false, paramType = "query", dataType = "String"),
             @ApiImplicitParam(name = "endTime", value = "结束日期", required = false, paramType = "query", dataType = "String"),
     })
-    public Result paginQuery(@RequestBody Inspection inspection, @RequestParam("current") Integer current, @RequestParam("size") Integer size, @RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime) {
+    public Result paginQuery(@RequestBody Inspection inspection, @RequestParam("current") Integer current, @RequestParam("size") Integer size,
+                             @RequestParam(value = "startTime",required = false) String startTime, @RequestParam(value = "endTime",required = false) String endTime) {
         /*把Mybatis的分页对象做封装转换，MP的分页对象上有一些SQL敏感信息，还是通过spring的分页模型来封装数据吧*/
         Page<Inspection> pageResult = (Page<Inspection>) inspectionService.paginQuery(inspection, current, size, startTime, endTime).getData();
         return new Result(true, StatusCode.OK, "查询检查报告分页成功", pageResult);

@@ -34,7 +34,7 @@ public interface PlanService extends IService<Plan> {
      * @param size    每页大小
      * @return
      */
-    Result paginQuery(Plan plan, Integer current, Integer size);
+    Result paginQuery(Plan plan, Integer current, Integer size, String nextStartTime, String nextEndTime, String endStartTime, String endEndTime);
 
     /**
      * 新增数据

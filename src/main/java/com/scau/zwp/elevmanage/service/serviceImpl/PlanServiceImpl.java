@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,23 +69,31 @@ public class PlanServiceImpl extends ServiceImpl<PlanMapper, Plan> implements Pl
      * @param size    每页大小
      * @return
      */
-    public Result paginQuery(Plan plan, Integer current, Integer size) {
+    public Result paginQuery(Plan plan, Integer current, Integer size, String nextStartTime, String nextEndTime, String endStartTime, String endEndTime) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Plan> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(plan.getPlanNumber())) {
-            queryWrapper.like(Plan::getPlanNumber, plan.getPlanNumber());
-        }
-        if (StrUtil.isNotBlank(plan.getElevatorNumber())) {
-            queryWrapper.like(Plan::getElevatorNumber, plan.getElevatorNumber());
-        }
-        if (StrUtil.isNotBlank(plan.getElevatorName())) {
-            queryWrapper.like(Plan::getElevatorName, plan.getElevatorName());
-        }
-        if (StrUtil.isNotBlank(plan.getIntervalUnit())) {
-            queryWrapper.like(Plan::getIntervalUnit, plan.getIntervalUnit());
+        if (plan.getElevatorId() != null) {
+            queryWrapper.eq(Plan::getElevatorId, plan.getElevatorId());
         }
         if (StrUtil.isNotBlank(plan.getIsFinish())) {
             queryWrapper.eq(Plan::getIsFinish, plan.getIsFinish());
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        if (nextStartTime != null && nextStartTime != "") {
+            LocalDateTime startDateTime = LocalDateTime.parse(nextStartTime, formatter);
+            queryWrapper.ge(Plan::getNextTime, startDateTime);
+        }
+        if (nextEndTime != null && nextEndTime != "") {
+            LocalDateTime endDateTime = LocalDateTime.parse(nextEndTime, formatter);
+            queryWrapper.le(Plan::getNextTime, endDateTime);
+        }
+        if (endStartTime != null && endStartTime != "") {
+            LocalDateTime startDateTime = LocalDateTime.parse(endStartTime, formatter);
+            queryWrapper.ge(Plan::getEndTime, startDateTime);
+        }
+        if (endEndTime != null && endEndTime != "") {
+            LocalDateTime endDateTime = LocalDateTime.parse(endEndTime, formatter);
+            queryWrapper.le(Plan::getEndTime, endDateTime);
         }
         //2. 执行分页查询
         Page<Plan> pagin = new Page<>(current, size, true);

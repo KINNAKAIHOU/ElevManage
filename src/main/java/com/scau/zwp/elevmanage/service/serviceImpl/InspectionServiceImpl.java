@@ -18,6 +18,7 @@ import com.scau.zwp.elevmanage.service.InspectionImageService;
 import com.scau.zwp.elevmanage.service.InspectionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scau.zwp.elevmanage.service.MessageService;
+import com.scau.zwp.elevmanage.vo.ElevatorVo;
 import com.scau.zwp.elevmanage.vo.InspectionVo;
 import com.sun.corba.se.impl.protocol.INSServerRequestDispatcher;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -86,26 +88,8 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
     public Result paginQuery(Inspection inspection, Integer current, Integer size, String startTime, String endTime) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Inspection> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(inspection.getInspectionNumber())) {
-            queryWrapper.like(Inspection::getInspectionNumber, inspection.getInspectionNumber());
-        }
-        if (StrUtil.isNotBlank(inspection.getElevatorNumber())) {
-            queryWrapper.like(Inspection::getElevatorNumber, inspection.getElevatorNumber());
-        }
-        if (StrUtil.isNotBlank(inspection.getElevatorName())) {
-            queryWrapper.like(Inspection::getElevatorName, inspection.getElevatorName());
-        }
         if (StrUtil.isNotBlank(inspection.getLocationName())) {
             queryWrapper.like(Inspection::getLocationName, inspection.getLocationName());
-        }
-        if (StrUtil.isNotBlank(inspection.getAddress())) {
-            queryWrapper.like(Inspection::getAddress, inspection.getAddress());
-        }
-        if (StrUtil.isNotBlank(inspection.getContactPerson())) {
-            queryWrapper.like(Inspection::getContactPerson, inspection.getContactPerson());
-        }
-        if (StrUtil.isNotBlank(inspection.getCheckDescription())) {
-            queryWrapper.like(Inspection::getCheckDescription, inspection.getCheckDescription());
         }
         if (StrUtil.isNotBlank(inspection.getInspectionPerson())) {
             queryWrapper.like(Inspection::getInspectionPerson, inspection.getInspectionPerson());
@@ -117,22 +101,37 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
             queryWrapper.eq(Inspection::getIsFault, inspection.getIsFault());
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        if (startTime != "") {
+        if (startTime != null && startTime!="") {
             LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
             queryWrapper.ge(Inspection::getInspectionData, startDateTime);
         }
-        if (endTime != "") {
+        if (endTime  != null && startTime!="") {
             LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
             queryWrapper.le(Inspection::getInspectionData, endDateTime);
+        }
+        if(inspection.getElevatorId()!=null){
+            queryWrapper.eq(Inspection::getElevatorId,inspection.getElevatorId());
         }
         //2. 执行分页查询
         Page<Inspection> pagin = new Page<>(current, size, true);
         IPage<Inspection> selectResult = page(pagin, queryWrapper);
-        pagin.setPages(selectResult.getPages());
-        pagin.setTotal(selectResult.getTotal());
-        pagin.setRecords(selectResult.getRecords());
+
+        List<Inspection> inspectionList = selectResult.getRecords();
+        List<InspectionVo> inspectionVoList = new ArrayList<>();
+        for (Inspection inspection1 : inspectionList) {
+            QueryWrapper newQueryWrapper = new QueryWrapper();
+            newQueryWrapper.eq("inspection_id", inspection1.getId());
+            List<InspectionImage> elevatorImageList = inspectionImageService.list(newQueryWrapper);
+            InspectionVo inspectionVo = BeanUtil.copyProperties(inspection1, InspectionVo.class);
+            inspectionVo.setInspectionImageList(elevatorImageList);
+            inspectionVoList.add(inspectionVo);
+        }
+        Page<InspectionVo> paginVo = new Page<>(current, size, true);
+        paginVo.setPages(selectResult.getPages());
+        paginVo.setTotal(selectResult.getTotal());
+        paginVo.setRecords(inspectionVoList);
         //3. 返回结果
-        return new Result(true, StatusCode.OK, "查询检查报告分页成功", pagin);
+        return new Result(true, StatusCode.OK, "查询检查报告分页成功", paginVo);
     }
 
     /**
