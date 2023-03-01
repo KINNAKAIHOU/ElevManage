@@ -65,9 +65,9 @@ public class MaintenanceItem {
     @TableField("quantity")
     private Integer quantity;
 
-    @ApiModelProperty("进货价")
-    @TableField("purchase_price")
-    private BigDecimal purchasePrice;
+    @ApiModelProperty("单价")
+    @TableField("unit_price")
+    private BigDecimal unitPrice;
 
     @ApiModelProperty("金额")
     @TableField("total_price")

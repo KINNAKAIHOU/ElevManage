@@ -17,6 +17,7 @@ import com.scau.zwp.elevmanage.mapper.InspectionMapper;
 import com.scau.zwp.elevmanage.mapper.MaintenanceMapper;
 import com.scau.zwp.elevmanage.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.scau.zwp.elevmanage.vo.InspectionVo;
 import com.scau.zwp.elevmanage.vo.MaintenanceVo;
 import com.scau.zwp.elevmanage.vo.StorageVo;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -103,53 +105,50 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
     public Result paginQuery(Maintenance maintenance, Integer current, Integer size, String startTime, String endTime) {
         //1. 构建动态查询条件
         LambdaQueryWrapper<Maintenance> queryWrapper = new LambdaQueryWrapper<>();
-        if (StrUtil.isNotBlank(maintenance.getMaintenanceNumber())) {
-            queryWrapper.like(Maintenance::getMaintenanceNumber, maintenance.getMaintenanceNumber());
-        }
-        if (StrUtil.isNotBlank(maintenance.getElevatorNumber())) {
-            queryWrapper.like(Maintenance::getElevatorNumber, maintenance.getElevatorNumber());
-        }
-        if (StrUtil.isNotBlank(maintenance.getElevatorName())) {
-            queryWrapper.like(Maintenance::getElevatorName, maintenance.getElevatorName());
-        }
         if (StrUtil.isNotBlank(maintenance.getLocationName())) {
             queryWrapper.like(Maintenance::getLocationName, maintenance.getLocationName());
         }
-        if (StrUtil.isNotBlank(maintenance.getAddress())) {
-            queryWrapper.like(Maintenance::getAddress, maintenance.getAddress());
-        }
-        if (StrUtil.isNotBlank(maintenance.getContactPerson())) {
-            queryWrapper.like(Maintenance::getContactPerson, maintenance.getContactPerson());
-        }
-        if (StrUtil.isNotBlank(maintenance.getCheckDescription())) {
-            queryWrapper.like(Maintenance::getCheckDescription, maintenance.getCheckDescription());
-        }
         if (StrUtil.isNotBlank(maintenance.getMaintenancePerson())) {
             queryWrapper.like(Maintenance::getMaintenancePerson, maintenance.getMaintenancePerson());
-        }
-        if (StrUtil.isNotBlank(maintenance.getFaultDescription())) {
-            queryWrapper.like(Maintenance::getFaultDescription, maintenance.getFaultDescription());
         }
         if (StrUtil.isNotBlank(maintenance.getIsFinish())) {
             queryWrapper.eq(Maintenance::getIsFinish, maintenance.getIsFinish());
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        if (startTime != "") {
+        if (startTime != null && startTime!="") {
             LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
             queryWrapper.ge(Maintenance::getMaintenanceData, startDateTime);
         }
-        if (endTime != "") {
+        if (endTime  != null && startTime!="") {
             LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
             queryWrapper.le(Maintenance::getMaintenanceData, endDateTime);
+        }
+        if(maintenance.getElevatorId()!=null){
+            queryWrapper.eq(Maintenance::getElevatorId,maintenance.getElevatorId());
         }
         //2. 执行分页查询
         Page<Maintenance> pagin = new Page<>(current, size, true);
         IPage<Maintenance> selectResult = page(pagin, queryWrapper);
-        pagin.setPages(selectResult.getPages());
-        pagin.setTotal(selectResult.getTotal());
-        pagin.setRecords(selectResult.getRecords());
+        List<Maintenance> maintenanceList = selectResult.getRecords();
+        List<MaintenanceVo> maintenanceVoList = new ArrayList<>();
+        for (Maintenance maintenance1 : maintenanceList) {
+            QueryWrapper newQueryWrapper = new QueryWrapper();
+            newQueryWrapper.eq("maintenance_id", maintenance1.getId());
+            List<MaintenanceImage> maintenanceImageList = maintenanceImageService.list(newQueryWrapper);
+            QueryWrapper newQueryWrapper1 = new QueryWrapper();
+            newQueryWrapper1.eq("maintenance_id", maintenance1.getId());
+            List<InspectionImage> inspectionImageList = inspectionImageService.list(newQueryWrapper);
+            MaintenanceVo maintenanceVo = BeanUtil.copyProperties(maintenance1, MaintenanceVo.class);
+            maintenanceVo.setInspectionImageList(inspectionImageList);
+            maintenanceVo.setMaintenanceImageList(maintenanceImageList);
+            maintenanceVoList.add(maintenanceVo);
+        }
+        Page<MaintenanceVo> paginVo = new Page<>(current, size, true);
+        paginVo.setPages(selectResult.getPages());
+        paginVo.setTotal(selectResult.getTotal());
+        paginVo.setRecords(maintenanceVoList);
         //3. 返回结果
-        return new Result(true, StatusCode.OK, "查询维修报告分页成功", pagin);
+        return new Result(true, StatusCode.OK, "查询维修报告分页成功", paginVo);
     }
 
     /**

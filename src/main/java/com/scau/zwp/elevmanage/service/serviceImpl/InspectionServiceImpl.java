@@ -115,15 +115,14 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         //2. 执行分页查询
         Page<Inspection> pagin = new Page<>(current, size, true);
         IPage<Inspection> selectResult = page(pagin, queryWrapper);
-
         List<Inspection> inspectionList = selectResult.getRecords();
         List<InspectionVo> inspectionVoList = new ArrayList<>();
         for (Inspection inspection1 : inspectionList) {
             QueryWrapper newQueryWrapper = new QueryWrapper();
             newQueryWrapper.eq("inspection_id", inspection1.getId());
-            List<InspectionImage> elevatorImageList = inspectionImageService.list(newQueryWrapper);
+            List<InspectionImage> inspectionImageList = inspectionImageService.list(newQueryWrapper);
             InspectionVo inspectionVo = BeanUtil.copyProperties(inspection1, InspectionVo.class);
-            inspectionVo.setInspectionImageList(elevatorImageList);
+            inspectionVo.setInspectionImageList(inspectionImageList);
             inspectionVoList.add(inspectionVo);
         }
         Page<InspectionVo> paginVo = new Page<>(current, size, true);
@@ -298,6 +297,7 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         maintenance.setCheckDescription(inspection.getCheckDescription());
         maintenance.setElevatorId(inspection.getElevatorId());
         maintenance.setApplicant(inspection.getInspectionPerson());
+        maintenance.setCreateTime(inspection.getInspectionData());
         String date = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "WX" + date;
         int num = 3;//编号的位数
