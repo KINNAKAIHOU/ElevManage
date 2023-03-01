@@ -1,5 +1,7 @@
 package com.scau.zwp.elevmanage.controller;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -126,6 +130,30 @@ public class MaintenanceController {
     @ApiImplicitParam(name = "id", value = "维修报告ID", required = true, paramType = "query", dataType = "Integer")
     public Result deleteById(@RequestParam(value = "id") Integer id) {
         return maintenanceService.deleteById(id);
+    }
+
+
+    /**
+     * 通过主键删除多个数据
+     *
+     * @param idsStr 主键
+     * @return 是否成功
+     */
+    @ApiOperation("通过主键删除多个数据")
+    @DeleteMapping("/deleteMore")
+    @ApiImplicitParam(name = "idsStr", value = "维修报告ID列表", required = true, paramType = "query", dataType = "String")
+    public Result deleteMore(@RequestParam(value = "idsStr") String idsStr) {
+        Assert.isTrue(StrUtil.isNotBlank(idsStr), "删除的维修报告数据为空");
+        List<Integer> intList = Arrays.stream(idsStr.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        for (Integer integer : intList) {
+            if (deleteById(integer).getCode() != 2000) {
+                return new Result(false, StatusCode.ERROR, "删除维修报告失败");
+            }
+        }
+        return new Result(true, StatusCode.OK, "删除维修报告成功");
     }
 
 }

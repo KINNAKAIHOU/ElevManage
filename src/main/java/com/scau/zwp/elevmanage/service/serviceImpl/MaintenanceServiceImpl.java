@@ -225,7 +225,7 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
                     maintenanceItem.setType(accessory.getType());
                     maintenanceItem.setUnit(accessory.getUnit());
                     if (maintenanceItemService.save(maintenanceItem) == true) {
-                        if (inventoryService.reduce(maintenanceItem.getAccessoryId(), maintenanceItem.getQuantity()).getCode() != 2000)
+                        if (inventoryService.reduce(maintenanceItem.getAccessoryId(), maintenanceItem.getPurchases()).getCode() != 2000)
                             return new Result(false, StatusCode.ERROR, "库存登记失败");
                     } else
                         return new Result(false, StatusCode.ERROR, "维修报告详情登记失败");
@@ -274,7 +274,7 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
         if (maintenanceItemList.size() != 0) {
             for (MaintenanceItem maintenanceItem : maintenanceItemList) {
                 if (maintenanceItemService.removeById(maintenanceItem) == true) {
-                    if (inventoryService.increase(maintenanceItem.getAccessoryId(), maintenanceItem.getQuantity()).getCode() != 1)
+                    if (inventoryService.increase(maintenanceItem.getAccessoryId(), maintenanceItem.getPurchases()).getCode() != 1)
                         return new Result(false, StatusCode.ERROR, "删除库存登记失败");
                 } else
                     return new Result(false, StatusCode.ERROR, "删除维修报告详情登记失败");

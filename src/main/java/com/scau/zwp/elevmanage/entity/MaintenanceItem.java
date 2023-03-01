@@ -62,8 +62,8 @@ public class MaintenanceItem {
     private String unit;
 
     @ApiModelProperty("数量")
-    @TableField("quantity")
-    private Integer quantity;
+    @TableField("purchases")
+    private Integer purchases;
 
     @ApiModelProperty("单价")
     @TableField("unit_price")
