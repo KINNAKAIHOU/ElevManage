@@ -73,8 +73,7 @@ public class MessageController {
     @ApiOperation("查询全部数据")
     @GetMapping("/getNew")
     public Result getNew() {
-        List<Message> messageList = messageService.list();
-        Page<Message> page = new Page<>(1, 5);
+        Page<Message> page = new Page<>(1, 10);
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.orderByDesc("create_time");
         IPage<Message> iPage = messageService.page(page, queryWrapper);
