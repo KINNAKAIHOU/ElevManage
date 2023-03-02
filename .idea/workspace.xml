@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b87a6c7b-f5dc-4cbc-8307-8f6c720c7066" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/common/PieChart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/common/RadarChart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/maintenance/A575528F-202E-42A8-B60D-F8C8536404AA.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.back_电梯管理(无em)/电梯管理(无em)-backup-202332202656.pdma.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/IndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/MessageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/MaintenanceMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/MaintenanceMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/StorageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/StorageMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/IndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/IndexController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/MessageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/MessageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/mapper/MaintenanceMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/mapper/MaintenanceMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/mapper/StorageMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/mapper/StorageMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/电梯管理(无em).pdma.json" beforeDir="false" afterPath="$PROJECT_DIR$/电梯管理(无em).pdma.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +167,7 @@
       <workItem from="1677598958683" duration="61000" />
       <workItem from="1677642774789" duration="8681000" />
       <workItem from="1677660073760" duration="13734000" />
-      <workItem from="1677734127571" duration="14188000" />
+      <workItem from="1677734127571" duration="15736000" />
     </task>
     <task id="LOCAL-00001" summary="第一次模板">
       <created>1676771533846</created>
@@ -378,7 +365,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677684762971</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="最终版 1.0">
+      <created>1677766564963</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1677766564963</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -428,7 +422,8 @@
     <MESSAGE value="完善了全部功能（配件界面）" />
     <MESSAGE value="完善了全部功能（计划界面）" />
     <MESSAGE value="完善了全部功能（基础界面）" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善了全部功能（基础界面）" />
+    <MESSAGE value="最终版 1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="最终版 1.0" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
