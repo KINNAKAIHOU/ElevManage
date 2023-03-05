@@ -231,8 +231,8 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
                 }
             }
         }
-        Elevator elevator = elevatorMapper.selectById(id);
         Inspection inspection = getById(id);
+        Elevator elevator = elevatorMapper.selectById(inspection.getElevatorId());
         if (elevator.getStatus().equals("待检查") && inspection.getIsFinish() == "0") {
             QueryWrapper neQueryWrapper = new QueryWrapper();
             neQueryWrapper.eq("is_finish", "0");
