@@ -3,6 +3,7 @@ package com.scau.zwp.elevmanage.controller;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scau.zwp.elevmanage.common.R;
 import com.scau.zwp.elevmanage.common.Result;
@@ -72,6 +73,24 @@ public class UserController {
         }
         DecodedJWT verify = JWTUtils.verify(token);
         return userService.getUserLoginInfo(verify);
+    }
+
+
+    /**
+     * 查询维修师傅全部数据
+     *
+     * @return 实例对象
+     */
+    @ApiOperation("查询全部数据")
+    @GetMapping("/getAllRepair")
+    public Result getAllRepair() {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("permission_name", "维修师傅");
+        List<User> userList = userService.list(queryWrapper);
+        if (userList != null)
+            return new Result(true, StatusCode.OK, "查询维修工用户全部数据成功", userList);
+        else
+            return new Result(false, StatusCode.ERROR, "查询维修工全部数据失败");
     }
 
 

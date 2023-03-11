@@ -115,16 +115,16 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
             queryWrapper.eq(Maintenance::getIsFinish, maintenance.getIsFinish());
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        if (startTime != null && startTime!="") {
+        if (startTime != null && startTime != "") {
             LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
             queryWrapper.ge(Maintenance::getMaintenanceData, startDateTime);
         }
-        if (endTime  != null && startTime!="") {
+        if (endTime != null && startTime != "") {
             LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
             queryWrapper.le(Maintenance::getMaintenanceData, endDateTime);
         }
-        if(maintenance.getElevatorId()!=null){
-            queryWrapper.eq(Maintenance::getElevatorId,maintenance.getElevatorId());
+        if (maintenance.getElevatorId() != null) {
+            queryWrapper.eq(Maintenance::getElevatorId, maintenance.getElevatorId());
         }
         //2. 执行分页查询
         Page<Maintenance> pagin = new Page<>(current, size, true);
@@ -224,6 +224,7 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
                     maintenanceItem.setSpecification(accessory.getSpecification());
                     maintenanceItem.setType(accessory.getType());
                     maintenanceItem.setUnit(accessory.getUnit());
+                    maintenanceItem.setCreateTime(maintenance.getMaintenanceData());
                     if (maintenanceItemService.save(maintenanceItem) == true) {
                         if (inventoryService.reduce(maintenanceItem.getAccessoryId(), maintenanceItem.getPurchases()).getCode() != 2000)
                             return new Result(false, StatusCode.ERROR, "库存登记失败");

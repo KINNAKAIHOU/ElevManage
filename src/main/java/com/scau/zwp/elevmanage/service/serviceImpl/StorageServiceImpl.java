@@ -85,15 +85,15 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
         if (StrUtil.isNotBlank(storage.getOperatorPerson())) {
             queryWrapper.like(Storage::getOperatorPerson, storage.getOperatorPerson());
         }
-        if (storage.getSupplierId()!=null) {
+        if (storage.getSupplierId() != null) {
             queryWrapper.like(Storage::getSupplierId, storage.getSupplierId());
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        if (startTime != null && startTime!="") {
+        if (startTime != null && startTime != "") {
             LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
             queryWrapper.ge(Storage::getStorageTime, startDateTime);
         }
-        if (endTime  != null && startTime!="") {
+        if (endTime != null && startTime != "") {
             LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
             queryWrapper.le(Storage::getStorageTime, endDateTime);
         }
@@ -143,6 +143,7 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
                     storageItem.setSpecification(accessory.getSpecification());
                     storageItem.setType(accessory.getType());
                     storageItem.setUnit(accessory.getUnit());
+                    storageItem.setCreateTime(storage.getStorageTime());
                     if (storageItemService.save(storageItem) == true) {
                         if (inventoryService.increase(storageItem.getAccessoryId(), storageItem.getQuantity()).getCode() == 2001)
                             return new Result(false, StatusCode.ERROR, "库存登记失败");

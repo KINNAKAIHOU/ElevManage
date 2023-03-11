@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b87a6c7b-f5dc-4cbc-8307-8f6c720c7066" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/StatisticController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/MessageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/MessageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,6 +184,18 @@
       <workItem from="1677859636109" duration="17000" />
       <workItem from="1677978979655" duration="998000" />
       <workItem from="1677982271381" duration="935000" />
+      <workItem from="1677983735632" duration="35000" />
+      <workItem from="1678164143750" duration="756000" />
+      <workItem from="1678166498232" duration="284000" />
+      <workItem from="1678167587782" duration="635000" />
+      <workItem from="1678178099987" duration="1536000" />
+      <workItem from="1678188474034" duration="619000" />
+      <workItem from="1678189963615" duration="8928000" />
+      <workItem from="1678205309029" duration="34000" />
+      <workItem from="1678205757417" duration="119000" />
+      <workItem from="1678205935509" duration="272000" />
+      <workItem from="1678245485110" duration="3143000" />
+      <workItem from="1678524999314" duration="3726000" />
     </task>
     <task id="LOCAL-00001" summary="第一次模板">
       <created>1676771533846</created>
@@ -386,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677770408377</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="最终版 1.0">
+      <created>1677983760209</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1677983760209</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -440,20 +468,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="最终版 1.0" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.java</url>
-          <line>309</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.java</url>
-          <line>310</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="((StandardSession)((StandardSessionFacade)session).session).attributes" custom="org.apache.catalina.session.StandardSessionFacade,org.apache.catalina.session.StandardSession" />

@@ -3,6 +3,10 @@ package com.scau.zwp.elevmanage.mapper;
 import com.scau.zwp.elevmanage.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.sql.Date;
 
 /**
  * <p>
@@ -14,5 +18,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
+
 
 }

@@ -1,9 +1,9 @@
 package com.scau.zwp.elevmanage;
 
 
-import cn.hutool.extra.pinyin.PinyinUtil;
 import com.scau.zwp.elevmanage.controller.ElevatorController;
 import com.scau.zwp.elevmanage.controller.IndexController;
+import com.scau.zwp.elevmanage.controller.StatisticController;
 import com.scau.zwp.elevmanage.service.StorageService;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
@@ -24,6 +24,8 @@ class ElevManageApplicationTests {
     private StringEncryptor stringEncryptor;
     @Resource
     private IndexController indexController;
+    @Resource
+    private StatisticController statisticController;
 
 
     @Test
@@ -69,7 +71,9 @@ class ElevManageApplicationTests {
 //        }
 //        System.out.println(convert.toString().toUpperCase());
 
-        indexController.getBarChart();
+//        indexController.getBarChart();
+
+
     }
 
 }
