@@ -101,16 +101,16 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
             queryWrapper.eq(Inspection::getIsFault, inspection.getIsFault());
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        if (startTime != null && startTime!="") {
+        if (startTime != null && startTime != "") {
             LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
             queryWrapper.ge(Inspection::getInspectionData, startDateTime);
         }
-        if (endTime  != null && startTime!="") {
+        if (endTime != null && startTime != "") {
             LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
             queryWrapper.le(Inspection::getInspectionData, endDateTime);
         }
-        if(inspection.getElevatorId()!=null){
-            queryWrapper.eq(Inspection::getElevatorId,inspection.getElevatorId());
+        if (inspection.getElevatorId() != null) {
+            queryWrapper.eq(Inspection::getElevatorId, inspection.getElevatorId());
         }
         //2. 执行分页查询
         Page<Inspection> pagin = new Page<>(current, size, true);
@@ -233,11 +233,11 @@ public class InspectionServiceImpl extends ServiceImpl<InspectionMapper, Inspect
         }
         Inspection inspection = getById(id);
         Elevator elevator = elevatorMapper.selectById(inspection.getElevatorId());
-        if (elevator.getStatus().equals("待检查") && inspection.getIsFinish() == "0") {
+        if (elevator.getStatus().equals("待检查") && inspection.getIsFinish().equals("0")) {
             QueryWrapper neQueryWrapper = new QueryWrapper();
             neQueryWrapper.eq("is_finish", "0");
-            queryWrapper.eq("elevator_id", inspection.getElevatorId());
-            if (list(queryWrapper).size() == 1) {
+            neQueryWrapper.eq("elevator_id", inspection.getElevatorId());
+            if (list(neQueryWrapper).size() == 1) {
                 elevator.setStatus("正常");
                 elevatorMapper.updateById(elevator);//修改电梯的状态
             }

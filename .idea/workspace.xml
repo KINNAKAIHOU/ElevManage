@@ -5,19 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b87a6c7b-f5dc-4cbc-8307-8f6c720c7066" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/StatisticController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/inspection/887D034E-850A-41F4-B043-5FFBB4517E79.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e8f368f4-07d1-49bb-ae83-38716076c345.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e8f368f4-07d1-49bb-ae83-38716076c345.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/InspectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/controller/InspectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/scau/zwp/elevmanage/ElevManageApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/InspectionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/controller/InspectionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/InspectionServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/MaintenanceServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/scau/zwp/elevmanage/service/serviceImpl/StorageServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/scau/zwp/elevmanage/ElevManageApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +71,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindow运行.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../elevManage-front" />
+    <property name="last_opened_file_path" value="G:/Code/depository_manage" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -195,7 +193,12 @@
       <workItem from="1678205757417" duration="119000" />
       <workItem from="1678205935509" duration="272000" />
       <workItem from="1678245485110" duration="3143000" />
-      <workItem from="1678524999314" duration="3726000" />
+      <workItem from="1678524999314" duration="3770000" />
+      <workItem from="1678605051665" duration="285000" />
+      <workItem from="1679580522385" duration="1225000" />
+      <workItem from="1679655831640" duration="3151000" />
+      <workItem from="1679724658321" duration="5041000" />
+      <workItem from="1679806932450" duration="3361000" />
     </task>
     <task id="LOCAL-00001" summary="第一次模板">
       <created>1676771533846</created>
@@ -414,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677983760209</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="最终版 2.0">
+      <created>1678540437951</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1678540437951</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,7 +475,8 @@
     <MESSAGE value="完善了全部功能（计划界面）" />
     <MESSAGE value="完善了全部功能（基础界面）" />
     <MESSAGE value="最终版 1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="最终版 1.0" />
+    <MESSAGE value="最终版 2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="最终版 2.0" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

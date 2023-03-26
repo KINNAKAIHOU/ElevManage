@@ -144,7 +144,6 @@ public class InspectionController {
         List<Integer> intList = Arrays.stream(idsStr.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-
         for (Integer integer : intList) {
             if (deleteById(integer).getCode() != 2000) {
                 return new Result(false, StatusCode.ERROR, "删除检查报告失败");

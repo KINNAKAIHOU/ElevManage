@@ -238,9 +238,9 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
             queryWrapper.eq("elevator_id", maintenance.getElevatorId());
             if (list(queryWrapper).size() == 0) {
                 QueryWrapper queryWrapper1 = new QueryWrapper();
-                queryWrapper.eq("is_finish", "0");
-                queryWrapper.eq("elevator_id", maintenance.getElevatorId());
-                if (inspectionMapper.selectList(queryWrapper).size() == 0)
+                queryWrapper1.eq("is_finish", "0");
+                queryWrapper1.eq("elevator_id", maintenance.getElevatorId());
+                if (inspectionMapper.selectList(queryWrapper1).size() == 0)
                     elevator.setStatus("正常");
                 else elevator.setStatus("待维修");
                 elevatorMapper.updateById(elevator);
@@ -294,12 +294,12 @@ public class MaintenanceServiceImpl extends ServiceImpl<MaintenanceMapper, Maint
         Elevator elevator = elevatorMapper.selectById(maintenance.getElevatorId());
         if (maintenance.getIsFinish().equals("0")) {
             QueryWrapper newqueryWrapper = new QueryWrapper();
-            queryWrapper.eq("is_finish", "0");
-            queryWrapper.eq("elevator_id", maintenance.getElevatorId());
-            if (list(newqueryWrapper).size() == 0) {
+            newqueryWrapper.eq("is_finish", "0");
+            newqueryWrapper.eq("elevator_id", maintenance.getElevatorId());
+            if (list(newqueryWrapper).size() == 1) {
                 QueryWrapper newqueryWrapper1 = new QueryWrapper();
-                queryWrapper.eq("is_finish", "0");
-                queryWrapper.eq("elevator_id", maintenance.getElevatorId());
+                newqueryWrapper1.eq("is_finish", "0");
+                newqueryWrapper1.eq("elevator_id", maintenance.getElevatorId());
                 if (inspectionMapper.selectList(newqueryWrapper1).size() == 0)
                     elevator.setStatus("正常");
                 else elevator.setStatus("待维修");
